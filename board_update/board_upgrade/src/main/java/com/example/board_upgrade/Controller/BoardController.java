@@ -2,7 +2,6 @@ package com.example.board_upgrade.Controller;
 
 import com.example.board_upgrade.Dto.BoardDto;
 import com.example.board_upgrade.Entity.User;
-import com.example.board_upgrade.Repository.BoardRepository;
 import com.example.board_upgrade.Repository.UserRepository;
 import com.example.board_upgrade.Response.Response;
 import com.example.board_upgrade.Service.BoardService;
