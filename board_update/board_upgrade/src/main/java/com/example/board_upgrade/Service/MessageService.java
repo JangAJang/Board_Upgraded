@@ -90,4 +90,12 @@ public class MessageService {
         }
         else return new IllegalArgumentException("유저 정보가 일치하지 않습니다. ");
     }
+
+    @Transactional(readOnly = true)
+    public MessageDto findMessageById(int id){
+        Message message = messageRepository.findById(id).orElseThrow(()->{
+            return new IllegalArgumentException("해당 메시지를 찾을 수 없습니다. ");
+        });
+        return MessageDto.toDto(message);
+    }
 }

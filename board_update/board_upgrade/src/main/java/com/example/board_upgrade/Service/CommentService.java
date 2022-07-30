@@ -27,7 +27,7 @@ public class CommentService {
         Board board = boardRepository.findById(boardId).orElseThrow(()->{
             return new IllegalArgumentException("게시글을 찾을 수 없습니다. ");
         });
-        comment.setUser(user);
+        comment.setWriter(user);
         comment.setBoard(board);
         commentRepository.save(comment);
         return commentDto.toDto(comment);
@@ -39,6 +39,14 @@ public class CommentService {
         List<CommentDto> commentDtos = new ArrayList<>();
         comments.forEach(s-> commentDtos.add(new CommentDto().toDto(s)));
         return commentDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public Comment getComment(int commentId){
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->{
+            return new IllegalArgumentException("댓글을 찾을 수 없습니다. ");
+        });
+        return comment;
     }
 
     @Transactional

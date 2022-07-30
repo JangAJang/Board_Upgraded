@@ -23,7 +23,7 @@ public class UserController {
 
     @ApiOperation(value = "유저 찾기", notes = "개별 유저 조회")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public Response<?> findUser(@PathVariable("id") Integer id){
         return new Response<>("true", "조회성공", userService.findUser(id));
     }

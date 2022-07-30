@@ -4,6 +4,7 @@ import com.example.board_upgrade.Dto.RegisterDto;
 import com.example.board_upgrade.Entity.User;
 import com.example.board_upgrade.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +14,14 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User register(RegisterDto registerDto){
         User user = new User();
         user.setName(registerDto.getName());
         user.setUsername(registerDto.getUsername());
-        user.setPassword(registerDto.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(registerDto.getPassword()));
+        user.setRole("ROLE_USER");
         return userRepository.save(user);
     }
 

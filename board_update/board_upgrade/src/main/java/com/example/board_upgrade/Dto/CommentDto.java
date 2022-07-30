@@ -17,7 +17,7 @@ public class CommentDto {
         return new CommentDto(
                 comment.getId(),
                 comment.getContent(),
-                comment.getUser().getName()
+                comment.getWriter().getName()
         );
     }
 }
