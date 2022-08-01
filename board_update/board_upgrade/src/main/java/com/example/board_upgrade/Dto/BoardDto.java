@@ -5,13 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDto {
+    @NotNull
     private int id;
+    @NotNull
     private String title;
+    @NotNull
     private String content;
+    @NotNull
     private String writer;
 
     public static BoardDto toDto(Board board){
