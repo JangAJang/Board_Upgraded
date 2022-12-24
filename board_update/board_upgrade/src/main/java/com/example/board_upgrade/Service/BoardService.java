@@ -37,9 +37,8 @@ public class BoardService {
     @Transactional
     public BoardDto write(BoardDto boardDto, User user){
         Board board = new Board();
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-        board.setUser(user);
+        board.createBoard(boardDto, user);
+        boardRepository.save(board);
         return BoardDto.toDto(board);
     }
 
@@ -48,8 +47,8 @@ public class BoardService {
         Board board = boardRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("해당 게시물 ID를 찾을 수 없습니다. ");
         });
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
+        board.updateBoard(boardDto);
+        boardRepository.save(board);
         return BoardDto.toDto(board);
     }
 
