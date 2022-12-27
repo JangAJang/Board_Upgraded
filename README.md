@@ -1,23 +1,25 @@
-# 구현 기능 목록
-## Cross Origin Resource Sharing 구현(12.27.2022)
-### - CorsConfig : 모든 헤더, 메서드, 출처의 외부 ip를 허용하며, "/api/**"로 api뒤에 어떤 주소로든 외부 ip를 등록할 수 있다. 
+# 게시판
+***
 
-## Swagger UI 구현(12.27.2022)
-### - SwaggerConfig : 스웨거 ui를 통한 api를 사용하기 위해 설정
-- api : 아래의 키, 시큐리티 콘텍스트, api 정보를 통해 스웨거 ui의 api를 설정해준다. 
-- apiInfo : 해당 api에 대한 전체적인 설명을 정리해둔다. 
-- apiKey : 인증방식의 키를 설정해준다. 
-- securityContext : 보안 참조값을 defaultAuth로 받아 /api로 시작하는 주소를 swagger ui에서 모은다.
-- defaultAuth : 기본적인 Authorization 방식을 설정해준다. 
+## Project Goal
+- 간단한 게시판을 통해서 테스트, 개발, 리펙토링을 통한 코드의 작성방식을 연습
+- 더욱 세밀한 기능적 테스트를 만들기를 통해 TDD를 실습
+- 개발 과정에서 실행 시간을 확인하며 시간상 더욱 효율적인 방법을 탐구
+- 리펙토링을 통해 클린하고 메서드가 제대로 분리된 코드로 분리
+***
+## Project Skill
+- Spring Web
+- JPA
+- JUnit5 Test
+- Spring Security
+- JWT
+***
+## Git Convention
+- feat: 기능 추가
+- fix: 버그 수정
+- refactor: 기능상의 변화는 없지만 물리적 코드의 변화
+- style: 메서드의 위치 변경, 세미콜론 추가(내용상 코드의 변경은 없음)
+- docs: 리드미 내용 작성/수정
+***
+## API
 
-## jwt 구현(미완)
-
-## Member 기능 구현(미완)
-
-## Board 기능 구현(미완)
-
-## Category 기능 구현(미완)
-
-## Comment 기능 구현(미완)
-
-## Message 기능 구현(미완)
