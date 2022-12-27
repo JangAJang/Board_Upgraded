@@ -1,4 +1,6 @@
 # 게시판
+## [기능 개발 과정](docs/PROGRESS.md)
+## [테스트코드 개발 과정](docs/TEST_PROGRESS.md)
 ***
 
 ## Project Goal
