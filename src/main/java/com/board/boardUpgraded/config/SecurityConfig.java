@@ -18,4 +18,9 @@ public class SecurityConfig{
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer(){
+        return web -> web.ignoring().anyRequest().requestMatchers("/swagger-ui");
+    }
 }
