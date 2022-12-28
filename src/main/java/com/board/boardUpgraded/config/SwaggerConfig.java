@@ -15,7 +15,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Import(BeanValidatorPluginsConfiguration.class)
@@ -29,11 +29,11 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.swprogramming"))
+                .apis(RequestHandlerSelectors.basePackage("com.board"))
                 .paths(PathSelectors.any())
                 .build()
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(apiKey()));
+                .securityContexts(Collections.singletonList(securityContext()))
+                .securitySchemes(List.of(apiKey()));
     }
 
     private ApiInfo apiInfo() {
@@ -55,7 +55,7 @@ public class SwaggerConfig {
     }
 
     private List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "global access");
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         return List.of(new SecurityReference("Authorization", new AuthorizationScope[] {authorizationScope}));
     }
 }
