@@ -28,11 +28,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 	implementation(group = "com.auth0" , name =  "java-jwt", version =  "3.10.3")
 	implementation(group = "io.jsonwebtoken", name =  "jjwt-api", version = "0.11.2")
+	implementation("org.projectlombok:lombok:1.18.24")
 	runtimeOnly(group = "io.jsonwebtoken", name = "jjwt-impl", version = "0.11.2")
 	runtimeOnly(group = "io.jsonwebtoken", name = "jjwt-jackson", version = "0.11.2")
-	compileOnly("org.projectlombok:lombok")
+	compileOnly("org.projectlombok:lombok:1.18.24")
 	runtimeOnly("com.mysql:mysql-connector-j")
-	annotationProcessor("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok:1.18.24")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }
@@ -40,3 +41,5 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+

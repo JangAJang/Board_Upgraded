@@ -51,7 +51,7 @@ public class SwaggerConfig {
 
     private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth())
-                .operationSelector(oc -> oc.requestMappingPattern().startsWith("/api/")).build();
+                .operationSelector(oc -> oc.requestMappingPattern().startsWith("/api")).build();
     }
 
     private List<SecurityReference> defaultAuth() {
