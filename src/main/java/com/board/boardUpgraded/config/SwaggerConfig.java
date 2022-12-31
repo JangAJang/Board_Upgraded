@@ -15,12 +15,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Import(BeanValidatorPluginsConfiguration.class)
 @Configuration
-@EnableWebMvc
 // http://localhost:8080/swagger-ui/index.html
 public class SwaggerConfig {
 
@@ -32,8 +31,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.board"))
                 .paths(PathSelectors.any())
                 .build()
-                .securityContexts(Collections.singletonList(securityContext()))
-                .securitySchemes(List.of(apiKey()));
+                .securityContexts(Arrays.asList(securityContext()))
+                .securitySchemes(Arrays.asList(apiKey()));
     }
 
     private ApiInfo apiInfo() {
@@ -50,13 +49,14 @@ public class SwaggerConfig {
     }
 
     private SecurityContext securityContext() {
-        return SecurityContext.builder().securityReferences(defaultAuth())
-                .operationSelector(oc -> oc.requestMappingPattern().startsWith("/api")).build();
+        return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
 
     private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        return List.of(new SecurityReference("Authorization", new AuthorizationScope[] {authorizationScope}));
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return List.of(new SecurityReference("Authorization", authorizationScopes));
     }
 }
 
