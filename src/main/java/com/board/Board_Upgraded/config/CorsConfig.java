@@ -1,4 +1,4 @@
-package com.board.boardUpgraded.config;
+package com.board.Board_Upgraded.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

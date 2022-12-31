@@ -1,4 +1,4 @@
-package com.board.boardUpgraded.controller;
+package com.board.Board_Upgraded.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
