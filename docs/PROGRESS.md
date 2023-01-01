@@ -16,6 +16,11 @@
   - 모든 요청에 대해 security가 동작해 인증을 처리해준다(스웨거 동작 확인)
 - webSecurityCustomizer : 등록한 url에 대해 시큐리티 검증을 무시해준다. 
 
+### -SecurityUtil
+- getCurrentMemberId : 
+  - 사용자의 인증 정보가 없을 때, 인증 정보의 아이디가 없을 때 예외처리한다. 
+  - 문제 없을 떄 아이디를 반환한다. 
+
 ## jwt 구현(미완)
 
 ## Member 기능 구현(미완)
