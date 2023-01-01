@@ -18,4 +18,6 @@ public class Response {
     }
 
     private static <T> Response success(T data){ return new Response(true, 0, new Success<>(data));}
+
+    private static Response failure(int code, String message){ return new Response(false, code, new Failure(message));}
 }
