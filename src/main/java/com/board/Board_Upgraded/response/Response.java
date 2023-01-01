@@ -16,4 +16,6 @@ public class Response {
     public static Response success() { // 4
         return new Response(true, 0, null);
     }
+
+    private static <T> Response success(T data){ return new Response(true, 0, new Success<>(data));}
 }
