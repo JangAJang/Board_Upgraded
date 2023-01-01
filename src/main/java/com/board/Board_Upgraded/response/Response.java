@@ -17,7 +17,7 @@ public class Response {
         return new Response(true, 0, null);
     }
 
-    private static <T> Response success(T data){ return new Response(true, 0, new Success<>(data));}
+    public static <T> Response success(T data){ return new Response(true, 0, new Success<>(data));}
 
-    private static Response failure(int code, String message){ return new Response(false, code, new Failure(message));}
+    public static Response failure(int code, String message){ return new Response(false, code, new Failure(message));}
 }
