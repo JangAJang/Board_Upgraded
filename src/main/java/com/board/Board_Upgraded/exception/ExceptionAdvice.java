@@ -22,6 +22,4 @@ public class ExceptionAdvice {
     public Response notRightAuthenticationException(){
         return Response.failure(403, "인증 정보가 존재하지 않습니다. 다시 로그인해주세요");
     }
-
-
 }
