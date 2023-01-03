@@ -1,6 +1,8 @@
 package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.TokenDto;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -27,5 +29,13 @@ public class TokenProvider {
 
     public TokenDto generateTokenDto(Authentication authentication) {
         return new TokenDto(authentication, key);
+    }
+
+    private Claims parseClaims(String accessToken){
+        try{
+            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();
+        } catch (ExpiredJwtException exception){
+            return exception.getClaims();
+        }
     }
 }
