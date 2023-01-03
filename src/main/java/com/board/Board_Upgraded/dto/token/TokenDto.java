@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.dto;
+package com.board.Board_Upgraded.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
