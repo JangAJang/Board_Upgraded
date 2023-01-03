@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.TokenDto;
+import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -64,7 +65,7 @@ public class TokenProvider {
         // 토큰 복호화
         Claims claims = parseClaims(accessToken);
         if (claims.get(AUTHORITIES_KEY.getComponent()) == null) {
-            throw new RuntimeException("권한 정보가 없는 토큰입니다.");
+            throw new NotAuthenticationInfoException();
         }
         // 클레임에서 권한 정보 가져오기
         Collection<? extends GrantedAuthority> authorities =

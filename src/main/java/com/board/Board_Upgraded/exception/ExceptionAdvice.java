@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.exception;
 
 import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
+import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response notRightAuthenticationException(){
         return Response.failure(403, "인증 정보가 존재하지 않습니다. 다시 로그인해주세요");
+    }
+
+    @ExceptionHandler(NotAuthenticationInfoException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public Response notAuthenticationInfoException(){
+        return Response.failure(403, "권한 정보가 없는 토큰입니다.");
     }
 }
