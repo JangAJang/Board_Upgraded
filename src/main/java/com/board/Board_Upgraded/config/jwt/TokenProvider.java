@@ -32,19 +32,20 @@ public class TokenProvider {
 
     public TokenDto generateTokenDto(Authentication authentication) {
         Date accessTokenExpiresIn = new Date((new Date()).getTime() + ACCESS_TOKEN_EXPIRE_TIME);
-
-        // Refresh Token 생성
-        String refreshToken = Jwts.builder()
-                .setExpiration(new Date((new Date()).getTime() + REFRESH_TOKEN_EXPIRE_TIME))
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
-
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(generateAccessToken(authentication, accessTokenExpiresIn))
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-                .refreshToken(refreshToken)
+                .refreshToken(generateRefreshToken())
                 .build();
+    }
+
+    // Refresh Token 생성
+    private String generateRefreshToken(){
+        return Jwts.builder()
+                .setExpiration(new Date((new Date()).getTime() + REFRESH_TOKEN_EXPIRE_TIME))
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
     }
 
     // Access Token 생성
