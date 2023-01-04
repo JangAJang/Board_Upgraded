@@ -21,7 +21,25 @@
   - 사용자의 인증 정보가 없을 때, 인증 정보의 아이디가 없을 때 예외처리한다. 
   - 문제 없을 떄 아이디를 반환한다.
 
-## jwt 구현(미완)
+## jwt 구현(~1.4.2023)
+### TokenProvider
+- 생성자 : 암호키를 가지고 키를 생성하는 기능 구현
+- generateTokenDto : 인증정보와 키를 이용해 TokenDto의 생성자로 토큰을 만드는 기능 구현
+- parseClaim : 문자열 토큰과 키를 가지고 Jwt Claim으로 파싱해주는 기능 구현
+- validateToken : 토큰의 상태를 보고, 오류/만료/지원 여부를 확인하고 이상 없으면 참을 반환하는 기능 구현
+- getAuthentication : 토큰을 통해 인증 정보를 가져오는 기능 구현
+### JwtAccessDenialHandler
+- handle : 필요 권한이 없을 때 403에러를 반환하는 기능 구현
+
+### JwtAuthenticationEntryPoint
+- commence : 자격증명 없이 자격이 필요한 요청을 할 때 401에러를 반환하는 기능 구현
+
+### JwtFilter
+- doFilterInternal : resolveToken을 받아와 토큰이 사용가능한 상태일 때 Authentication을 설정하고 필터체인에서 필터링을 하는 기능 구현
+  - resolveToken : Http요청을 받을 때 토큰의 헤더를 제외한 내용부분을 받아오는 기능 구현
+
+### JwtSecurityConfig
+- filterChain : 토큰 생성자를 이용해 JwtFilter를 만들고 필터체인 동작 전 필터를 추가하는 기능 구현
 
 ## Response 구현(~1.1.2023)
 ### Response
@@ -44,3 +62,6 @@
 ## Comment 기능 구현(미완)
 
 ## Message 기능 구현(미완)
+
+### TokenDto 기능 구현(~1.3.2023)
+- 생성자에 Key와 Authentication을 가져와 억세스토큰과 리프레쉬토큰을 생성하는 기능 구현
