@@ -3,6 +3,7 @@ package com.board.Board_Upgraded.exception;
 import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
+import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,5 +29,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public Response notAuthenticationInfoException(){
         return Response.failure(403, "권한 정보가 없는 토큰입니다.");
+    }
+
+    @ExceptionHandler(WrongTokenException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public Response wrongTokenException(){
+        return Response.failure(401, "JWT 토큰이 잘못되었습니다.");
     }
 }

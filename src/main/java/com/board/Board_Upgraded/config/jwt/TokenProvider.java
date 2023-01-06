@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.TokenDto;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
+import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -54,7 +55,7 @@ public class TokenProvider {
             log.info("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             log.info("지원되지 않는 JWT 토큰입니다.");
-        } catch (IllegalArgumentException e) {
+        } catch (WrongTokenException e) {
             log.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
