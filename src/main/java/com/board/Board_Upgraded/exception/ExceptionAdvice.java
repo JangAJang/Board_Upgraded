@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
+import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,5 +36,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public Response wrongTokenException(){
         return Response.failure(401, "JWT 토큰이 잘못되었습니다.");
+    }
+
+    @ExceptionHandler(UsernameAlreadyInUseException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public Response usernameAlreadyInUseException(){
+        return Response.failure(404, "이미 사용중인 아이디입니다.");
     }
 }
