@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
+import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.response.Response;
@@ -48,6 +49,12 @@ public class ExceptionAdvice {
     @ExceptionHandler(NicknameAlreadyInUseException.class)
     @ResponseStatus(HttpStatus.FOUND)
     public Response nicknameAlreadyInUseException(){
+        return Response.failure(404, "이미 사용중인 닉네임입니다.");
+    }
+
+    @ExceptionHandler(EmailAlreadyInUseException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public Response emailAlreadyInUseException(){
         return Response.failure(404, "이미 사용중인 닉네임입니다.");
     }
 }
