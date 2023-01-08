@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoEx
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.response.Response;
@@ -55,6 +56,12 @@ public class ExceptionAdvice {
     @ExceptionHandler(EmailAlreadyInUseException.class)
     @ResponseStatus(HttpStatus.FOUND)
     public Response emailAlreadyInUseException(){
-        return Response.failure(404, "이미 사용중인 닉네임입니다.");
+        return Response.failure(404, "이미 사용중인 이메일입니다.");
+    }
+
+    @ExceptionHandler(EmailNotFormatException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public Response emailNotFormatException(){
+        return Response.failure(404, "올바르지 않은 이메일 형식입니다.");
     }
 }
