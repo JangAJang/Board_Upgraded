@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
+import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.FOUND)
     public Response usernameAlreadyInUseException(){
         return Response.failure(404, "이미 사용중인 아이디입니다.");
+    }
+
+    @ExceptionHandler(NicknameAlreadyInUseException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public Response nicknameAlreadyInUseException(){
+        return Response.failure(404, "이미 사용중인 닉네임입니다.");
     }
 }
