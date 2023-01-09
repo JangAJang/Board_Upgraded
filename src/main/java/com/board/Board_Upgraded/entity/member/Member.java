@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.entity.member;
 
+import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,8 @@ public class Member extends BaseEntity {
     @Column(name = "MEMBER_ROLE")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    public Member(RegisterRequestDto registerRequestDto){
+
+    }
 }
