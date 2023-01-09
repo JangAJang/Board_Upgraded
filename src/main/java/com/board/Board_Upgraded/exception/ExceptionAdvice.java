@@ -4,10 +4,7 @@ import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
-import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
-import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -63,5 +60,11 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.FOUND)
     public Response emailNotFormatException(){
         return Response.failure(404, "올바르지 않은 이메일 형식입니다.");
+    }
+
+    @ExceptionHandler(PasswordNotMatchingException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public Response passwordNotMatchingException(){
+        return Response.failure(404, "비밀번호가 일치하지 않습니다.");
     }
 }
