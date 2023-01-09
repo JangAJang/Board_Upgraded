@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.entity.member;
 
+import com.board.Board_Upgraded.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Member extends BaseEntity{
+public class Member extends BaseEntity {
 
     @Column(name = "MEMBER_USERNAME")
     private String username;
