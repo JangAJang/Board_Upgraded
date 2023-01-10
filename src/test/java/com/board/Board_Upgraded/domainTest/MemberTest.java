@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.domainTest;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,15 @@ public class MemberTest {
         test.setPasswordCheck("wrong");
         assertThatThrownBy(()-> new Member(test))
                 .isInstanceOf(PasswordNotMatchingException.class);
+    }
+
+    @Test
+    @DisplayName("이메일 형식이 올바르지 않을 경우 예외처리된다. ")
+    void notRightEmailFormat(){
+        RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setEmail("wrongEamail");
+        assertThatThrownBy(()-> new Member(registerRequestDto))
+                .isInstanceOf(EmailNotFormatException.class);
     }
 
     private RegisterRequestDto makeTestRegister(){
