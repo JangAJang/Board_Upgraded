@@ -1,5 +1,8 @@
 package com.board.Board_Upgraded.entity.member;
 
+import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
+import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
+import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -33,6 +36,18 @@ public class Member extends BaseEntity {
     private Role role;
 
     public Member(RegisterRequestDto registerRequestDto){
+
+    }
+
+    public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
+
+    }
+
+    public void changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
+
+    }
+
+    public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
 
     }
 }

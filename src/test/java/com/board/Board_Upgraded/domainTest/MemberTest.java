@@ -54,8 +54,8 @@ public class MemberTest {
     @DisplayName("이메일을 수정하면, 변경된 닉네임이 나온다. ")
     void changeEmailTest(){
         Member member = new Member(makeTestRegister());
-        ChangeEmailRequestDto changeNicknameRequestDto = new ChangeEmailRequestDto("newEmail@email.com");
-        member.changEmail(changeNicknameRequestDto);
+        ChangeEmailRequestDto changeEmailRequestDto = new ChangeEmailRequestDto("newEmail@email.com");
+        member.changeEmail(changeEmailRequestDto);
         assertThat(member.getNickname()).isEqualTo("newEmail@email.com");
     }
 
