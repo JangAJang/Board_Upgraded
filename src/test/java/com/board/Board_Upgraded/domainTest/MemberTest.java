@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.domainTest;
 
+import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
@@ -39,26 +40,17 @@ public class MemberTest {
     }
 
     @Test
-    @DisplayName("닉네임을 정상적으로 수정하면, 변경된 닉네임이 나온다. ")
+    @DisplayName("닉네임을 수정하면, 변경된 닉네임이 나온다. ")
     void changeNicknameTest(){
-
+        Member member = new Member(makeTestRegister());
+        ChangeNicknameRequestDto changeNicknameRequestDto = new ChangeNicknameRequestDto("newNickname");
+        member.changeNickname(changeNicknameRequestDto);
+        assertThat(member.getNickname()).isEqualTo("newNickname");
     }
 
     @Test
-    @DisplayName("수정하려는 닉네임이 존재하면, 예외처리한다. ")
-    void nicknameAlreadyExistChanging(){
-
-    }
-
-    @Test
-    @DisplayName("이메일을 정상적으로 수정하면, 변경된 닉네임이 나온다. ")
+    @DisplayName("이메일을 수정하면, 변경된 닉네임이 나온다. ")
     void changeEmailTest(){
-
-    }
-
-    @Test
-    @DisplayName("수정하려는 이메일이 존재하면, 예외처리한다. ")
-    void EmailAlreadyExistChanging(){
 
     }
 
