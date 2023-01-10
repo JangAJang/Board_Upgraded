@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.domainTest;
 
 import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
+import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
@@ -61,7 +62,10 @@ public class MemberTest {
     @Test
     @DisplayName("비밀번호를 정상적으로 수정하면, 성공되고, 로그인시 다른 비밀번호로 로그인해야한다. ")
     void changePasswordTest(){
-
+        Member member = new Member(makeTestRegister());
+        ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("newP", "newP");
+        assertThatThrownBy(()-> member.changePassword(changePasswordRequestDto))
+                .doesNotThrowAnyException();
     }
 
     @Test
