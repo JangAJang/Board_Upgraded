@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.domainTest;
 
+import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
@@ -51,7 +52,10 @@ public class MemberTest {
     @Test
     @DisplayName("이메일을 수정하면, 변경된 닉네임이 나온다. ")
     void changeEmailTest(){
-
+        Member member = new Member(makeTestRegister());
+        ChangeEmailRequestDto changeNicknameRequestDto = new ChangeEmailRequestDto("newEmail@email.com");
+        member.changEmail(changeNicknameRequestDto);
+        assertThat(member.getNickname()).isEqualTo("newEmail@email.com");
     }
 
     @Test
