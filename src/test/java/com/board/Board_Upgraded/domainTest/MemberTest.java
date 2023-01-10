@@ -71,7 +71,10 @@ public class MemberTest {
     @Test
     @DisplayName("비밀 번호수정시, 두번 쓴 비밀번호가 서로 다르면 예외처리한다.  ")
     void passwordNotMatch(){
-
+        Member member = new Member(makeTestRegister());
+        ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("newP", "mextP");
+        assertThatThrownBy(()-> member.changePassword(changePasswordRequestDto))
+                .isInstanceOf(PasswordNotMatchingException.class);
     }
 
     private RegisterRequestDto makeTestRegister(){
