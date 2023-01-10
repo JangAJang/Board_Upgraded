@@ -38,6 +38,42 @@ public class MemberTest {
                 .isInstanceOf(EmailNotFormatException.class);
     }
 
+    @Test
+    @DisplayName("닉네임을 정상적으로 수정하면, 변경된 닉네임이 나온다. ")
+    void changeNicknameTest(){
+
+    }
+
+    @Test
+    @DisplayName("수정하려는 닉네임이 존재하면, 예외처리한다. ")
+    void nicknameAlreadyExistChanging(){
+
+    }
+
+    @Test
+    @DisplayName("이메일을 정상적으로 수정하면, 변경된 닉네임이 나온다. ")
+    void changeEmailTest(){
+
+    }
+
+    @Test
+    @DisplayName("수정하려는 이메일이 존재하면, 예외처리한다. ")
+    void EmailAlreadyExistChanging(){
+
+    }
+
+    @Test
+    @DisplayName("비밀번호를 정상적으로 수정하면, 성공되고, 로그인시 다른 비밀번호로 로그인해야한다. ")
+    void changePasswordTest(){
+
+    }
+
+    @Test
+    @DisplayName("비밀 번호수정시, 두번 쓴 비밀번호가 서로 다르면 예외처리한다.  ")
+    void passwordNotMatch(){
+
+    }
+
     private RegisterRequestDto makeTestRegister(){
         return new RegisterRequestDto("username", "nickname", "email@email.com"
                 , "password", "password");
