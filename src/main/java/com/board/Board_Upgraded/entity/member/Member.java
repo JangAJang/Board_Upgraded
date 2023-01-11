@@ -6,6 +6,7 @@ import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
 import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
+import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,11 +52,12 @@ public class Member extends BaseEntity {
     }
 
     public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
-
+        if(isNicknameSameWithFormal(changeNicknameRequestDto)) throw new NicknameAlreadyInUseException();
+        this.nickname = changeNicknameRequestDto.getNewNickname();
     }
     
     private boolean isNicknameSameWithFormal(ChangeNicknameRequestDto changeNicknameRequestDto){
-        return false;
+        return this.nickname.equals(changeNicknameRequestDto.getNewNickname());
     }
 
     public void changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
