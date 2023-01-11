@@ -80,6 +80,7 @@ public class Member extends BaseEntity {
         if(isPasswordSameWithFormal(changePasswordRequestDto.getNewPassword()))
             throw new PasswordNotChangedException();
         this.password = changePasswordRequestDto.getNewPassword();
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     private boolean isPasswordNotSame(String pw1, String pw2){
