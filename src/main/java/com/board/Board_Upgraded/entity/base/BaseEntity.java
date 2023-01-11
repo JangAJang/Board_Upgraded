@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.entity;
+package com.board.Board_Upgraded.entity.base;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

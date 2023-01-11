@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.board.Board_Upgraded.domainTest.MemberTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-11T07:03:06" hostname="ijanghuiui-MacBookPro.local" time="0.026">
+<testsuite name="com.board.Board_Upgraded.domainTest.MemberTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-11T07:22:49" hostname="ijanghuiui-MacBookPro.local" time="0.026">
   <properties/>
-  <testcase name="비밀번호를 정상적으로 수정하면, 성공되고, 로그인시 다른 비밀번호로 로그인해야한다." classname="com.board.Board_Upgraded.domainTest.MemberTest" time="0.026"/>
+  <testcase name="최종 수정일이 한달이 되지 않았을 경우, 거짓을 반환한다." classname="com.board.Board_Upgraded.domainTest.MemberTest" time="0.026"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

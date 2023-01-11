@@ -4,15 +4,16 @@ import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.entity.BaseEntity;
+import com.board.Board_Upgraded.entity.base.BaseEntity;
+import com.board.Board_Upgraded.entity.base.DueTime;
 import com.board.Board_Upgraded.exception.member.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 @Entity
@@ -88,7 +89,7 @@ public class Member extends BaseEntity {
         return this.password.equals(pw1);
     }
 
-    private boolean isPasswordOutdated(){
-        return false;
+    public boolean isPasswordOutdated(){
+        return isLastModifiedDateAfter(DueTime.PASSWORD_CHANGE_DUETIME.getDays());
     }
 }
