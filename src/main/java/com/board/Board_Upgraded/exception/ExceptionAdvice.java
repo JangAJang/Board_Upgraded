@@ -67,4 +67,10 @@ public class ExceptionAdvice {
     public Response passwordNotMatchingException(){
         return Response.failure(404, "비밀번호가 일치하지 않습니다.");
     }
+
+    @ExceptionHandler(PasswordNotChangedException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Response passwordNotChangedException(){
+        return Response.failure(404, "같은 비밀번호로 변경할 수 없습니다.");
+    }
 }
