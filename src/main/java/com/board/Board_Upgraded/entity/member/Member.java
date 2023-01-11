@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
+import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
@@ -61,11 +62,13 @@ public class Member extends BaseEntity {
     }
 
     public void changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
-
+        if(isEmailNotFormat(changeEmailRequestDto.getNewEmail())) throw new EmailNotFormatException();
+        if(isEmailSameWithFormal(changeEmailRequestDto)) throw new EmailAlreadyInUseException();
+        this.email = changeEmailRequestDto.getNewEmail();
     }
     
     private boolean isEmailSameWithFormal(ChangeEmailRequestDto changeEmailRequestDto){
-        return false;
+        return this.email.equals(changeEmailRequestDto.getNewEmail());
     }
 
     private boolean isEmailNotFormat(String email){

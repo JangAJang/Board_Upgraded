@@ -66,7 +66,7 @@ public class MemberTest {
     void changeEmailTest(){
         Member member = new Member(makeTestRegister());
         member.changeEmail(new ChangeEmailRequestDto("newEmail@email.com"));
-        assertThat(member.getNickname()).isEqualTo("newEmail@email.com");
+        assertThat(member.getEmail()).isEqualTo("newEmail@email.com");
     }
 
     @Test

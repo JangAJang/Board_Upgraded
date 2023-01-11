@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.board.Board_Upgraded.domainTest.MemberTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-11T06:50:11" hostname="ijanghuiui-MacBookPro.local" time="0.12">
+<testsuite name="com.board.Board_Upgraded.domainTest.MemberTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-11T06:53:35" hostname="ijanghuiui-MacBookPro.local" time="0.121">
   <properties/>
-  <testcase name="기존의 닉네임으로 닉네임을 수정하면 예외처리된다." classname="com.board.Board_Upgraded.domainTest.MemberTest" time="0.12"/>
+  <testcase name="이메일을 수정하면, 변경된 이메일이 나온다." classname="com.board.Board_Upgraded.domainTest.MemberTest" time="0.121"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
