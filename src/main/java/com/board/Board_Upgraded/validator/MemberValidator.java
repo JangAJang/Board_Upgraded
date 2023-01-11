@@ -1,7 +1,6 @@
 package com.board.Board_Upgraded.validator;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
@@ -10,7 +9,7 @@ import com.board.Board_Upgraded.repository.MemberRepository;
 
 import java.util.regex.Pattern;
 
-public class RegisterValidator {
+public class MemberValidator {
 
     private MemberRepository memberRepository;
 
@@ -24,22 +23,22 @@ public class RegisterValidator {
         validateEmail(registerRequestDto.getEmail());
     }
 
-    private void validateUsername(String username){
+    public void validateUsername(String username){
         if(memberRepository.findByUsername(username).isEmpty()) return;
         throw new UsernameAlreadyInUseException();
     }
 
-    private void validateNickname(String nickname){
+    public void validateNickname(String nickname){
         if(memberRepository.findByNickname(nickname).isEmpty()) return;
         throw new NicknameAlreadyInUseException();
     }
 
-    private void validateEmail(String email){
-        validateFormat(email);
+    public void validateEmail(String email){
+        validateEmailFormat(email);
         validateEmailExistence(email);
     }
 
-    private void validateFormat(String email){
+    public void validateEmailFormat(String email){
         if(!Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email))
             throw new EmailNotFormatException();
     }
