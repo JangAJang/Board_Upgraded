@@ -5,12 +5,16 @@ import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
+import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
+import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.regex.Pattern;
 
 @Entity
 @Data
@@ -36,7 +40,14 @@ public class Member extends BaseEntity {
     private Role role;
 
     public Member(RegisterRequestDto registerRequestDto){
-
+        if(isEmailNotFormat(registerRequestDto.getEmail())) throw new EmailNotFormatException();
+        if(isPasswordNotSame(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck()))
+            throw new PasswordNotMatchingException();
+        this.username = registerRequestDto.getUsername();
+        this.nickname = registerRequestDto.getNickname();
+        this.email = registerRequestDto.getEmail();
+        this.role = Role.USER;
+        this.password = encryptPassword(registerRequestDto.getPassword());
     }
 
     public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
@@ -55,19 +66,28 @@ public class Member extends BaseEntity {
         return false;
     }
 
+    private boolean isEmailNotFormat(String email){
+        return !Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email);
+    }
+
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
 
     }
 
-    private boolean isPasswordNotSame(ChangePasswordRequestDto changePasswordRequestDto){
-        return false;
+    private boolean isPasswordNotSame(String pw1, String pw2){
+        return !pw1.equals(pw2);
     }
 
-    private boolean isPasswordSameWithFormal(ChangePasswordRequestDto changePasswordRequestDto){
+    private boolean isPasswordSameWithFormal(String pw1){
         return false;
     }
 
     private boolean isPasswordOutdated(){
         return false;
+    }
+
+    private String encryptPassword(String password){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(password);
     }
 }

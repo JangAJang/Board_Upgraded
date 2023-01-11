@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.entity.member.Role;
 import com.board.Board_Upgraded.exception.member.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,11 @@ public class MemberTest {
     @Test
     @DisplayName("회원가입상의 문제가 없을 경우, 회원가입이 진행된다. ")
     void registerTest(){
-       assertThatThrownBy(()->new Member(makeTestRegister()))
-               .doesNotThrowAnyException();
+        Member member = new Member(makeTestRegister());
+        assertThat(member.getNickname()).isEqualTo("nickname");
+        assertThat(member.getEmail()).isEqualTo("email@email.com");
+        assertThat(member.getUsername()).isEqualTo("username");
+        assertThat(member.getRole()).isEqualTo(Role.USER);
     }
 
     @Test
