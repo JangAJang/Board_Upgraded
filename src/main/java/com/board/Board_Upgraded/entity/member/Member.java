@@ -5,10 +5,7 @@ import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.BaseEntity;
-import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
-import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
+import com.board.Board_Upgraded.exception.member.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,7 +46,7 @@ public class Member extends BaseEntity {
         this.nickname = registerRequestDto.getNickname();
         this.email = registerRequestDto.getEmail();
         this.role = Role.USER;
-        this.password = encryptPassword(registerRequestDto.getPassword());
+        this.password = registerRequestDto.getPassword();
     }
 
     public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
@@ -76,7 +73,11 @@ public class Member extends BaseEntity {
     }
 
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
-
+        if(isPasswordNotSame(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck()))
+            throw new PasswordNotMatchingException();
+        if(isPasswordSameWithFormal(changePasswordRequestDto.getNewPassword()))
+            throw new PasswordNotChangedException();
+        this.password = changePasswordRequestDto.getNewPassword();
     }
 
     private boolean isPasswordNotSame(String pw1, String pw2){
@@ -84,15 +85,10 @@ public class Member extends BaseEntity {
     }
 
     private boolean isPasswordSameWithFormal(String pw1){
-        return false;
+        return this.password.equals(pw1);
     }
 
     private boolean isPasswordOutdated(){
         return false;
-    }
-
-    private String encryptPassword(String password){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder.encode(password);
     }
 }

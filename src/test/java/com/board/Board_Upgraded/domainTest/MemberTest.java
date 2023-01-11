@@ -91,8 +91,8 @@ public class MemberTest {
     void changePasswordTest(){
         Member member = new Member(makeTestRegister());
         ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("newP", "newP");
-        assertThatThrownBy(()-> member.changePassword(changePasswordRequestDto))
-                .doesNotThrowAnyException();
+        member.changePassword(changePasswordRequestDto);
+        assertThat(member.getPassword()).isEqualTo("newP");
     }
 
     @Test
