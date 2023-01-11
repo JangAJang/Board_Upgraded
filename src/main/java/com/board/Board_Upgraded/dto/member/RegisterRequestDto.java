@@ -1,12 +1,14 @@
 package com.board.Board_Upgraded.dto.member;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @Data
+@Builder
 public class RegisterRequestDto {
 
     @NotNull(message = "")

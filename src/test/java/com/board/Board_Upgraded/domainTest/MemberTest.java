@@ -78,7 +78,12 @@ public class MemberTest {
     }
 
     private RegisterRequestDto makeTestRegister(){
-        return new RegisterRequestDto("username", "nickname", "email@email.com"
-                , "password", "password");
+        return RegisterRequestDto.builder()
+                .username("username")
+                .nickname("nickname")
+                .email("email@email.com")
+                .password("password")
+                .passwordCheck("password")
+                .build();
     }
 }
