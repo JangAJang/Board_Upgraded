@@ -50,4 +50,16 @@ public class Member extends BaseEntity {
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
 
     }
+
+    private boolean isPasswordNotSame(ChangePasswordRequestDto changePasswordRequestDto){
+        return false;
+    }
+
+    private boolean isPasswordSameWithFormal(ChangePasswordRequestDto changePasswordRequestDto){
+        return false;
+    }
+
+    private boolean isPasswordOutdated(){
+        return false;
+    }
 }

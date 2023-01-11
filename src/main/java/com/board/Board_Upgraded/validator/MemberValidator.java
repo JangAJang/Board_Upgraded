@@ -1,10 +1,7 @@
 package com.board.Board_Upgraded.validator;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.EmailNotFormatException;
-import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.MemberRepository;
 
 import java.util.regex.Pattern;
@@ -43,7 +40,7 @@ public class MemberValidator {
             throw new EmailNotFormatException();
     }
 
-    private void validateEmailExistence(String email){
+    public void validateEmailExistence(String email){
         if(memberRepository.findByEmail(email).isEmpty()) return;
         throw new EmailAlreadyInUseException();
     }
