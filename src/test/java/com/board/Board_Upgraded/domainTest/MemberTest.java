@@ -113,6 +113,14 @@ public class MemberTest {
                 .isInstanceOf(PasswordNotChangedException.class);
     }
 
+    @Test
+    @DisplayName("최종 수정일이 한달이 되지 않았을 경우, 거짓을 반환한다.")
+    void isLastModifiedLessThanMonthTest(){
+        Member member = new Member(makeTestRegister());
+        member.changePassword(new ChangePasswordRequestDto("newP", "newP"));
+        assertThat(member.isPasswordOutdated()).isFalse();
+    }
+
     private RegisterRequestDto makeTestRegister(){
         return RegisterRequestDto.builder()
                 .username("username")
