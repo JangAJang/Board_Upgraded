@@ -42,9 +42,17 @@ public class Member extends BaseEntity {
     public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
 
     }
+    
+    private boolean isNicknameSameWithFormal(ChangeNicknameRequestDto changeNicknameRequestDto){
+        return false;
+    }
 
     public void changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
 
+    }
+    
+    private boolean isEmailSameWithFormal(ChangeEmailRequestDto changeEmailRequestDto){
+        return false;
     }
 
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
