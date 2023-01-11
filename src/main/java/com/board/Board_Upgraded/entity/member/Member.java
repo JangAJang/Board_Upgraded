@@ -48,6 +48,7 @@ public class Member extends BaseEntity {
         this.email = registerRequestDto.getEmail();
         this.role = Role.USER;
         this.password = registerRequestDto.getPassword();
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
