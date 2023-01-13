@@ -61,4 +61,12 @@ public class MemberService {
         member.changeNickname(changeNicknameRequestDto);
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
+        changePasswordRequestDto.setNewPassword(bCryptPasswordEncoder.encode(changePasswordRequestDto.getNewPassword()));
+        changePasswordRequestDto.setNewPasswordCheck(bCryptPasswordEncoder.encode(changePasswordRequestDto.getNewPasswordCheck()));
+        member.changePassword(changePasswordRequestDto);
+        memberRepository.save(member);
+    }
 }
