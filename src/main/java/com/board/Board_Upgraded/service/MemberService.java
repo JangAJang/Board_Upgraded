@@ -45,4 +45,11 @@ public class MemberService {
         if(memberRepository.findByEmail(email).isPresent())
             throw new EmailAlreadyInUseException();
     }
+
+    @Transactional
+    public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
+        validateEmail(changeEmailRequestDto.getNewEmail());
+        member.setEmail(changeEmailRequestDto.getNewEmail());
+        memberRepository.save(member);
+    }
 }
