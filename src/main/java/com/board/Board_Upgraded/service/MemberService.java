@@ -1,6 +1,8 @@
 package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
+import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
+import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
@@ -49,7 +51,14 @@ public class MemberService {
     @Transactional
     public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
         validateEmail(changeEmailRequestDto.getNewEmail());
-        member.setEmail(changeEmailRequestDto.getNewEmail());
+        member.changeEmail(changeEmailRequestDto);
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    public void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
+        validateNickname(changeNicknameRequestDto.getNewNickname());
+        member.changeNickname(changeNicknameRequestDto);
         memberRepository.save(member);
     }
 }
