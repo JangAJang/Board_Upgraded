@@ -94,4 +94,8 @@ public class Member extends BaseEntity {
     public boolean isPasswordOutdated(){
         return isLastModifiedDateAfter(DueTime.PASSWORD_CHANGE_DUETIME.getDays());
     }
+
+    public boolean isPasswordRight(String password){
+        return password.equals(this.password);
+    }
 }

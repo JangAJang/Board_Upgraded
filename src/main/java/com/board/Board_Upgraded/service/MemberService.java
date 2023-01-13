@@ -1,11 +1,10 @@
 package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.*;
+import com.board.Board_Upgraded.dto.token.TokenDto;
+import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
-import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
-import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
-import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -72,5 +71,17 @@ public class MemberService {
     public MemberInfoDto searchMember(SearchMemberDto searchMemberDto){
         Member member = memberRepository.findByNickname(searchMemberDto.getNickname()).orElseThrow(MemberNotFoundException::new);
         return new MemberInfoDto(member);
+    }
+
+    @Transactional
+    public TokenResponseDto signIn(SignInRequestDto signInRequestDto){
+        validateSignInRequest(signInRequestDto);
+        TokenDto tokenDto = new TokenDto(signInRequestDto);
+        return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
+    }
+
+    private void validateSignInRequest(SignInRequestDto signInRequestDto){
+        Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
+        if(!member.isPasswordRight(bCryptPasswordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
     }
 }

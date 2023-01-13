@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.dto.token;
 
+import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.*;
@@ -28,6 +29,10 @@ public class TokenDto {
         this.grantType = BEARER_TYPE.getComponent();
         this.accessToken = generateAccessToken(authentication, secretKey);
         this.refreshToken = generateRefreshToken(secretKey);
+    }
+
+    public TokenDto(SignInRequestDto signInRequestDto){
+
     }
 
     // 권한들 가져오기
