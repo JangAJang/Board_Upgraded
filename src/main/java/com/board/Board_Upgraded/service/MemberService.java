@@ -1,11 +1,9 @@
 package com.board.Board_Upgraded.service;
 
-import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
-import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
-import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.repository.MemberRepository;
@@ -68,5 +66,11 @@ public class MemberService {
         changePasswordRequestDto.setNewPasswordCheck(bCryptPasswordEncoder.encode(changePasswordRequestDto.getNewPasswordCheck()));
         member.changePassword(changePasswordRequestDto);
         memberRepository.save(member);
+    }
+
+    @Transactional(readOnly = true)
+    public MemberInfoDto searchMember(SearchMemberDto searchMemberDto){
+        Member member = memberRepository.findByNickname(searchMemberDto.getNickname()).orElseThrow(MemberNotFoundException::new);
+        return new MemberInfoDto(member);
     }
 }

@@ -73,4 +73,10 @@ public class ExceptionAdvice {
     public Response passwordNotChangedException(){
         return Response.failure(404, "같은 비밀번호로 변경할 수 없습니다.");
     }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response memberNotFoundException(){
+        return Response.failure(404, "해당 사용자를 찾을 수 없습니다.");
+    }
 }
