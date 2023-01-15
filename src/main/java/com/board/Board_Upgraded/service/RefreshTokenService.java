@@ -52,4 +52,14 @@ public class RefreshTokenService {
     private Authentication getAuthentication(ReissueRequestDto req){
         return tokenProvider.getAuthentication(req.getAccessToken());
     }
+
+    public TokenDto createTokenDtoByAuthentication(Authentication authentication){
+        TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
+        RefreshToken refreshToken = RefreshToken.builder()
+                .key(authentication.getName())
+                .value(tokenDto.getRefreshToken())
+                .build();
+        refreshTokenRepository.save(refreshToken);
+        return tokenDto;
+    }
 }
