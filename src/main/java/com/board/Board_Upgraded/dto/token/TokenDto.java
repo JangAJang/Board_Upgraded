@@ -1,9 +1,11 @@
 package com.board.Board_Upgraded.dto.token;
 
+import com.board.Board_Upgraded.config.jwt.TokenProvider;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -29,10 +31,6 @@ public class TokenDto {
         this.grantType = BEARER_TYPE.getComponent();
         this.accessToken = generateAccessToken(authentication, secretKey);
         this.refreshToken = generateRefreshToken(secretKey);
-    }
-
-    public TokenDto(SignInRequestDto signInRequestDto){
-
     }
 
     // 권한들 가져오기

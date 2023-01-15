@@ -7,6 +7,9 @@ import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Transactional
     public void registerNewMember(RegisterRequestDto registerRequestDto){
@@ -74,14 +79,20 @@ public class MemberService {
     }
 
     @Transactional
-    public TokenResponseDto signIn(SignInRequestDto signInRequestDto){
+    public TokenResponseDto signIn(SignInRequestDto signInRequestDto, RefreshTokenService refreshTokenService){
         validateSignInRequest(signInRequestDto);
-        TokenDto tokenDto = new TokenDto(signInRequestDto);
+        TokenDto tokenDto = getTokenDto(signInRequestDto, refreshTokenService);
         return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
     }
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
         if(!member.isPasswordRight(bCryptPasswordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
+    }
+
+    private TokenDto getTokenDto(SignInRequestDto signInRequestDto, RefreshTokenService refreshTokenService){
+        UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        return refreshTokenService.createTokenDtoByAuthentication(authentication);
     }
 }
