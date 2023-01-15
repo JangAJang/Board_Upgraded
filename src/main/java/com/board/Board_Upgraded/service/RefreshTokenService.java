@@ -53,13 +53,15 @@ public class RefreshTokenService {
         return tokenProvider.getAuthentication(req.getAccessToken());
     }
 
-    public TokenDto createTokenDtoByAuthentication(Authentication authentication){
+    //SignIn을 위한 로직2
+    @Transactional
+    public TokenResponseDto createTokenDtoByAuthentication(Authentication authentication){
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(authentication.getName())
                 .value(tokenDto.getRefreshToken())
                 .build();
         refreshTokenRepository.save(refreshToken);
-        return tokenDto;
+        return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
     }
 }
