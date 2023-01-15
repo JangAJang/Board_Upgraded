@@ -78,21 +78,15 @@ public class MemberService {
         return new MemberInfoDto(member);
     }
 
-    @Transactional
-    public TokenResponseDto signIn(SignInRequestDto signInRequestDto, RefreshTokenService refreshTokenService){
-        validateSignInRequest(signInRequestDto);
-        TokenDto tokenDto = getTokenDto(signInRequestDto, refreshTokenService);
-        return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
-    }
-
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
         if(!member.isPasswordRight(bCryptPasswordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
     }
 
-    private TokenDto getTokenDto(SignInRequestDto signInRequestDto, RefreshTokenService refreshTokenService){
+    // SignIn을 위한 로직1
+    @Transactional
+    public Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
         UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        return refreshTokenService.createTokenDtoByAuthentication(authentication);
+        return authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     }
 }
