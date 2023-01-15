@@ -1,9 +1,4 @@
 package com.board.Board_Upgraded.exception.authentication;
-
-import com.board.Board_Upgraded.exception.authentication.NeedToLoginException;
-import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
-import com.board.Board_Upgraded.exception.authentication.NotRightAuthenticationException;
-import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
 import com.board.Board_Upgraded.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
