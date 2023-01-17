@@ -1,8 +1,6 @@
 package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.*;
-import com.board.Board_Upgraded.dto.token.TokenDto;
-import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.MemberRepository;
