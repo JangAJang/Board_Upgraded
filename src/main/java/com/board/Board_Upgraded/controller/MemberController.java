@@ -1,9 +1,6 @@
 package com.board.Board_Upgraded.controller;
 
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
-import com.board.Board_Upgraded.dto.member.MemberInfoDto;
-import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.dto.member.SignInRequestDto;
+import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.dto.token.TokenDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
@@ -54,6 +51,15 @@ public class MemberController {
     public MemberInfoDto changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberNickname(changeNicknameRequestDto, member);
+        return new MemberInfoDto(member);
+    }
+
+    @ApiOperation(value = "이메일 변경", notes = "회원의 이메일을 변경하는 기능 구현")
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/changeEmail")
+    public MemberInfoDto changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
+        Member member = findMemberByUsername();
+        memberService.changeMemberEmail(changeEmailRequestDto, member);
         return new MemberInfoDto(member);
     }
 
