@@ -9,6 +9,7 @@ import com.board.Board_Upgraded.repository.MemberRepository;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.MemberService;
 import com.board.Board_Upgraded.service.RefreshTokenService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -61,6 +62,15 @@ public class MemberController {
         Member member = findMemberByUsername();
         memberService.changeMemberEmail(changeEmailRequestDto, member);
         return new MemberInfoDto(member);
+    }
+
+    @ApiOperation(value = "비밀번호 변경", notes = "회원의 비밀번호를 변경하는 기능 구현")
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/changePassword")
+    public Response changePassword(ChangePasswordRequestDto changePasswordRequestDto){
+        Member member = findMemberByUsername();
+        memberService.changeMemberPassword(changePasswordRequestDto, member);
+        return Response.success(member.getNickname() + "님의 비밀번호 변경을 성공했습니다");
     }
 
     private Member findMemberByUsername(){
