@@ -1,7 +1,6 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.*;
-import com.board.Board_Upgraded.dto.token.TokenDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
@@ -9,17 +8,12 @@ import com.board.Board_Upgraded.repository.MemberRepository;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.MemberService;
 import com.board.Board_Upgraded.service.RefreshTokenService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/member")
@@ -71,6 +65,20 @@ public class MemberController {
         Member member = findMemberByUsername();
         memberService.changeMemberPassword(changePasswordRequestDto, member);
         return Response.success(member.getNickname() + "님의 비밀번호 변경을 성공했습니다");
+    }
+
+    @ApiOperation(value = "회원 조회", notes = "회원을 검색해 기본 정보를 반환받는 기능")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/searchMember")
+    public MemberInfoDto searchMember(SearchMemberDto searchMemberDto){
+        return memberService.searchMember(searchMemberDto);
+    }
+
+    @ApiOperation(value = "마이페이지", notes = "로그인시에 개인 정보를 반환받는 기능")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/myPage")
+    public MemberInfoDto getMyPage(){
+        return new MemberInfoDto(findMemberByUsername());
     }
 
     private Member findMemberByUsername(){
