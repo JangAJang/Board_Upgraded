@@ -32,4 +32,11 @@ public class MemberController {
         memberService.registerNewMember(registerRequestDto);
         return Response.success("회원 가입 성공");
     }
+
+    @ApiOperation(value = "로그인", notes = "로그인 페이지입니다.")
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/signIn")
+    public TokenResponseDto signIn(SignInRequestDto signInRequestDto){
+        return refreshTokenService.createTokenDtoByAuthentication(memberService.getAuthenticationToSignIn(signInRequestDto));
+    }
 }
