@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.*;
+import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
@@ -8,6 +9,7 @@ import com.board.Board_Upgraded.repository.MemberRepository;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.MemberService;
 import com.board.Board_Upgraded.service.RefreshTokenService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -79,6 +81,13 @@ public class MemberController {
     @GetMapping("/myPage")
     public MemberInfoDto getMyPage(){
         return new MemberInfoDto(findMemberByUsername());
+    }
+
+    @ApiOperation(value = "토큰 재발행", notes = "리프레쉬 토큰을 재발행받는 기능 구현")
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/reissue")
+    public TokenResponseDto reissue(ReissueRequestDto reissueRequestDto){
+        return refreshTokenService.reissue(reissueRequestDto);
     }
 
     private Member findMemberByUsername(){
