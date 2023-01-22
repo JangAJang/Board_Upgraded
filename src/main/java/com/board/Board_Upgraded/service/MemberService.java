@@ -84,6 +84,7 @@ public class MemberService {
     // SignIn을 위한 로직1
     @Transactional
     public Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
+        validateSignInRequest(signInRequestDto);
         UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
         return authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     }
