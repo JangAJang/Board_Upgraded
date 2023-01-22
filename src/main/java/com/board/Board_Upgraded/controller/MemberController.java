@@ -9,7 +9,6 @@ import com.board.Board_Upgraded.repository.MemberRepository;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.MemberService;
 import com.board.Board_Upgraded.service.RefreshTokenService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -44,7 +43,7 @@ public class MemberController {
 
     @ApiOperation(value = "닉네임 변경", notes = "회원의 닉네임을 변경하는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/changeNickname")
+    @PostMapping("/myPage/changeNickname")
     public MemberInfoDto changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberNickname(changeNicknameRequestDto, member);
@@ -53,7 +52,7 @@ public class MemberController {
 
     @ApiOperation(value = "이메일 변경", notes = "회원의 이메일을 변경하는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/changeEmail")
+    @PostMapping("/myPage/changeEmail")
     public MemberInfoDto changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberEmail(changeEmailRequestDto, member);
@@ -62,7 +61,7 @@ public class MemberController {
 
     @ApiOperation(value = "비밀번호 변경", notes = "회원의 비밀번호를 변경하는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/changePassword")
+    @PostMapping("/myPage/changePassword")
     public Response changePassword(ChangePasswordRequestDto changePasswordRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberPassword(changePasswordRequestDto, member);
@@ -85,7 +84,7 @@ public class MemberController {
 
     @ApiOperation(value = "토큰 재발행", notes = "리프레쉬 토큰을 재발행받는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/reissue")
+    @PostMapping("/myPage/reissue")
     public TokenResponseDto reissue(ReissueRequestDto reissueRequestDto){
         return refreshTokenService.reissue(reissueRequestDto);
     }
