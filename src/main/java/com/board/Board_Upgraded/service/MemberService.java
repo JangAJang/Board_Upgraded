@@ -27,8 +27,8 @@ public class MemberService {
         validateUsername(registerRequestDto.getUsername());
         validateNickname(registerRequestDto.getNickname());
         validateEmail(registerRequestDto.getEmail());
+        validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
         registerRequestDto.setPassword(bCryptPasswordEncoder.encode(registerRequestDto.getPassword()));
-        registerRequestDto.setPasswordCheck(bCryptPasswordEncoder.encode(registerRequestDto.getPasswordCheck()));
         Member member = new Member(registerRequestDto);
         memberRepository.save(member);
     }
@@ -48,6 +48,12 @@ public class MemberService {
             throw new EmailAlreadyInUseException();
     }
 
+    private void validatePasswordCheck(String password, String passwordCheck){
+        if(!password.equals(passwordCheck)){
+            throw new PasswordNotMatchingException();
+        }
+    }
+
     @Transactional
     public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
         validateEmail(changeEmailRequestDto.getNewEmail());
@@ -64,10 +70,8 @@ public class MemberService {
 
     @Transactional
     public void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
-        changePasswordRequestDto.setNewPassword(bCryptPasswordEncoder.encode(changePasswordRequestDto.getNewPassword()));
-        changePasswordRequestDto.setNewPasswordCheck(bCryptPasswordEncoder.encode(changePasswordRequestDto.getNewPasswordCheck()));
+        validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
         member.changePassword(changePasswordRequestDto);
-        memberRepository.save(member);
     }
 
     @Transactional(readOnly = true)

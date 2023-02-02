@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Import(BeanValidatorPluginsConfiguration.class)
 @Configuration
+@EnableWebMvc
 // http://localhost:8080/swagger-ui/index.html
 public class SwaggerConfig {
 

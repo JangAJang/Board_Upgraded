@@ -15,13 +15,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create #create update none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
 
 jwt:
-  secret:
+  secret: 9q28hinltgiahsd098ehan5optiugsdu908hnbrio5tu3h0w98BHNOP354H4R26f8wbnaet0a98ehgdspoih59083hwneodfghjso
+

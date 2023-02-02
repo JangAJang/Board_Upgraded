@@ -6,23 +6,33 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
+
 @Data
 @Builder
 public class RegisterRequestDto {
 
-    @NotNull(message = "")
+    @NotNull(message = "아이디를 입력해야합니다")
     private String username;
 
-    @NotNull(message = "")
+    @NotNull(message = "비밀번호를 입력해야합니다.")
     private String nickname;
 
-    @NotNull(message = "")
+    @NotNull(message = "이메일을 입력해야 합니다")
     private String email;
 
-    @NotNull(message = "")
+    @NotNull(message = "비밀번호를 입력해야 합니다")
     private String password;
 
-    @NotNull(message = "")
+    @NotNull(message = "비밀번호를 다시 입력해야 합니다.")
     private String passwordCheck;
+
+    protected RegisterRequestDto() {}
+
+    public RegisterRequestDto(String username, String nickname, String email, String password, String passwordCheck) {
+        this.username = username;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
+    }
 }

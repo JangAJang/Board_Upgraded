@@ -41,8 +41,6 @@ public class Member extends BaseEntity {
 
     public Member(RegisterRequestDto registerRequestDto){
         if(isEmailNotFormat(registerRequestDto.getEmail())) throw new EmailNotFormatException();
-        if(isPasswordNotSame(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck()))
-            throw new PasswordNotMatchingException();
         this.username = registerRequestDto.getUsername();
         this.nickname = registerRequestDto.getNickname();
         this.email = registerRequestDto.getEmail();
@@ -75,16 +73,10 @@ public class Member extends BaseEntity {
     }
 
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
-        if(isPasswordNotSame(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck()))
-            throw new PasswordNotMatchingException();
         if(isPasswordSameWithFormal(changePasswordRequestDto.getNewPassword()))
             throw new PasswordNotChangedException();
         this.password = changePasswordRequestDto.getNewPassword();
         this.setLastModifiedDate(LocalDateTime.now());
-    }
-
-    private boolean isPasswordNotSame(String pw1, String pw2){
-        return !pw1.equals(pw2);
     }
 
     private boolean isPasswordSameWithFormal(String pw1){

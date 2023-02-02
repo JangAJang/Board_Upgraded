@@ -16,7 +16,7 @@ public class SecurityConfig{
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/api/test/getTest");
+        return (web) -> web.ignoring().antMatchers("/api/test/getTest", "/api/join");
     }
 
     @Bean
@@ -27,7 +27,8 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
-                .httpBasic(withDefaults());
+                .httpBasic(withDefaults())
+        ;
         return http.build();
     }
 }

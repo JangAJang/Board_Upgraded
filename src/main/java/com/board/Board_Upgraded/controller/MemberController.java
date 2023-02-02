@@ -16,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -29,7 +31,8 @@ public class MemberController {
     @ApiOperation(value = "회원가입", notes = "회원가입 페이지 입니다.")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/join")
-    public Response registerMember(RegisterRequestDto registerRequestDto){
+    public Response registerMember(@RequestBody @Valid RegisterRequestDto registerRequestDto){
+        System.out.println(registerRequestDto.toString());
         memberService.registerNewMember(registerRequestDto);
         return Response.success("회원 가입 성공");
     }
