@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -17,24 +19,26 @@ public class MemberRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private EntityManager em;
+
     @Test
-    @DisplayName("")
-    public void createTest() throws Exception{
-        try{
-            //given
-            RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                    .username("testUser")
-                    .nickname("test")
-                    .email("test@test.com")
-                    .password("password")
-                    .passwordCheck("password")
-                    .build();
-            //when
-            Member member = new Member(registerRequestDto);
-            //then
-            assertThatThrownBy(()->memberRepository.save(member)).doesNotThrowAnyException();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    @DisplayName("생성과 조회를 테스트")
+    public void createAndReadTest() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser")
+                .nickname("test")
+                .email("test@test.com")
+                .password("password")
+                .passwordCheck("password")
+                .build();
+        //when
+        Member member = new Member(registerRequestDto);
+        memberRepository.save(member);
+        em.flush();
+        em.clear();
+        //then
+        assertThat(memberRepository.findByUsername("testUser").get().getId()).isEqualTo(member.getId());
     }
 }
