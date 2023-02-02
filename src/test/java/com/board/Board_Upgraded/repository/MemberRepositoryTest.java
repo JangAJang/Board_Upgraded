@@ -55,8 +55,6 @@ public class MemberRepositoryTest {
         //given
         //when
         memberRepository.findByUsername("testUser").get().changeNickname(new ChangeNicknameRequestDto("이건줄 몰랐지"));
-        em.flush();
-        em.clear();
         //then
         assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("이건줄 몰랐지");
     }
