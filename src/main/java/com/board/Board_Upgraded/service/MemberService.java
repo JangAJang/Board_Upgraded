@@ -3,7 +3,7 @@ package com.board.Board_Upgraded.service;
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.*;
-import com.board.Board_Upgraded.repository.MemberRepository;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

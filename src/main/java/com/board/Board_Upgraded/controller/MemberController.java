@@ -5,7 +5,7 @@ import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
-import com.board.Board_Upgraded.repository.MemberRepository;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.MemberService;
 import com.board.Board_Upgraded.service.RefreshTokenService;

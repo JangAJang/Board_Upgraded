@@ -1,7 +1,7 @@
 package com.board.Board_Upgraded.config.auth;
 
 import com.board.Board_Upgraded.entity.member.Member;
-import com.board.Board_Upgraded.repository.MemberRepository;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

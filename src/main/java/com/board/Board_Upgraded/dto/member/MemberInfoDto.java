@@ -13,12 +13,15 @@ import javax.validation.constraints.NotNull;
 public class MemberInfoDto {
 
     @NotNull
+    private String username;
+    @NotNull
     private String nickname;
 
     @NotNull
     private String email;
 
     public MemberInfoDto(Member member){
+        this.username = member.getUsername();
         this.nickname = member.getNickname();
         this.email = member.getEmail();
     }
