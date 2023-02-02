@@ -60,4 +60,16 @@ public class MemberRepositoryTest {
         //then
         assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("이건줄 몰랐지");
     }
+
+    @Test
+    @DisplayName("")
+    public void deleteTest() throws Exception{
+        //given
+
+        //when
+        Member member = memberRepository.findByUsername("testUser").get();
+        //then
+        memberRepository.delete(member);
+        assertThat(memberRepository.findAll().size()).isEqualTo(0);
+    }
 }
