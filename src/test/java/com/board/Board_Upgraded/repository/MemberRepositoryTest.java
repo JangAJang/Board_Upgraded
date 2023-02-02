@@ -1,7 +1,9 @@
 package com.board.Board_Upgraded.repository;
 
+import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,8 @@ public class MemberRepositoryTest {
     @Autowired
     private EntityManager em;
 
-    @Test
-    @DisplayName("생성과 조회를 테스트")
-    public void createAndReadTest() throws Exception{
-        //given
+    @BeforeEach
+    public void initData(){
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
                 .username("testUser")
                 .nickname("test")
@@ -33,12 +33,31 @@ public class MemberRepositoryTest {
                 .password("password")
                 .passwordCheck("password")
                 .build();
-        //when
         Member member = new Member(registerRequestDto);
         memberRepository.save(member);
         em.flush();
         em.clear();
+    }
+
+    @Test
+    @DisplayName("생성과 조회를 테스트")
+    public void createAndReadTest() throws Exception{
+        //given
+
+        //when
         //then
-        assertThat(memberRepository.findByUsername("testUser").get().getId()).isEqualTo(member.getId());
+        assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("test");
+    }
+
+    @Test
+    @DisplayName("수정시 변경감지로 쿼리가 나가고 조회해오면 변경이 반영되었는지 테스트")
+    public void updateTest() throws Exception{
+        //given
+        //when
+        memberRepository.findByUsername("testUser").get().changeNickname(new ChangeNicknameRequestDto("이건줄 몰랐지"));
+        em.flush();
+        em.clear();
+        //then
+        assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("이건줄 몰랐지");
     }
 }
