@@ -1,11 +1,9 @@
 package com.board.Board_Upgraded.dto.member;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
 @Data
 public class SearchMemberDto {
 
