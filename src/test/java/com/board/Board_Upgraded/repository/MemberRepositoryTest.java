@@ -100,4 +100,30 @@ public class MemberRepositoryTest {
         //then
         assertThat(search.get(0).getNickname()).isEqualTo("test3");
     }
+
+    @Test
+    @DisplayName("닉네임으로만 검색했을 때 검색한 멤버의 아이디가 같은 번호로 나온다. ")
+    public void searchByNickname() throws Exception{
+        //given
+        for(int index = 0; index < 10; index++){
+            RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                    .username("testUser" + index)
+                    .nickname("test" + index)
+                    .email("test" + index + "@test.com")
+                    .password("password")
+                    .passwordCheck("password")
+                    .build();
+            Member member = new Member(registerRequestDto);
+            memberRepository.save(member);
+            em.flush();
+            em.clear();
+        }
+
+        SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", null);
+
+        //when
+        List<Member> search = memberRepository.search(searchMemberDto);
+        //then
+        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+    }
 }
