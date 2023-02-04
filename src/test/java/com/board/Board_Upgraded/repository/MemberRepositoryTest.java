@@ -95,8 +95,8 @@ public class MemberRepositoryTest {
                     .username("testUser" + index)
                     .nickname("test" + index)
                     .email("test" + index + "@test.com")
-                    .password("password")
-                    .passwordCheck("password")
+                    .password("password" + index)
+                    .passwordCheck("password" + index)
                     .build();
             Member member = new Member(registerRequestDto);
             memberRepository.save(member);
@@ -173,5 +173,19 @@ public class MemberRepositoryTest {
         List<Member> search = memberRepository.search(searchMemberDto);
         //then
         assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+    }
+
+    @Test
+    @DisplayName("모든 요소로 검색하면 같은 번호의 비밀번호가 나온다. ")
+    public void searchByAll() throws Exception{
+        //given
+        createDatas();
+        SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", "test3@test.com");
+
+        //when
+        List<Member> search = memberRepository.search(searchMemberDto);
+
+        //then
+        assertThat(search.get(0).getPassword()).isEqualTo("password3");
     }
 }
