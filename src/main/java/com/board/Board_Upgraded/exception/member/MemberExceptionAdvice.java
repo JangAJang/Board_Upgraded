@@ -50,4 +50,10 @@ public class MemberExceptionAdvice {
     public Response memberNotFoundException(){
         return Response.failure(404, "해당 사용자를 찾을 수 없습니다.");
     }
+
+    @ExceptionHandler(NeedToAddSearchConditionException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public Response needToAddSearchConditionException(){
+        return Response.failure(404, "검색 조건을 하나라도 입력해야 합니다.");
+    }
 }
