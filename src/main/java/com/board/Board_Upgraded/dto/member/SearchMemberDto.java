@@ -7,7 +7,13 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SearchMemberDto {
 
+    private String username;
     private String nickname;
     private String email;
-    private String username;
+
+    public SearchMemberDto(String username, String nickname, String email) {
+        this.username = username;
+        this.nickname = nickname;
+        this.email = email;
+    }
 }
