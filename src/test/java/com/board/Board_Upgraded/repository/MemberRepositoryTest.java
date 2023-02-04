@@ -160,4 +160,18 @@ public class MemberRepositoryTest {
         //then
         assertThat(search.get(0).getNickname()).isEqualTo("test3");
     }
+
+    @Test
+    @DisplayName("닉네임과 이메일로 검색하면 같은 번호의 아이디가 나온다.")
+    public void searchByNicknameAndEmail() throws Exception{
+        //given
+        createDatas();
+
+        SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", "test3@test.com");
+
+        //when
+        List<Member> search = memberRepository.search(searchMemberDto);
+        //then
+        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+    }
 }
