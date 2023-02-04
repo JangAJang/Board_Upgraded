@@ -79,19 +79,7 @@ public class MemberRepositoryTest {
     @DisplayName("아이디로만 검색했을 때 검색한 멤버의 닉네임이 같은 번호로 나온다. ")
     public void searchByUsernameTest() throws Exception{
         //given
-        for(int index = 0; index < 10; index++){
-            RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                    .username("testUser" + index)
-                    .nickname("test" + index)
-                    .email("test" + index + "@test.com")
-                    .password("password")
-                    .passwordCheck("password")
-                    .build();
-            Member member = new Member(registerRequestDto);
-            memberRepository.save(member);
-            em.flush();
-            em.clear();
-        }
+        createDatas();
 
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, null);
 
@@ -101,10 +89,7 @@ public class MemberRepositoryTest {
         assertThat(search.get(0).getNickname()).isEqualTo("test3");
     }
 
-    @Test
-    @DisplayName("닉네임으로만 검색했을 때 검색한 멤버의 아이디가 같은 번호로 나온다. ")
-    public void searchByNickname() throws Exception{
-        //given
+    private void createDatas() {
         for(int index = 0; index < 10; index++){
             RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
                     .username("testUser" + index)
@@ -118,8 +103,29 @@ public class MemberRepositoryTest {
             em.flush();
             em.clear();
         }
+    }
+
+    @Test
+    @DisplayName("닉네임으로만 검색했을 때 검색한 멤버의 아이디가 같은 번호로 나온다. ")
+    public void searchByNickname() throws Exception{
+        //given
+        createDatas();
 
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", null);
+
+        //when
+        List<Member> search = memberRepository.search(searchMemberDto);
+        //then
+        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+    }
+
+    @Test
+    @DisplayName("이메일로만 검색했을 때 검색한 멤버의 아이디가 같은 번호로 나온다. ")
+    public void searchByEmail() throws Exception{
+        //given
+        createDatas();
+
+        SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, "test3@test.com");
 
         //when
         List<Member> search = memberRepository.search(searchMemberDto);
