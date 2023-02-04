@@ -5,7 +5,7 @@ import com.board.Board_Upgraded.entity.member.Member;
 
 import java.util.List;
 
-public interface MemberRepositoryCustom {
+public interface MemberCustomRepository {
 
     List<Member> search(SearchMemberDto searchMemberDto);
 }
