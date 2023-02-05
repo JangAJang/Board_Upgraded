@@ -47,19 +47,19 @@ public class MemberController {
     @ApiOperation(value = "닉네임 변경", notes = "회원의 닉네임을 변경하는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/myPage/changeNickname")
-    public MemberInfoDto changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
+    public SearchMemberDto changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberNickname(changeNicknameRequestDto, member);
-        return new MemberInfoDto(member);
+        return new SearchMemberDto(member);
     }
 
     @ApiOperation(value = "이메일 변경", notes = "회원의 이메일을 변경하는 기능 구현")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/myPage/changeEmail")
-    public MemberInfoDto changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
+    public SearchMemberDto changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
         Member member = findMemberByUsername();
         memberService.changeMemberEmail(changeEmailRequestDto, member);
-        return new MemberInfoDto(member);
+        return new SearchMemberDto(member);
     }
 
     @ApiOperation(value = "비밀번호 변경", notes = "회원의 비밀번호를 변경하는 기능 구현")
@@ -74,15 +74,15 @@ public class MemberController {
     @ApiOperation(value = "회원 조회", notes = "회원을 검색해 기본 정보를 반환받는 기능")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/searchMember")
-    public MemberInfoDto searchMember(SearchMemberDto searchMemberDto){
+    public SearchMemberDto searchMember(SearchMemberDto searchMemberDto){
         return memberService.searchMember(searchMemberDto);
     }
 
     @ApiOperation(value = "마이페이지", notes = "로그인시에 개인 정보를 반환받는 기능")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/myPage")
-    public MemberInfoDto getMyPage(){
-        return new MemberInfoDto(findMemberByUsername());
+    public SearchMemberDto getMyPage(){
+        return new SearchMemberDto(findMemberByUsername());
     }
 
     @ApiOperation(value = "토큰 재발행", notes = "리프레쉬 토큰을 재발행받는 기능 구현")

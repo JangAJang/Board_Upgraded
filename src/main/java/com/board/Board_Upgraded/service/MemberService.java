@@ -75,9 +75,9 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public MemberInfoDto searchMember(SearchMemberDto searchMemberDto){
+    public SearchMemberDto searchMember(SearchMemberDto searchMemberDto){
         Member member = memberRepository.findByNickname(searchMemberDto.getNickname()).orElseThrow(MemberNotFoundException::new);
-        return new MemberInfoDto(member);
+        return new SearchMemberDto(member);
     }
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){

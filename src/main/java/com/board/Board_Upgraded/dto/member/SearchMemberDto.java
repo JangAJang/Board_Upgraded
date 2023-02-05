@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.dto.member;
 
+import com.board.Board_Upgraded.entity.member.Member;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -15,5 +16,12 @@ public class SearchMemberDto {
         this.username = username;
         this.nickname = nickname;
         this.email = email;
+    }
+
+
+    public SearchMemberDto(Member member){
+        this.username = member.getUsername();
+        this.nickname = member.getNickname();
+        this.email = member.getEmail();
     }
 }
