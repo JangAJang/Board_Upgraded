@@ -1,9 +1,8 @@
 package com.board.Board_Upgraded.dto.member;
 
 import com.board.Board_Upgraded.entity.member.Member;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 public class SearchMemberDto {
@@ -12,6 +11,7 @@ public class SearchMemberDto {
     private String nickname;
     private String email;
 
+    @QueryProjection
     public SearchMemberDto(String username, String nickname, String email) {
         this.username = username;
         this.nickname = nickname;

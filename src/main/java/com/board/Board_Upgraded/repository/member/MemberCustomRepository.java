@@ -1,11 +1,10 @@
 package com.board.Board_Upgraded.repository.member;
 
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
-import com.board.Board_Upgraded.entity.member.Member;
 
 import java.util.List;
 
 public interface MemberCustomRepository {
 
-    List<Member> search(SearchMemberDto searchMemberDto);
+    List<SearchMemberDto> search(SearchMemberDto searchMemberDto);
 }
