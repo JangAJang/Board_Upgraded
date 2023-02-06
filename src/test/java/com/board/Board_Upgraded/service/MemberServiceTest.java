@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import org.assertj.core.api.Assertions;
@@ -93,11 +94,18 @@ public class MemberServiceTest {
     @DisplayName("")        
     public void 비밀번호_불일치() throws Exception{
         //given
-        
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("jangajang")
+                .nickname("아장아장")
+                .email("jangajang@email.com")
+                .nickname("아장아장")
+                .passwordCheck("아장아장1")
+                .build();
         //when
-        
+
         //then
-        
+        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+                .isInstanceOf(PasswordNotMatchingException.class);
     }
     
     @Test
