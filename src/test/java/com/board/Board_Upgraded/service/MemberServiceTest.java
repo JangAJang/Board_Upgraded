@@ -1,22 +1,21 @@
 package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
-import com.board.Board_Upgraded.repository.member.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 public class MemberServiceTest {
 
     @Autowired
@@ -33,6 +32,7 @@ public class MemberServiceTest {
                     .passwordCheck("테스트" + index)
                     .build();
             memberService.registerNewMember(registerRequestDto);
+            System.out.println("test data activated");
         }
     }
 
@@ -45,6 +45,7 @@ public class MemberServiceTest {
                 .nickname("아장아장")
                 .email("jangajang@email.com")
                 .nickname("아장아장")
+                .password("아장아장")
                 .passwordCheck("아장아장")
                 .build();
         //when
@@ -60,9 +61,9 @@ public class MemberServiceTest {
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
                 .username("jangajang")
-                .nickname("testUser1")
+                .nickname("test1")
                 .email("jangajang@email.com")
-                .nickname("아장아장")
+                .password("아장아장")
                 .passwordCheck("아장아장")
                 .build();
         //when
@@ -81,6 +82,7 @@ public class MemberServiceTest {
                 .nickname("아장아장")
                 .email("test1@test.com")
                 .nickname("아장아장")
+                .password("아장아장")
                 .passwordCheck("아장아장")
                 .build();
         //when
@@ -99,6 +101,7 @@ public class MemberServiceTest {
                 .nickname("아장아장")
                 .email("jangajang@email.com")
                 .nickname("아장아장")
+                .password("아장아장")
                 .passwordCheck("아장아장1")
                 .build();
         //when
@@ -117,12 +120,12 @@ public class MemberServiceTest {
                 .nickname("아장아장")
                 .email("jangajang@test.com")
                 .nickname("아장아장")
+                .password("아장아장")
                 .passwordCheck("아장아장")
                 .build();
         //when
 
         //then
-        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
-                .doesNotThrowAnyException();
+        memberService.registerNewMember(registerRequestDto);
     }
 }

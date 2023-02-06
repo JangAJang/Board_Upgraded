@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +18,19 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Transactional
     public void registerNewMember(RegisterRequestDto registerRequestDto){
-
+        validateUsername(registerRequestDto.getUsername());
+        validateNickname(registerRequestDto.getNickname());
+        validateEmail(registerRequestDto.getEmail());
+        validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
+        registerRequestDto.setPassword(bCryptPasswordEncoder.encode(registerRequestDto.getPassword()));
+        Member member = new Member(registerRequestDto);
+        memberRepository.save(member);
     }
 
     private void validateUsername(String username){
