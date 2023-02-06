@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import org.assertj.core.api.Assertions;
@@ -55,11 +56,18 @@ public class MemberServiceTest {
     @DisplayName("")        
     public void 닉네임_중복() throws Exception{
         //given
-        
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser11")
+                .nickname("testUser1")
+                .email("jangajang@email.com")
+                .nickname("아장아장")
+                .passwordCheck("아장아장")
+                .build();
         //when
-        
+
         //then
-        
+        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+                .isInstanceOf(NicknameAlreadyInUseException.class);
     }
     
     @Test
