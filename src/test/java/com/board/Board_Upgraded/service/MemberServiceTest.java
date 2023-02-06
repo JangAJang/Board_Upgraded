@@ -112,10 +112,17 @@ public class MemberServiceTest {
     @DisplayName("")        
     public void 회원가입_정상동작() throws Exception{
         //given
-        
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("jangajang")
+                .nickname("아장아장")
+                .email("jangajang@test.com")
+                .nickname("아장아장")
+                .passwordCheck("아장아장")
+                .build();
         //when
-        
+
         //then
-        
+        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+                .doesNotThrowAnyException();
     }
 }
