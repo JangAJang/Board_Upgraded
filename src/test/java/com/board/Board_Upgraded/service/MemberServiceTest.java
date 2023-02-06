@@ -2,18 +2,22 @@ package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.*;
+
 @SpringBootTest
 public class MemberServiceTest {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
 
     @BeforeEach
     void initData(){
@@ -25,8 +29,7 @@ public class MemberServiceTest {
                     .password("테스트" + index)
                     .passwordCheck("테스트" + index)
                     .build();
-            Member member = new Member(registerRequestDto);
-            memberRepository.save(member);
+            memberService.registerNewMember(registerRequestDto);
         }
     }
 
@@ -34,11 +37,18 @@ public class MemberServiceTest {
     @DisplayName("")
     public void 아이디_중복() throws Exception{
         //given
-
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser1")
+                .nickname("아장아장")
+                .email("jangajang@email.com")
+                .nickname("아장아장")
+                .passwordCheck("아장아장")
+                .build();
         //when
 
         //then
-
+        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+                .isInstanceOf(UsernameAlreadyInUseException.class);
     }
     
     @Test
