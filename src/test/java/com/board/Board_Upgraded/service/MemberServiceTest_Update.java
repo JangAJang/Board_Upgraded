@@ -1,16 +1,19 @@
 package com.board.Board_Upgraded.service;
 
+import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -52,7 +55,7 @@ public class MemberServiceTest_Update {
         //when
         ChangeNicknameRequestDto changeNicknameRequestDto = new ChangeNicknameRequestDto("test1");
         //then
-        Assertions.assertThatThrownBy(()-> memberService.changeMemberNickname(changeNicknameRequestDto, member2))
+        assertThatThrownBy(()-> memberService.changeMemberNickname(changeNicknameRequestDto, member2))
                 .isInstanceOf(NicknameAlreadyInUseException.class);
     }
 
@@ -66,5 +69,30 @@ public class MemberServiceTest_Update {
         ChangeNicknameRequestDto changeNicknameRequestDto = new ChangeNicknameRequestDto("test3");
         //then
         memberService.changeMemberNickname(changeNicknameRequestDto, member2);
+    }
+
+    @Test
+    @DisplayName("")
+    public void 이메일_변경_중복() throws Exception{
+        //given
+        makeMember1();
+        Member member2 = makeMember2();
+        //when
+        ChangeEmailRequestDto changeEmailRequestDto = new ChangeEmailRequestDto("test1@test.com");
+        //then
+        assertThatThrownBy(()-> memberService.changeMemberEmail(changeEmailRequestDto, member2))
+                .isInstanceOf(EmailAlreadyInUseException.class);
+    }
+
+    @Test
+    @DisplayName("")
+    public void 이메일_변경_성공() throws Exception{
+        //given
+        makeMember1();
+        Member member2 = makeMember2();
+        //when
+        ChangeEmailRequestDto changeEmailRequestDto = new ChangeEmailRequestDto("test3@test.com");
+        //then
+        memberService.changeMemberEmail(changeEmailRequestDto, member2);
     }
 }
