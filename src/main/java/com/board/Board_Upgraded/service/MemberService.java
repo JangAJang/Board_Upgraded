@@ -24,13 +24,7 @@ public class MemberService {
 
     @Transactional
     public void registerNewMember(RegisterRequestDto registerRequestDto){
-        validateUsername(registerRequestDto.getUsername());
-        validateNickname(registerRequestDto.getNickname());
-        validateEmail(registerRequestDto.getEmail());
-        validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
-        registerRequestDto.setPassword(bCryptPasswordEncoder.encode(registerRequestDto.getPassword()));
-        Member member = new Member(registerRequestDto);
-        memberRepository.save(member);
+
     }
 
     private void validateUsername(String username){

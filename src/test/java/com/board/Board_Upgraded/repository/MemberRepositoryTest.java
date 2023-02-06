@@ -2,7 +2,6 @@ package com.board.Board_Upgraded.repository;
 
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.dto.member.SearchMemberDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 

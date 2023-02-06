@@ -37,7 +37,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("회원가입_아이디 중복")
     public void 아이디_중복() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -55,7 +55,7 @@ public class MemberServiceTest {
     }
     
     @Test
-    @DisplayName("")        
+    @DisplayName("회원가입_닉네임 중복")
     public void 닉네임_중복() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -73,7 +73,7 @@ public class MemberServiceTest {
     }
     
     @Test
-    @DisplayName("")        
+    @DisplayName("회원가입_이메일 중복")
     public void 이메일_중복() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -91,7 +91,7 @@ public class MemberServiceTest {
     }
     
     @Test
-    @DisplayName("")        
+    @DisplayName("회원가입_비밀번호 불일치")
     public void 비밀번호_불일치() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -109,7 +109,7 @@ public class MemberServiceTest {
     }
     
     @Test
-    @DisplayName("")        
+    @DisplayName("회원가입_정상동작")
     public void 회원가입_정상동작() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
