@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.service;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
+import com.board.Board_Upgraded.exception.member.NeedToAddSearchConditionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,18 @@ public class MemberServiceTest_Search {
                     .build();
             memberService.registerNewMember(registerRequestDto);
         }
+    }
+
+    @Test
+    @DisplayName("전부 다 null값으로 검색하면 예외처리된다. ")
+    public void searchWithAllNull() throws Exception{
+        //given
+
+        //when
+        SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, null);
+        //then
+        assertThatThrownBy(()-> memberService.search(searchMemberDto))
+                .isInstanceOf(NeedToAddSearchConditionException.class);
     }
 
     @Test
