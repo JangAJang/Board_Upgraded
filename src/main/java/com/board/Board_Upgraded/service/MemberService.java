@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MemberService {
@@ -77,6 +79,11 @@ public class MemberService {
         validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
         changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
         member.changePassword(changePasswordRequestDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SearchMemberDto> search(SearchMemberDto searchMemberDto){
+        return memberRepository.search(searchMemberDto);
     }
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
