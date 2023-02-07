@@ -79,12 +79,6 @@ public class MemberService {
         member.changePassword(changePasswordRequestDto);
     }
 
-    @Transactional(readOnly = true)
-    public SearchMemberDto searchMember(SearchMemberDto searchMemberDto){
-        Member member = memberRepository.findByNickname(searchMemberDto.getNickname()).orElseThrow(MemberNotFoundException::new);
-        return new SearchMemberDto(member);
-    }
-
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
         if(!member.isPasswordRight(passwordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
