@@ -73,8 +73,6 @@ public class Member extends BaseEntity {
     }
 
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
-        if(isPasswordSameWithFormal(changePasswordRequestDto.getNewPassword()))
-            throw new PasswordNotChangedException();
         this.password = changePasswordRequestDto.getNewPassword();
         this.setLastModifiedDate(LocalDateTime.now());
     }

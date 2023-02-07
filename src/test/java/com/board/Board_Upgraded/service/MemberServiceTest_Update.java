@@ -9,7 +9,6 @@ import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotChangedException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

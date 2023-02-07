@@ -18,7 +18,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    private final PasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
@@ -28,7 +28,7 @@ public class MemberService {
         validateNickname(registerRequestDto.getNickname());
         validateEmail(registerRequestDto.getEmail());
         validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
-        registerRequestDto.setPassword(bCryptPasswordEncoder.encode(registerRequestDto.getPassword()));
+        registerRequestDto.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         Member member = new Member(registerRequestDto);
         memberRepository.save(member);
     }
@@ -54,23 +54,28 @@ public class MemberService {
         }
     }
 
+    private void validateWithCurrentPassword(ChangePasswordRequestDto changePasswordRequestDto, String currentPassword){
+        if(passwordEncoder.matches(changePasswordRequestDto.getNewPassword(), currentPassword))
+            throw new PasswordNotChangedException();
+    }
+
     @Transactional
     public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
         validateEmail(changeEmailRequestDto.getNewEmail());
         member.changeEmail(changeEmailRequestDto);
-        memberRepository.save(member);
     }
 
     @Transactional
     public void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
         validateNickname(changeNicknameRequestDto.getNewNickname());
         member.changeNickname(changeNicknameRequestDto);
-        memberRepository.save(member);
     }
 
     @Transactional
     public void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
         validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
+        validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
+        changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
         member.changePassword(changePasswordRequestDto);
     }
 
@@ -82,7 +87,7 @@ public class MemberService {
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
-        if(!member.isPasswordRight(bCryptPasswordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
+        if(!member.isPasswordRight(passwordEncoder.encode(signInRequestDto.getPassword()))) throw new PasswordNotMatchingException();
     }
 
     // SignIn을 위한 로직1
