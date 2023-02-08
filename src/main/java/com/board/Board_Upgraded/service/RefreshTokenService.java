@@ -34,7 +34,7 @@ public class RefreshTokenService {
         TokenDto tokenDto = tokenProvider.generateTokenDto(getAuthentication(req));
         RefreshToken newRefreshToken = refreshToken.updateValue(tokenDto.getRefreshToken());
         refreshTokenRepository.save(newRefreshToken);
-        return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
+        return new TokenResponseDto(tokenDto);
     }
 
     private void validateRefreshToken(ReissueRequestDto req){
@@ -62,6 +62,6 @@ public class RefreshTokenService {
                 .value(tokenDto.getRefreshToken())
                 .build();
         refreshTokenRepository.save(refreshToken);
-        return new TokenResponseDto(tokenDto.getAccessToken(), tokenDto.getRefreshToken());
+        return new TokenResponseDto(tokenDto);
     }
 }

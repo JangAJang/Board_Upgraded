@@ -1,14 +1,15 @@
 package com.board.Board_Upgraded.dto.token;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TokenResponseDto {
     private String accessToken;
     private String refreshToken;
+
+    public TokenResponseDto(TokenDto tokenDto){
+        this.accessToken = tokenDto.getAccessToken();
+        this.refreshToken = tokenDto.getRefreshToken();
+    }
 }
