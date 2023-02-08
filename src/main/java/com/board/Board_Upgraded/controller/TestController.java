@@ -2,12 +2,16 @@ package com.board.Board_Upgraded.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/test")
+@Slf4j
 public class TestController {
 
     @ApiOperation(value = "get메서드 테스트", notes = "get이 스웨거에 등록되는지 테스트 합니다")
@@ -20,7 +24,10 @@ public class TestController {
     @ApiOperation(value = "post메서드 테스트", notes = "post이 스웨거에 등록되는지 테스트 합니다")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/postTest")
-    public String postController(){return "post";}
+    public String postController(@RequestBody String testUser){
+        log.info("testUser = {}, testTime = {}", testUser, LocalDateTime.now());
+        return "post";
+    }
 
     @ApiOperation(value = "put메서드 테스트", notes = "put이 스웨거에 등록되는지 테스트 합니다")
     @ResponseStatus(HttpStatus.OK)
