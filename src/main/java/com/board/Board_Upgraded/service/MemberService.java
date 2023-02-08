@@ -5,6 +5,8 @@ import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -82,8 +84,8 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<SearchMemberDto> search(SearchMemberDto searchMemberDto){
-        return memberRepository.search(searchMemberDto);
+    public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable){
+        return memberRepository.search(searchMemberDto, pageable);
     }
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){

@@ -3,8 +3,12 @@ package com.board.Board_Upgraded.repository.member;
 import com.board.Board_Upgraded.dto.member.QSearchMemberDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
 import com.board.Board_Upgraded.exception.member.NeedToAddSearchConditionException;
+import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -20,16 +24,19 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     @Override
-    public List<SearchMemberDto> search(SearchMemberDto searchMemberDto) {
+    public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable) {
         if(searchMemberDto.getUsername() == null && searchMemberDto.getNickname() == null && searchMemberDto.getEmail() == null)
             throw new NeedToAddSearchConditionException();
-        return query
+        QueryResults<SearchMemberDto> result =  query
                 .select(new QSearchMemberDto(member.username, member.nickname, member.email))
                 .from(member)
                 .where(usernameEq(searchMemberDto.getUsername()),
                         nicknameEq(searchMemberDto.getNickname()),
                         emailEq(searchMemberDto.getEmail()))
-                .fetch();
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+        return new PageImpl<SearchMemberDto>(result.getResults(), pageable, result.getTotal());
     }
 
     private BooleanExpression usernameEq(String username){
