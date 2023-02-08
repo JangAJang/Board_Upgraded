@@ -87,8 +87,10 @@ public class MemberService {
     }
 
     private void validateSignInRequest(SignInRequestDto signInRequestDto){
-        Member member = memberRepository.findByUsername(signInRequestDto.getUsername()).orElseThrow(MemberNotFoundException::new);
-        if(!passwordEncoder.matches(signInRequestDto.getPassword(), member.getPassword())) throw new PasswordNotMatchingException();
+        Member member = memberRepository.findByUsername(signInRequestDto.getUsername())
+                .orElseThrow(MemberNotFoundException::new);
+        if(!passwordEncoder.matches(signInRequestDto.getPassword(), member.getPassword()))
+            throw new PasswordNotMatchingException();
     }
 
     // SignIn을 위한 로직1
