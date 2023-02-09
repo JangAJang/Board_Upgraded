@@ -14,9 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.board.Board_Upgraded.repository.member.SearchType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -55,7 +55,7 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, null);
 
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname).collect(Collectors.toList()))
                 .containsExactly("test3");
@@ -69,7 +69,7 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", null);
 
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
                 .containsExactly("testUser3");
@@ -83,7 +83,7 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, "test3@test.com");
 
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
                 .containsExactly("testUser3");
@@ -97,7 +97,7 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", null);
 
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getEmail).collect(Collectors.toList()))
                 .containsExactly("test3@test.com");
@@ -109,7 +109,7 @@ public class MemberRepository_SearchTest {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname).collect(Collectors.toList()))
                 .containsExactly("test3");
@@ -121,7 +121,7 @@ public class MemberRepository_SearchTest {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
                 .containsExactly("testUser3");
@@ -134,7 +134,7 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", "test3@test.com");
 
         //when
-        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
                 .containsExactly("testUser3");
