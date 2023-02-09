@@ -5,17 +5,16 @@ import com.board.Board_Upgraded.dto.member.SearchMemberDto;
 import com.board.Board_Upgraded.exception.member.NeedToAddSearchConditionException;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 
 import static com.board.Board_Upgraded.entity.member.QMember.*;
 import static com.board.Board_Upgraded.repository.member.SearchType.*;
+import static org.springframework.util.StringUtils.*;
 
 public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
@@ -40,50 +39,23 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     private BooleanBuilder searchCondition(SearchMemberDto searchMemberDto, SearchType searchType){
+        if(searchType.equals(EXACT)) return exactSearch(searchMemberDto);
+        return containsSearch(searchMemberDto);
+    }
+
+    private BooleanBuilder exactSearch(SearchMemberDto searchMemberDto) {
         BooleanBuilder builder = new BooleanBuilder();
-        if(StringUtils.hasText(searchMemberDto.getUsername())){
-            builder.or(queryUsername(searchMemberDto.getUsername(), searchType));
-        }
-        if(StringUtils.hasText(searchMemberDto.getNickname()))
-            builder.or(queryNickname(searchMemberDto.getNickname(), searchType));
-        if(StringUtils.hasText(searchMemberDto.getEmail()))
-            builder.or(queryEmail(searchMemberDto.getEmail(), searchType));
+        if(hasText(searchMemberDto.getUsername())) builder.and(member.username.eq(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getNickname())) builder.and(member.nickname.eq(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getEmail())) builder.and(member.email.eq(searchMemberDto.getEmail()));
         return builder;
     }
 
-    private Predicate queryUsername(String username, SearchType searchType){
-        if(searchType.equals(EXACT))
-            return member.username.eq(username);
-        return member.username.contains(username);
+    private BooleanBuilder containsSearch(SearchMemberDto searchMemberDto){
+        BooleanBuilder builder = new BooleanBuilder();
+        if(hasText(searchMemberDto.getUsername())) builder.or(member.username.contains(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getNickname())) builder.or(member.nickname.contains(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getEmail())) builder.or(member.email.contains(searchMemberDto.getEmail()));
+        return builder;
     }
-
-    private Predicate queryNickname(String nickname, SearchType searchType){
-        if(searchType.equals(EXACT))
-            return member.nickname.eq(nickname);
-        return member.nickname.contains(nickname);
-    }
-
-    private Predicate queryEmail(String email, SearchType searchType){
-        if(searchType.equals(EXACT))
-            return member.email.eq(email);
-        return member.email.contains(email);
-    }
-
-//    private BooleanExpression usernameEq(String username, SearchType searchType){
-//        if(username == null || username.isEmpty() || username.isBlank()) return null;
-//        if(searchType.equals(CONTAINS)) return member.username.contains(username);
-//        return member.username.eq(username);
-//    }
-//
-//    private BooleanExpression nicknameEq(String nickname, SearchType searchType){
-//        if(nickname == null || nickname.isEmpty() || nickname.isBlank()) return null;
-//        if(searchType.equals(CONTAINS)) return member.nickname.contains(nickname);
-//        return member.nickname.eq(nickname);
-//    }
-//
-//    private BooleanExpression emailEq(String email, SearchType searchType){
-//        if(email == null || email.isEmpty() || email.isBlank()) return null;
-//        if(searchType.equals(CONTAINS)) return member.email.contains(email);
-//        return member.email.eq(email);
-//    }
 }

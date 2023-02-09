@@ -146,15 +146,4 @@ public class MemberServiceTest_Search_Exact {
         assertThat(search.getContent().stream().map(SearchMemberDto::getEmail))
                 .containsExactly("test3@test.com");
     }
-
-    @Test
-    @DisplayName("")
-    public void searchTest() throws Exception{
-        //given
-        SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test2", null);
-        //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
-        //then
-        System.out.println("result : " + search.getContent().toString());
-    }
 }
