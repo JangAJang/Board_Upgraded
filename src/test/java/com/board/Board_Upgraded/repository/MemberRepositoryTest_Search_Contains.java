@@ -44,13 +44,17 @@ public class MemberRepositoryTest_Search_Contains {
     public void searchWith_testUser1() throws Exception{
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser1", null, null);
-        PageRequest pageRequest = PageRequest.of(0, 10);
+        PageRequest pageRequest1 = PageRequest.of(0, 10);
+        PageRequest pageRequest2 = PageRequest.of(1, 10);
         //when
-        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest, CONTAINS);
-        System.out.println("result : " + result.getContent().toString());
+        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1, CONTAINS);
+        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2, CONTAINS);
+        System.out.println("result1 : " + result1.getContent().toString());
         //then
-        assertThat(result.getContent().stream().map(SearchMemberDto::getUsername))
+        assertThat(result1.getContent().stream().map(SearchMemberDto::getUsername))
                 .containsExactly("testUser1", "testUser10", "testUser11", "testUser12", "testUser13",
                         "testUser14", "testUser15", "testUser16", "testUser17", "testUser18");
+        assertThat(result2.getContent().stream().map(SearchMemberDto::getUsername))
+                .containsExactly("testUser19", "testUser100");
     }
 }
