@@ -22,7 +22,7 @@ public class MemberServiceTest_Search_Exact {
     @Autowired
     private MemberService memberService;
 
-    private final PageRequest page = PageRequest.of(0, 3);
+    private static final PageRequest page = PageRequest.of(0, 3);
 
     @BeforeEach
     void createData() {

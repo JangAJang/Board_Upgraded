@@ -42,19 +42,19 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
     private BooleanExpression usernameEq(String username, SearchType searchType){
         if(username == null || username.isEmpty() || username.isBlank()) return null;
-        if(searchType.equals(LIKE)) return member.username.like(username);
+        if(searchType.equals(CONTAINS)) return member.username.contains(username);
         return member.username.eq(username);
     }
 
     private BooleanExpression nicknameEq(String nickname, SearchType searchType){
         if(nickname == null || nickname.isEmpty() || nickname.isBlank()) return null;
-        if(searchType.equals(LIKE)) return member.nickname.like(nickname);
+        if(searchType.equals(CONTAINS)) return member.nickname.contains(nickname);
         return member.nickname.eq(nickname);
     }
 
     private BooleanExpression emailEq(String email, SearchType searchType){
         if(email == null || email.isEmpty() || email.isBlank()) return null;
-        if(searchType.equals(LIKE)) return member.email.like(email);
+        if(searchType.equals(CONTAINS)) return member.email.contains(email);
         return member.email.eq(email);
     }
 }

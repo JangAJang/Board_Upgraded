@@ -2,7 +2,7 @@ package com.board.Board_Upgraded.repository.member;
 
 public enum SearchType {
 
-    LIKE("like"), EXACT("exact");
+    CONTAINS("contains"), EXACT("exact");
 
     private String type;
 
