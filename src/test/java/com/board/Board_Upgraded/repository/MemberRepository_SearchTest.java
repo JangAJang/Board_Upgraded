@@ -9,10 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,6 +28,8 @@ public class MemberRepository_SearchTest {
 
     @Autowired
     private EntityManager em;
+
+    private final PageRequest page = PageRequest.of(0, 3);
 
     @BeforeEach
     void createData() {
@@ -50,9 +55,10 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, null);
 
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getNickname()).isEqualTo("test3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getNickname).collect(Collectors.toList()))
+                .containsExactly("test3");
     }
 
     @Test
@@ -63,9 +69,10 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", null);
 
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
+                .containsExactly("testUser3");
     }
 
     @Test
@@ -76,9 +83,10 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, "test3@test.com");
 
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
+                .containsExactly("testUser3");
     }
 
     @Test
@@ -89,35 +97,34 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", null);
 
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getEmail()).isEqualTo("test3@test.com");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getEmail).collect(Collectors.toList()))
+                .containsExactly("test3@test.com");
     }
 
     @Test
     @DisplayName("아이디와 이메일로 검색하면 같은 번호의 닉네임이 나온다.")
     public void searchByUsernameAndEmail() throws Exception{
         //given
-
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, "test3@test.com");
-
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getNickname()).isEqualTo("test3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getNickname).collect(Collectors.toList()))
+                .containsExactly("test3");
     }
 
     @Test
     @DisplayName("닉네임과 이메일로 검색하면 같은 번호의 아이디가 나온다.")
     public void searchByNicknameAndEmail() throws Exception{
         //given
-
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", "test3@test.com");
-
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
+                .containsExactly("testUser3");
     }
 
     @Test
@@ -127,11 +134,13 @@ public class MemberRepository_SearchTest {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", "test3@test.com");
 
         //when
-        List<SearchMemberDto> search = memberRepository.search(searchMemberDto);
-
+        Page<SearchMemberDto> search = memberRepository.search(searchMemberDto, page);
         //then
-        assertThat(search.get(0).getUsername()).isEqualTo("testUser3");
-        assertThat(search.get(0).getNickname()).isEqualTo("test3");
-        assertThat(search.get(0).getEmail()).isEqualTo("test3@test.com");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getUsername).collect(Collectors.toList()))
+                .containsExactly("testUser3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getNickname).collect(Collectors.toList()))
+                .containsExactly("test3");
+        assertThat(search.getContent().stream().map(SearchMemberDto::getEmail).collect(Collectors.toList()))
+                .containsExactly("test3@test.com");
     }
 }
