@@ -12,13 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+import static com.board.Board_Upgraded.repository.member.SearchType.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class MemberServiceTest_Search {
+public class MemberServiceTest_Search_Exact {
 
     @Autowired
     private MemberService memberService;
@@ -47,7 +46,7 @@ public class MemberServiceTest_Search {
         //when
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, null);
         //then
-        assertThatThrownBy(()-> memberService.search(searchMemberDto, page))
+        assertThatThrownBy(()-> memberService.search(searchMemberDto, page, EXACT))
                 .isInstanceOf(NeedToAddSearchConditionException.class);
     }
 
@@ -58,7 +57,7 @@ public class MemberServiceTest_Search {
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, null);
 
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname))
@@ -71,7 +70,7 @@ public class MemberServiceTest_Search {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", null);
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
@@ -84,7 +83,7 @@ public class MemberServiceTest_Search {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, null, "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
@@ -97,7 +96,7 @@ public class MemberServiceTest_Search {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", null);
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getEmail))
@@ -111,7 +110,7 @@ public class MemberServiceTest_Search {
 
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", null, "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname))
@@ -124,7 +123,7 @@ public class MemberServiceTest_Search {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
@@ -137,7 +136,7 @@ public class MemberServiceTest_Search {
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", "test3@test.com");
         //when
-        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
+        Page<SearchMemberDto> search = memberService.search(searchMemberDto, page, EXACT);
         //then
         assertThat(search.getContent().size()).isEqualTo(1);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
