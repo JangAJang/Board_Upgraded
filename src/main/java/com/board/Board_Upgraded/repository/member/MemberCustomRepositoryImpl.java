@@ -53,7 +53,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
     private BooleanBuilder containsSearch(SearchMemberDto searchMemberDto){
         BooleanBuilder builder = new BooleanBuilder();
-        if(hasText(searchMemberDto.getUsername())) builder.or(member.username.contains(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getUsername())) builder.or(member.username.contains(searchMemberDto.getUsername()));
         if(hasText(searchMemberDto.getNickname())) builder.or(member.nickname.contains(searchMemberDto.getNickname()));
         if(hasText(searchMemberDto.getEmail())) builder.or(member.email.contains(searchMemberDto.getEmail()));
         return builder;

@@ -112,4 +112,18 @@ public class MemberRepositoryTest_Search_Contains {
                 .containsExactly("test1", "test2", "test3", "test4", "test5",
                         "test6", "test7", "test8", "test9", "test10");
     }
+
+    @Test
+    @DisplayName("")
+    public void 서로_다른_객체를_요구하며_검색하기() throws Exception{
+        //given
+        SearchMemberDto searchMemberDto = new SearchMemberDto("11", null, "22");
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        //when
+        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest, CONTAINS);
+        //then
+        assertThat(result.getTotalElements()).isEqualTo(2L);
+        assertThat(result.getContent().stream().map(SearchMemberDto::getNickname))
+                .containsExactly("test11", "test22");
+    }
 }
