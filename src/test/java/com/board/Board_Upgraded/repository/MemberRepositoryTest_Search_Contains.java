@@ -126,4 +126,16 @@ public class MemberRepositoryTest_Search_Contains {
         assertThat(result.getContent().stream().map(SearchMemberDto::getNickname))
                 .containsExactly("test11", "test22");
     }
+
+    @Test
+    @DisplayName("")
+    public void 서로_값을_넣었을때_포함값을_가지며_다른_입력에_대한_쿼리가_or로_처리되는지() throws Exception{
+        //given
+        SearchMemberDto searchMemberDto = new SearchMemberDto("1", null, "2");
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        //when
+        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest, CONTAINS);
+        //then
+        assertThat(result.getTotalElements()).isEqualTo(37L);
+    }
 }
