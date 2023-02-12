@@ -26,9 +26,6 @@ class MemberControllerTest_Register_NullOrSuccess {
     private MockMvc mvc;
 
     @Autowired
-    private MemberService memberService;
-
-    @Autowired
     private MemberRepository memberRepository;
 
     private String makeJson(Object object){

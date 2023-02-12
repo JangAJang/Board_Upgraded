@@ -13,6 +13,6 @@ public class ValidationExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response needToWriteParameterException(MethodArgumentNotValidException e){
-        return Response.failure(404, e.getFieldErrors().get(0).getDefaultMessage());
+        return Response.failure(400, e.getFieldErrors().get(0).getDefaultMessage());
     }
 }
