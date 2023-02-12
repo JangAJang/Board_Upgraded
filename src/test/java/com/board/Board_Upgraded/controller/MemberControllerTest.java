@@ -1,8 +1,12 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.service.MemberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +28,23 @@ class MemberControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
     private String makeJson(Object object){
         try {
             return new ObjectMapper().writeValueAsString(object);
         } catch (JsonProcessingException e) {
             return "";
         }
+    }
+
+    @BeforeEach
+    void clearDB(){
+        memberRepository.deleteAll();
     }
 
     @Test
@@ -62,6 +77,7 @@ class MemberControllerTest {
     public void registerFail_NullUsername() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setUsername(null);
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -75,6 +91,7 @@ class MemberControllerTest {
     public void registerFail_NullNickname() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setNickname(null);
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -88,6 +105,7 @@ class MemberControllerTest {
     public void registerFail_NullEmail() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setEmail(null);
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -101,6 +119,7 @@ class MemberControllerTest {
     public void registerFail_NullPassword() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setPassword(null);
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -113,6 +132,27 @@ class MemberControllerTest {
     @DisplayName("비밀번호 재입력이 null값이면 400에러를 날린다.")
     public void registerFail_NullPasswordCheck() throws Exception{
         //given
+        RegisterRequestDto registerRequestDto = makeTestRegister();
+        registerRequestDto.setPasswordCheck(null);
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("")
+    public void registerFail_DuplicatedUsername() throws Exception{
+        //given
+        memberService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("aaa")
+                .email("bbb@bbb.com")
+                .password("ccc")
+                .passwordCheck("ccc")
+                .build());
         RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
