@@ -36,13 +36,7 @@ class MemberControllerTest {
     @DisplayName("회원가입을 성공하면 success register가 반환된다.")
     public void registerSuccessTest() throws Exception{
         //given
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("pass")
-                .passwordCheck("pass")
-                .build();
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -52,17 +46,22 @@ class MemberControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
-    @DisplayName("아이디가 null값이면 400에러를 날린다.")
-    public void registerFail_NullUsername() throws Exception{
-        //given
+    private static RegisterRequestDto makeTestRegister() {
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username(null)
+                .username("test")
                 .nickname("test")
                 .email("test@test.com")
                 .password("pass")
                 .passwordCheck("pass")
                 .build();
+        return registerRequestDto;
+    }
+
+    @Test
+    @DisplayName("아이디가 null값이면 400에러를 날린다.")
+    public void registerFail_NullUsername() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -75,13 +74,7 @@ class MemberControllerTest {
     @DisplayName("닉네임이 null값이면 400에러를 날린다.")
     public void registerFail_NullNickname() throws Exception{
         //given
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username("test")
-                .nickname(null)
-                .email("test@test.com")
-                .password("pass")
-                .passwordCheck("pass")
-                .build();
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -94,13 +87,7 @@ class MemberControllerTest {
     @DisplayName("이메일이 null값이면 400에러를 날린다.")
     public void registerFail_NullEmail() throws Exception{
         //given
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email(null)
-                .password("pass")
-                .passwordCheck("pass")
-                .build();
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -113,13 +100,7 @@ class MemberControllerTest {
     @DisplayName("비밀번호가 null값이면 400에러를 날린다.")
     public void registerFail_NullPassword() throws Exception{
         //given
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password(null)
-                .passwordCheck("pass")
-                .build();
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -132,13 +113,7 @@ class MemberControllerTest {
     @DisplayName("비밀번호 재입력이 null값이면 400에러를 날린다.")
     public void registerFail_NullPasswordCheck() throws Exception{
         //given
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("pass")
-                .passwordCheck(null)
-                .build();
+        RegisterRequestDto registerRequestDto = makeTestRegister();
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                         .contentType(MediaType.APPLICATION_JSON)
