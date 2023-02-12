@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.MemberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,13 @@ public class MemberControllerTest_Register_Duplicated {
                 .build();
     }
 
+    @BeforeEach
+    public void clear(){
+        memberRepository.deleteAll();
+    }
+
     @Test
-    @DisplayName("아이디가 중복되었을 때 404에러를 반환하며 body 에서 중복됨을 알려준다.")
+    @DisplayName("아이디가 중복되었을 때 400에러를 반환하며 body 에서 중복됨을 알려준다.")
     public void registerFail_DuplicatedUsername() throws Exception{
         //given
         memberService.registerNewMember(RegisterRequestDto.builder()
