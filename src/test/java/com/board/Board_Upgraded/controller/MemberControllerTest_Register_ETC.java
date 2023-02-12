@@ -40,11 +40,26 @@ public class MemberControllerTest_Register_ETC {
     }
 
     @Test
-    @DisplayName("이메일 형식이 맞지 않을 경우 400에러를 발생시키며 형식이상을 body 에 출력시킨다")
-    public void registerFail_EmailFormat() throws Exception{
+    @DisplayName("이메일 형식에 @이후가 존재하지 않을 때 400에러를 발생시키며 형식이상을 body 에 출력시킨다")
+    public void registerFail_EmailFormat1() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTest();
         registerRequestDto.setEmail("test");
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/join")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("올바르지 않은 이메일 형식입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("이메일 형식에 . 이후가 존재하지 않을 때 400에러를 발생시키며 형식이상을 body 에 출력시킨다")
+    public void registerFail_EmailFormat2() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = makeTest();
+        registerRequestDto.setEmail("test@test");
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/join")
                 .contentType(MediaType.APPLICATION_JSON)
