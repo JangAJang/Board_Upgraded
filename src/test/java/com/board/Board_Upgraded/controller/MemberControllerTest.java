@@ -83,6 +83,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("아이디를 입력해야 합니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -97,6 +98,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("닉네임을 입력해야 합니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -111,6 +113,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이메일을 입력해야 합니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -125,6 +128,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("비밀번호를 입력해야 합니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -139,6 +143,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("비밀번호를 다시 입력해야 합니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -159,6 +164,7 @@ class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 아이디입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

@@ -12,20 +12,20 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class RegisterRequestDto {
 
-    @NotNull(message = "아이디를 입력해야합니다")
-    @NotBlank(message = "아이디를 입력해야합니다")
+    @NotNull(message = "아이디를 입력해야 합니다.")
+    @NotBlank(message = "아이디를 입력해야 합니다.")
     private String username;
 
-    @NotNull(message = "비밀번호를 입력해야합니다.")
-    @NotBlank(message = "비밀번호를 입력해야합니다.")
+    @NotNull(message = "닉네임을 입력해야 합니다.")
+    @NotBlank(message = "닉네임을 입력해야 합니다.")
     private String nickname;
 
-    @NotNull(message = "이메일을 입력해야 합니다")
-    @NotBlank(message = "이메일을 입력해야 합니다")
+    @NotNull(message = "이메일을 입력해야 합니다.")
+    @NotBlank(message = "이메일을 입력해야 합니다.")
     private String email;
 
-    @NotNull(message = "비밀번호를 입력해야 합니다")
-    @NotBlank(message = "비밀번호를 입력해야 합니다")
+    @NotNull(message = "비밀번호를 입력해야 합니다.")
+    @NotBlank(message = "비밀번호를 입력해야 합니다.")
     private String password;
 
     @NotNull(message = "비밀번호를 다시 입력해야 합니다.")
