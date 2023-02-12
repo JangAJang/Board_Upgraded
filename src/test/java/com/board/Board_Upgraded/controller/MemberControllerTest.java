@@ -129,7 +129,7 @@ class MemberControllerTest {
     }
 
     @Test
-    @DisplayName("비밀번호 재입력이 null값이면 400에러를 날린다.")
+    @DisplayName("비밀번호 재입력이 null 값이면 400에러를 날린다.")
     public void registerFail_NullPasswordCheck() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = makeTestRegister();
@@ -143,7 +143,7 @@ class MemberControllerTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("아이디가 중복되었을 때 404에러를 반환하며 body 에서 중복됨을 알려준다.")
     public void registerFail_DuplicatedUsername() throws Exception{
         //given
         memberService.registerNewMember(RegisterRequestDto.builder()
