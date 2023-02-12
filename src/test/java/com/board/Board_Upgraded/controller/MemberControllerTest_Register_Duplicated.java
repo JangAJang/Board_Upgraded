@@ -39,14 +39,13 @@ public class MemberControllerTest_Register_Duplicated {
     }
 
     private static RegisterRequestDto makeTestRegister() {
-        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+        return RegisterRequestDto.builder()
                 .username("test")
                 .nickname("test")
                 .email("test@test.com")
                 .password("pass")
                 .passwordCheck("pass")
                 .build();
-        return registerRequestDto;
     }
 
     @Test
@@ -67,6 +66,48 @@ public class MemberControllerTest_Register_Duplicated {
                         .content(makeJson(registerRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 아이디입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("닉네임이 중복되었을 때 400에러를 반환하며 body 에서 중복됨을 알려준다.")
+    public void registerFail_DuplicatedNickname() throws Exception{
+        //given
+        memberService.registerNewMember(RegisterRequestDto.builder()
+                .username("aaa")
+                .nickname("test")
+                .email("bbb@bbb.com")
+                .password("ccc")
+                .passwordCheck("ccc")
+                .build());
+        RegisterRequestDto registerRequestDto = makeTestRegister();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 닉네임입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("이메일이 중복되었을 때 400에러를 반환하며 body 에서 중복됨을 알려준다.")
+    public void registerFail_DuplicatedEmail() throws Exception{
+        //given
+        memberService.registerNewMember(RegisterRequestDto.builder()
+                .username("aaa")
+                .nickname("bbb")
+                .email("test@test.com")
+                .password("ccc")
+                .passwordCheck("ccc")
+                .build());
+        RegisterRequestDto registerRequestDto = makeTestRegister();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 이메일입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
