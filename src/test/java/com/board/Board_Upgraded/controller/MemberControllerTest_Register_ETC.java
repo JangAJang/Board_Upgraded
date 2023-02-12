@@ -53,4 +53,19 @@ public class MemberControllerTest_Register_ETC {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("올바르지 않은 이메일 형식입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
+
+    @Test
+    @DisplayName("비밀번호가 서로 일치하지 않은 경우 400에러를 발생시키며 형식이상을 body 에 출력시킨다")
+    public void registerFail_PasswordMissMatch() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = makeTest();
+        registerRequestDto.setPassword("test1");
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/join")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("비밀번호가 일치하지 않습니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
