@@ -11,9 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RequiredArgsConstructor
 public class MemberInstanceValidator {
+    private final MemberRepository memberRepository;
 
-    private MemberRepository memberRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public void validateRegisterRequest(RegisterRequestDto registerRequestDto){
         validateUsername(registerRequestDto.getUsername());

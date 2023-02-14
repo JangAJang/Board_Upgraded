@@ -21,9 +21,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class AuthService {
 
     private final RefreshTokenRepository refreshTokenRepository;
@@ -31,7 +32,12 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final MemberRepository memberRepository;
-    private final MemberInstanceValidator memberInstanceValidator;
+    private MemberInstanceValidator memberInstanceValidator;
+
+    @PostConstruct
+    private void setValidator(){
+        memberInstanceValidator = new MemberInstanceValidator(memberRepository, passwordEncoder);
+    }
 
     @Transactional
     public void registerNewMember(RegisterRequestDto registerRequestDto){
@@ -41,17 +47,21 @@ public class AuthService {
         memberRepository.save(member);
     }
 
-    // SignIn을 위한 로직1
     @Transactional
-    public Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
+    public TokenResponseDto signIn(SignInRequestDto signInRequestDto){
+        Authentication authentication = getAuthenticationToSignIn(signInRequestDto);
+        return createTokenDtoByAuthentication(authentication);
+    }
+
+    // SignIn을 위한 로직1
+    private Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
         memberInstanceValidator.validateSignInRequest(signInRequestDto);
         UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
         return authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     }
 
     //SignIn을 위한 로직2
-    @Transactional
-    public TokenResponseDto createTokenDtoByAuthentication(Authentication authentication){
+    private TokenResponseDto createTokenDtoByAuthentication(Authentication authentication){
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(authentication.getName())
