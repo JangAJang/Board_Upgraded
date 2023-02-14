@@ -54,6 +54,49 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("회원가입 요청에 null값이 존재한다면 400(Bad Request)에러를 반환한다.")
+    public void registerFail_ValidationException_Null() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("아이디를 입력해야 합니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("회원가입 요청에 공백값이 존재한다면 400(Bad Request)에러를 반환한다.")
+    public void registerFail_ValidationException_Empty() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username(" ")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("아이디를 입력해야 합니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
