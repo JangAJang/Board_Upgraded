@@ -62,9 +62,9 @@ public class MemberServiceTest_Search {
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname))
-                .containsExactly("test3");
+                .containsExactly("test3", "test30");
     }
 
     @Test
@@ -75,9 +75,9 @@ public class MemberServiceTest_Search {
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
-                .containsExactly("testUser3");
+                .containsExactly("testUser3", "testUser30");
     }
 
     @Test
@@ -94,20 +94,20 @@ public class MemberServiceTest_Search {
     }
 
     @Test
-    @DisplayName("아이디와 닉네임으로 검색하면 같은 번호의 이메일이 나온다.")
+    @DisplayName("아이디와 닉네임으로 검색하면 3, 30이 나온다. ")
     public void searchByUsernameAndNickname() throws Exception{
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", null);
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getEmail))
-                .containsExactly("test3@test.com");
+                .containsExactly("test3@test.com", "test30@test.com");
     }
 
     @Test
-    @DisplayName("아이디와 이메일로 검색하면 같은 번호의 닉네임이 나온다.")
+    @DisplayName("아이디와 이메일로 검색하면 3, 30이 나온다. ")
     public void searchByUsernameAndEmail() throws Exception{
         //given
 
@@ -115,38 +115,38 @@ public class MemberServiceTest_Search {
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname))
-                .containsExactly("test3");
+                .containsExactly("test3", "test30");
     }
 
     @Test
-    @DisplayName("닉네임과 이메일로 검색하면 같은 번호의 아이디가 나온다.")
+    @DisplayName("3의 닉네임과 이메일로 검색하면 3, 30이 나온다. ")
     public void searchByNicknameAndEmail() throws Exception{
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto(null, "test3", "test3@test.com");
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
-                .containsExactly("testUser3");
+                .containsExactly("testUser3", "testUser30");
     }
 
     @Test
-    @DisplayName("모든 요소로 검색하면 같은 번호의 정보가 나온다. ")
+    @DisplayName("3의 모든 값으로 검색하면 3, 30번이 나온다.")
     public void searchByAll() throws Exception{
         //given
         SearchMemberDto searchMemberDto = new SearchMemberDto("testUser3", "test3", "test3@test.com");
         //when
         Page<SearchMemberDto> search = memberService.search(searchMemberDto, page);
         //then
-        assertThat(search.getContent().size()).isEqualTo(1);
+        assertThat(search.getContent().size()).isEqualTo(2);
         assertThat(search.getContent().stream().map(SearchMemberDto::getUsername))
-                .containsExactly("testUser3");
+                .containsExactly("testUser3", "testUser30");
         assertThat(search.getContent().stream().map(SearchMemberDto::getNickname))
-                .containsExactly("test3");
+                .containsExactly("test3", "test30");
         assertThat(search.getContent().stream().map(SearchMemberDto::getEmail))
-                .containsExactly("test3@test.com");
+                .containsExactly("test3@test.com", "test30@test.com");
     }
 }
