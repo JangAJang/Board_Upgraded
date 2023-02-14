@@ -2,7 +2,6 @@ package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
-import com.board.Board_Upgraded.repository.member.SearchType;
 import com.board.Board_Upgraded.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +18,9 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/join")
-    public String register(@RequestBody @Valid RegisterRequestDto registerRequestDto){
-        memberService.registerNewMember(registerRequestDto);
-        return "success register";
-    }
-
     @GetMapping("/members/{search_type}")
     public Page<SearchMemberDto> search(@RequestBody @Valid SearchMemberDto searchMemberDto,
-                                        @PageableDefault Pageable pageable,
-                                        @PathVariable("search_type") SearchType searchType){
-        return memberService.search(searchMemberDto, pageable, searchType);
+                                        @PageableDefault Pageable pageable){
+        return memberService.search(searchMemberDto, pageable);
     }
 }

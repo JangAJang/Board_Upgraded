@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 
 import static com.board.Board_Upgraded.entity.member.QMember.*;
-import static com.board.Board_Upgraded.repository.member.SearchType.*;
 import static org.springframework.util.StringUtils.*;
 
 public class MemberCustomRepositoryImpl implements MemberCustomRepository {
@@ -25,30 +24,21 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     @Override
-    public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable, SearchType searchType) {
+    public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable) {
         if(searchMemberDto.getUsername() == null && searchMemberDto.getNickname() == null && searchMemberDto.getEmail() == null)
             throw new NeedToAddSearchConditionException();
         QueryResults<SearchMemberDto> result =  query
                 .select(new QSearchMemberDto(member.username, member.nickname, member.email))
                 .from(member)
-                .where(searchCondition(searchMemberDto, searchType))
+                .where(searchCondition(searchMemberDto))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
         return new PageImpl<SearchMemberDto>(result.getResults(), pageable, result.getTotal());
     }
 
-    private BooleanBuilder searchCondition(SearchMemberDto searchMemberDto, SearchType searchType){
-        if(searchType.equals(EXACT)) return exactSearch(searchMemberDto);
+    private BooleanBuilder searchCondition(SearchMemberDto searchMemberDto){
         return containsSearch(searchMemberDto);
-    }
-
-    private BooleanBuilder exactSearch(SearchMemberDto searchMemberDto) {
-        BooleanBuilder builder = new BooleanBuilder();
-        if(hasText(searchMemberDto.getUsername())) builder.and(member.username.eq(searchMemberDto.getNickname()));
-        if(hasText(searchMemberDto.getNickname())) builder.and(member.nickname.eq(searchMemberDto.getNickname()));
-        if(hasText(searchMemberDto.getEmail())) builder.and(member.email.eq(searchMemberDto.getEmail()));
-        return builder;
     }
 
     private BooleanBuilder containsSearch(SearchMemberDto searchMemberDto){

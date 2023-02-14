@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MemberCustomRepository {
 
-    Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable, SearchType searchType);
+    Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable);
 }

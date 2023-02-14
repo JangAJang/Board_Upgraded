@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.board.Board_Upgraded.repository.member.SearchType.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -47,8 +45,8 @@ public class MemberRepositoryTest_Search_Contains {
         PageRequest pageRequest1 = PageRequest.of(0, 10);
         PageRequest pageRequest2 = PageRequest.of(1, 10);
         //when
-        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1, CONTAINS);
-        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2, CONTAINS);
+        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1);
+        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2);
         System.out.println("result1 : " + result1.getContent().toString());
         //then
         assertThat(result1.getContent().stream().map(SearchMemberDto::getUsername))
@@ -66,8 +64,8 @@ public class MemberRepositoryTest_Search_Contains {
         PageRequest pageRequest1 = PageRequest.of(0, 10);
         PageRequest pageRequest2 = PageRequest.of(1, 10);
         //when
-        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1, CONTAINS);
-        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2, CONTAINS);
+        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1);
+        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2);
         System.out.println("result1 : " + result1.getContent().toString());
         //then
         assertThat(result1.getContent().stream().map(SearchMemberDto::getUsername))
@@ -84,8 +82,8 @@ public class MemberRepositoryTest_Search_Contains {
         PageRequest pageRequest1 = PageRequest.of(0, 10);
         PageRequest pageRequest2 = PageRequest.of(1, 10);
         //when
-        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1, CONTAINS);
-        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2, CONTAINS);
+        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1);
+        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2);
         System.out.println("result1 : " + result1.getContent().toString());
         //then
         assertThat(result1.getContent().stream().map(SearchMemberDto::getUsername))
@@ -103,8 +101,8 @@ public class MemberRepositoryTest_Search_Contains {
         PageRequest pageRequest1 = PageRequest.of(0, 10);
         PageRequest pageRequest2 = PageRequest.of(1, 10);
         //when
-        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1, CONTAINS);
-        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2, CONTAINS);
+        Page<SearchMemberDto> result1 = memberRepository.search(searchMemberDto, pageRequest1);
+        Page<SearchMemberDto> result2 = memberRepository.search(searchMemberDto, pageRequest2);
         System.out.println("result1 : " + result1.getContent().toString());
         //then
         assertThat(result1.getTotalElements()).isEqualTo(100);
@@ -120,7 +118,7 @@ public class MemberRepositoryTest_Search_Contains {
         SearchMemberDto searchMemberDto = new SearchMemberDto("11", null, "22");
         PageRequest pageRequest = PageRequest.of(0, 10);
         //when
-        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest, CONTAINS);
+        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest);
         //then
         assertThat(result.getTotalElements()).isEqualTo(2L);
         assertThat(result.getContent().stream().map(SearchMemberDto::getNickname))
@@ -134,7 +132,7 @@ public class MemberRepositoryTest_Search_Contains {
         SearchMemberDto searchMemberDto = new SearchMemberDto("1", null, "2");
         PageRequest pageRequest = PageRequest.of(0, 10);
         //when
-        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest, CONTAINS);
+        Page<SearchMemberDto> result = memberRepository.search(searchMemberDto, pageRequest);
         //then
         assertThat(result.getTotalElements()).isEqualTo(37L);
     }
