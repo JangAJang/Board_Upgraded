@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.service.auth;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
+import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
@@ -158,5 +159,18 @@ public class AuthServiceTest {
         TokenResponseDto tokenResponseDto = authService.signIn(signInRequestDto);
         System.out.println("Access Token : " + tokenResponseDto.getAccessToken());
         System.out.println("Refresh Token : " + tokenResponseDto.getRefreshToken());
+    }
+
+    @Test
+    @DisplayName("토큰 재발행을 실행할 때, 재발행된 토큰의 값이 생성되어 반환되어야 한다. ")
+    public void reissueTest() throws Exception{
+        //given
+        TokenResponseDto tokenResponseDto = authService.signIn(
+                SignInRequestDto.builder().username("testUser1").password("테스트1").build());
+        //when
+        ReissueRequestDto reissueRequestDto = new ReissueRequestDto(tokenResponseDto.getRefreshToken(), tokenResponseDto.getAccessToken());
+        //then
+        TokenResponseDto reissuedToken = authService.reissue(reissueRequestDto);
+        assertThat(reissuedToken).isNotNull();
     }
 }
