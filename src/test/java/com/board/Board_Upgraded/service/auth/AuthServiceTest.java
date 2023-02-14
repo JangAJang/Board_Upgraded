@@ -1,10 +1,11 @@
-package com.board.Board_Upgraded.service;
+package com.board.Board_Upgraded.service.auth;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
+import com.board.Board_Upgraded.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,10 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class MemberServiceTest_Register {
+public class AuthServiceTest {
 
     @Autowired
-    private MemberService memberService;
+    private AuthService authService;
 
     @BeforeEach
     void initData(){
@@ -31,7 +32,7 @@ public class MemberServiceTest_Register {
                     .password("테스트" + index)
                     .passwordCheck("테스트" + index)
                     .build();
-            memberService.registerNewMember(registerRequestDto);
+            authService.registerNewMember(registerRequestDto);
             System.out.println("test data activated");
         }
     }
@@ -51,7 +52,7 @@ public class MemberServiceTest_Register {
         //when
 
         //then
-        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+        assertThatThrownBy(()-> authService.registerNewMember(registerRequestDto))
                 .isInstanceOf(UsernameAlreadyInUseException.class);
     }
     
@@ -69,7 +70,7 @@ public class MemberServiceTest_Register {
         //when
 
         //then
-        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+        assertThatThrownBy(()-> authService.registerNewMember(registerRequestDto))
                 .isInstanceOf(NicknameAlreadyInUseException.class);
     }
     
@@ -88,7 +89,7 @@ public class MemberServiceTest_Register {
         //when
 
         //then
-        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+        assertThatThrownBy(()-> authService.registerNewMember(registerRequestDto))
                 .isInstanceOf(EmailAlreadyInUseException.class);
     }
     
@@ -107,7 +108,7 @@ public class MemberServiceTest_Register {
         //when
 
         //then
-        assertThatThrownBy(()-> memberService.registerNewMember(registerRequestDto))
+        assertThatThrownBy(()-> authService.registerNewMember(registerRequestDto))
                 .isInstanceOf(PasswordNotMatchingException.class);
     }
     
@@ -126,6 +127,6 @@ public class MemberServiceTest_Register {
         //when
 
         //then
-        memberService.registerNewMember(registerRequestDto);
+        authService.registerNewMember(registerRequestDto);
     }
 }
