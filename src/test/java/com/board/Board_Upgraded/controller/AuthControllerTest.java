@@ -2,7 +2,6 @@ package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
-import com.board.Board_Upgraded.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
@@ -94,6 +93,28 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
                         .value("아이디를 입력해야 합니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("비밀번호가 서로 다를 때, 400에러를 반환하며 일치하지 않음을 body에 출력시킨다.")
+    public void registerFail_PasswordNotEqual() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test1").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("비밀번호가 일치하지 않습니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
