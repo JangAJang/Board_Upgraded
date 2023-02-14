@@ -8,9 +8,6 @@ import com.board.Board_Upgraded.repository.member.SearchType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,49 +18,24 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-
-    private void validateUsername(String username){
-        if(memberRepository.findByUsername(username).isPresent())
-            throw new UsernameAlreadyInUseException();
-    }
-
-    private void validateNickname(String nickname){
-        if(memberRepository.findByNickname(nickname).isPresent())
-            throw new NicknameAlreadyInUseException();
-    }
-
-    private void validateEmail(String email){
-        if(memberRepository.findByEmail(email).isPresent())
-            throw new EmailAlreadyInUseException();
-    }
-
-    private void validatePasswordCheck(String password, String passwordCheck){
-        if(!password.equals(passwordCheck)){
-            throw new PasswordNotMatchingException();
-        }
-    }
-
-    private void validateWithCurrentPassword(ChangePasswordRequestDto changePasswordRequestDto, String currentPassword){
-        if(passwordEncoder.matches(changePasswordRequestDto.getNewPassword(), currentPassword))
-            throw new PasswordNotChangedException();
-    }
+    private final MemberInstanceValidator memberInstanceValidator;
 
     @Transactional
     public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
-        validateEmail(changeEmailRequestDto.getNewEmail());
+        memberInstanceValidator.validateEmail(changeEmailRequestDto.getNewEmail());
         member.changeEmail(changeEmailRequestDto);
     }
 
     @Transactional
     public void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
-        validateNickname(changeNicknameRequestDto.getNewNickname());
+        memberInstanceValidator.validateNickname(changeNicknameRequestDto.getNewNickname());
         member.changeNickname(changeNicknameRequestDto);
     }
 
     @Transactional
     public void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
-        validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
-        validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
+        memberInstanceValidator.validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
+        memberInstanceValidator.validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
         changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
         member.changePassword(changePasswordRequestDto);
     }

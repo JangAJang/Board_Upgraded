@@ -8,8 +8,6 @@ import com.board.Board_Upgraded.dto.token.TokenDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.member.RefreshToken;
-import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
-import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.token.LogOutMemberException;
 import com.board.Board_Upgraded.exception.token.TokenUnmatchWithMemberException;
 import com.board.Board_Upgraded.exception.token.UnvalidRefreshTokenException;
@@ -33,13 +31,11 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final MemberRepository memberRepository;
+    private final MemberInstanceValidator memberInstanceValidator;
 
     @Transactional
     public void registerNewMember(RegisterRequestDto registerRequestDto){
-        validateUsername(registerRequestDto.getUsername());
-        validateNickname(registerRequestDto.getNickname());
-        validateEmail(registerRequestDto.getEmail());
-        validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
+        memberInstanceValidator.validateRegisterRequest(registerRequestDto);
         registerRequestDto.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         Member member = new Member(registerRequestDto);
         memberRepository.save(member);
@@ -48,7 +44,7 @@ public class AuthService {
     // SignIn을 위한 로직1
     @Transactional
     public Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
-        validateSignInRequest(signInRequestDto);
+        memberInstanceValidator.validateSignInRequest(signInRequestDto);
         UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
         return authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     }
@@ -91,12 +87,5 @@ public class AuthService {
 
     private Authentication getAuthentication(ReissueRequestDto req){
         return tokenProvider.getAuthentication(req.getAccessToken());
-    }
-
-    private void validateSignInRequest(SignInRequestDto signInRequestDto){
-        Member member = memberRepository.findByUsername(signInRequestDto.getUsername())
-                .orElseThrow(MemberNotFoundException::new);
-        if(!passwordEncoder.matches(signInRequestDto.getPassword(), member.getPassword()))
-            throw new PasswordNotMatchingException();
     }
 }
