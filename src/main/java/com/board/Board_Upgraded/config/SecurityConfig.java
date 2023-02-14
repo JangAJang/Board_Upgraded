@@ -19,7 +19,7 @@ public class SecurityConfig{
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/api/test/getTest", "/join");
+        return (web) -> web.ignoring().antMatchers("/api/test/getTest", "/auth/join");
     }
 
     @Bean
