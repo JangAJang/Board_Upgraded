@@ -1,10 +1,13 @@
 package com.board.Board_Upgraded.service.auth;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.member.SignInRequestDto;
+import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +25,12 @@ public class AuthServiceTest {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @BeforeEach
     void initData(){
+        memberRepository.deleteAll();
         for(int index = 1; index <=10; index++){
             RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
                     .username("testUser" + index)
@@ -128,5 +135,28 @@ public class AuthServiceTest {
 
         //then
         authService.registerNewMember(registerRequestDto);
+    }
+
+    @Test
+    @DisplayName("로그인시에 Access Token, Refresh Token을 출력")
+    public void 로그인_출력() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("jangajang")
+                .nickname("아장아장")
+                .email("jangajang@test.com")
+                .nickname("아장아장")
+                .password("아장아장")
+                .passwordCheck("아장아장")
+                .build();
+        authService.registerNewMember(registerRequestDto);
+        //when
+        SignInRequestDto signInRequestDto = SignInRequestDto.builder()
+                .username("jangajang")
+                .password("아장아장").build();
+        //then
+        TokenResponseDto tokenResponseDto = authService.signIn(signInRequestDto);
+        System.out.println("Access Token : " + tokenResponseDto.getAccessToken());
+        System.out.println("Refresh Token : " + tokenResponseDto.getRefreshToken());
     }
 }
