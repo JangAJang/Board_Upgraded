@@ -42,4 +42,26 @@ public class MemberControllerTest_SignIn_Authentication {
             return "";
         }
     }
+
+    @Test
+    @DisplayName("로그인시에 존재하지 않는 아이디로 로그인하면, 로그인 예외가 발생한다. ")
+    public void signIn_FAIL_NO_MEMBER() throws Exception{
+        //given
+        memberService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+
+        SignInRequestDto signInRequestDto = SignInRequestDto.builder()
+                .username("test1")
+                .password("test").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/sign_in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(signInRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
