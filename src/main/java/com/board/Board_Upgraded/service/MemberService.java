@@ -20,21 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
     private final PasswordEncoder passwordEncoder;
-
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-    @Transactional
-    public void registerNewMember(RegisterRequestDto registerRequestDto){
-        validateUsername(registerRequestDto.getUsername());
-        validateNickname(registerRequestDto.getNickname());
-        validateEmail(registerRequestDto.getEmail());
-        validatePasswordCheck(registerRequestDto.getPassword(), registerRequestDto.getPasswordCheck());
-        registerRequestDto.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
-        Member member = new Member(registerRequestDto);
-        memberRepository.save(member);
-    }
 
     private void validateUsername(String username){
         if(memberRepository.findByUsername(username).isPresent())
@@ -85,20 +71,5 @@ public class MemberService {
     @Transactional(readOnly = true)
     public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable, SearchType searchType){
         return memberRepository.search(searchMemberDto, pageable, searchType);
-    }
-
-    private void validateSignInRequest(SignInRequestDto signInRequestDto){
-        Member member = memberRepository.findByUsername(signInRequestDto.getUsername())
-                .orElseThrow(MemberNotFoundException::new);
-        if(!passwordEncoder.matches(signInRequestDto.getPassword(), member.getPassword()))
-            throw new PasswordNotMatchingException();
-    }
-
-    // SignIn을 위한 로직1
-    @Transactional
-    public Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
-        validateSignInRequest(signInRequestDto);
-        UsernamePasswordAuthenticationToken authenticationToken = signInRequestDto.toAuthentication();
-        return authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     }
 }

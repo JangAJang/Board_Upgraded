@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.controller;
+package com.board.Board_Upgraded.controller.member;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
