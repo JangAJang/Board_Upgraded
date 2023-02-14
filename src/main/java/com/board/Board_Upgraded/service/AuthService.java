@@ -73,8 +73,7 @@ public class AuthService {
                 .orElseThrow(LogOutMemberException::new);
         validateTokenInfo(refreshToken, req);
         TokenDto tokenDto = tokenProvider.generateTokenDto(getAuthentication(req));
-        RefreshToken newRefreshToken = refreshToken.updateValue(tokenDto.getRefreshToken());
-        refreshTokenRepository.save(newRefreshToken);
+        refreshToken.updateValue(tokenDto.getRefreshToken());
         return new TokenResponseDto(tokenDto);
     }
 
