@@ -118,6 +118,28 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("이메일 형식이 올바르지 않을 때 400에러를 반환하며 일치하지 않음을 body에 출력시킨다.")
+    public void registerFail_EmailFormat() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser")
+                .nickname("test")
+                .email("testtest.com")
+                .password("test")
+                .passwordCheck("test").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("올바르지 않은 이메일 형식입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
