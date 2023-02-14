@@ -1,9 +1,11 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,12 @@ public class AuthControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private String makeJson(Object object){
-        try{
-            return new ObjectMapper().writeValueAsString(object);
-        }catch(Exception e) {
-            System.out.println("에러발생");
-            return "";
-        }
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @BeforeEach
+    void cleanDB(){
+        memberRepository.deleteAll();
     }
 
     @Test
@@ -51,5 +52,14 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("회원가입 완료"))
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    private String makeJson(Object object){
+        try{
+            return new ObjectMapper().writeValueAsString(object);
+        }catch(Exception e) {
+            System.out.println("에러발생");
+            return "";
+        }
     }
 }
