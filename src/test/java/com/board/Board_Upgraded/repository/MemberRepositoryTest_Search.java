@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class MemberRepositoryTest_Search_Contains {
+public class MemberRepositoryTest_Search {
 
 
     @Autowired

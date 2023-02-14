@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class MemberServiceTest_Search_Exact {
+public class MemberServiceTest_Search {
 
     @Autowired
     private MemberService memberService;
