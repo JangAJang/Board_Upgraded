@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private AuthService authService;
+    private final AuthService authService;
 
     @PostMapping("/join")
     public Response register(@RequestBody @Valid RegisterRequestDto registerRequestDto){
