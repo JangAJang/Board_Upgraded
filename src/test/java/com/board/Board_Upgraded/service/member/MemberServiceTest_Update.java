@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.service;
+package com.board.Board_Upgraded.service.member;
 
 import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
@@ -9,6 +9,8 @@ import com.board.Board_Upgraded.exception.member.EmailAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotChangedException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
+import com.board.Board_Upgraded.service.AuthService;
+import com.board.Board_Upgraded.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class MemberServiceTest_Update {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private AuthService authService;
 
     private Member makeMember(String index){
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -32,7 +36,7 @@ public class MemberServiceTest_Update {
                 .password("password" + index)
                 .passwordCheck("password" + index)
                 .build();
-        memberService.registerNewMember(registerRequestDto);
+        authService.registerNewMember(registerRequestDto);
         return new Member(registerRequestDto);
     }
 
