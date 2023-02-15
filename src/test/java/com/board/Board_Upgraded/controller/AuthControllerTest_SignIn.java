@@ -64,6 +64,25 @@ public class AuthControllerTest_SignIn {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("존재하지 않는 아이디로 로그인을 요청할 때, 404에러와 회원이 없음을 바디에 반환한다.")
+    public void signIn_Fail_NOT_FOUND() throws Exception{
+        //given
+        SignInRequestDto signInRequestDto = SignInRequestDto.builder()
+                .username("testUser1")
+                .password("test")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(signInRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(404))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("해당 사용자를 찾을 수 없습니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
