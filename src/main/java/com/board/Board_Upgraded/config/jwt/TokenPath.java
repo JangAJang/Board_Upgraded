@@ -2,10 +2,12 @@ package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Configuration
 public class TokenPath {
 
     public ReissueRequestDto getReissueResponseDtoFromHeader(HttpServletRequest request){
