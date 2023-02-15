@@ -83,6 +83,25 @@ public class AuthControllerTest_SignIn {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("회원의 아이디가 존재할 때, 비밀번호가 틀리면 400에러와 함께 비밀번호가 틀렸음을 반환한다.")
+    public void signIn_Fail_PasswordWrong() throws Exception{
+        //given
+        SignInRequestDto signInRequestDto = SignInRequestDto.builder()
+                .username("testUser")
+                .password("test1")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(signInRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("비밀번호가 일치하지 않습니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
