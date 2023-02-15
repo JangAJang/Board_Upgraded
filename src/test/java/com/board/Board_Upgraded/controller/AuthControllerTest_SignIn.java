@@ -35,18 +35,18 @@ public class AuthControllerTest_SignIn {
     @BeforeEach
     void cleanDB(){
         memberRepository.deleteAll();
-    }
-
-    @Test
-    @DisplayName("로그인을 성공했을 경우, 코드 200과 로그인 성공을 바디에 반환한다.")
-    public void signIn_Success() throws Exception{
-        //given
         authService.registerNewMember(RegisterRequestDto.builder()
                 .username("testUser")
                 .nickname("test")
                 .email("test@test.com")
                 .password("test")
                 .passwordCheck("test").build());
+    }
+
+    @Test
+    @DisplayName("로그인을 성공했을 경우, 코드 200과 로그인 성공을 바디에 반환한다.")
+    public void signIn_Success() throws Exception{
+        //given
         SignInRequestDto signInRequestDto = SignInRequestDto.builder()
                 .username("testUser")
                 .password("test")
