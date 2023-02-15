@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
+@DisplayName("회원가입 기능 테스트")
 public class AuthControllerTest {
 
     @Autowired
