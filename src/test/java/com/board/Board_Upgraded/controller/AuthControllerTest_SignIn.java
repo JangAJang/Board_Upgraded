@@ -102,6 +102,24 @@ public class AuthControllerTest_SignIn {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("입력중에 아이디가 null값일 때 validation으로 예외처리된다.")
+    public void signIn_Fail_NullInput() throws Exception{
+        //given
+        SignInRequestDto signInRequestDto = SignInRequestDto.builder()
+                .password("test1")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(signInRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("아이디를 입력해야 합니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
