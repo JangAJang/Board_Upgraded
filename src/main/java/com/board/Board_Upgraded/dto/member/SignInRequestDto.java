@@ -1,8 +1,6 @@
 package com.board.Board_Upgraded.dto.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotNull;
@@ -10,6 +8,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Data
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignInRequestDto {
 
     @NotNull(message = "아이디를 입력해주세요.")
