@@ -13,9 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static com.board.Board_Upgraded.dto.token.TokenGeneratingComponent.BEARER_TYPE;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -50,9 +53,12 @@ public class AuthControllerTest_Reissue {
         authService.registerNewMember(registerRequestDto);
         TokenResponseDto tokenResponseDto = authService.signIn(
                 SignInRequestDto.builder().username("testUser1").password("테스트1").build());
+
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/auth/reissue")
-                .header("Authentication", makeJson(tokenResponseDto)))
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(tokenResponseDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

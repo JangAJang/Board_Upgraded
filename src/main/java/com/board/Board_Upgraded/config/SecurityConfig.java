@@ -41,6 +41,10 @@ public class SecurityConfig{
         http.httpBasic(withDefaults())
                 .authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 
+        http.csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable();
+
         http.exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDenialHandler)
