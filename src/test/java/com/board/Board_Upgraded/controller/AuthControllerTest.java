@@ -1,7 +1,10 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.entity.member.Role;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +29,9 @@ public class AuthControllerTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private AuthService authService;
 
     @BeforeEach
     void cleanDB(){
@@ -137,6 +143,36 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
                         .value("올바르지 않은 이메일 형식입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("이미 가입한 회원과 같은 값으로 요청을 하면 400에러와 예외사항을 바디에 반환한다. ")
+    public void registerFail_Already() throws Exception{
+        //given
+        RegisterRequestDto firstRegister = RegisterRequestDto.builder()
+                .username("testUser1")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build();
+        authService.registerNewMember(firstRegister);
+
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser1")
+                .nickname("test1")
+                .email("test1@test.com")
+                .password("test1")
+                .passwordCheck("test1").build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/auth/join")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(registerRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("이미 사용중인 아이디입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
