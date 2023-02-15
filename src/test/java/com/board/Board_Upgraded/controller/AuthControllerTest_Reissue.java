@@ -1,5 +1,8 @@
 package com.board.Board_Upgraded.controller;
 
+import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.member.SignInRequestDto;
+import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,8 +40,20 @@ public class AuthControllerTest_Reissue {
     public void reissue_Success() throws Exception{
         //given
 
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser" + 1)
+                .nickname("test" + 1)
+                .email("test"  + 1 + "@test.com")
+                .password("테스트" + 1)
+                .passwordCheck("테스트" + 1)
+                .build();
+        authService.registerNewMember(registerRequestDto);
+        TokenResponseDto tokenResponseDto = authService.signIn(
+                SignInRequestDto.builder().username("testUser1").password("테스트1").build());
         //expected
-
+        mvc.perform(MockMvcRequestBuilders.post("/auth/reissue")
+                .header("Authentication", makeJson(tokenResponseDto)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private String makeJson(Object object){
