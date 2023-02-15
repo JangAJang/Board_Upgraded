@@ -1,8 +1,6 @@
 package com.board.Board_Upgraded.controller;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
-import com.board.Board_Upgraded.entity.member.Member;
-import com.board.Board_Upgraded.entity.member.Role;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
