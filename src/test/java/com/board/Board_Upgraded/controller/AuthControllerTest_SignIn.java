@@ -58,7 +58,9 @@ public class AuthControllerTest_SignIn {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("로그인 성공"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.length()").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.accessToken").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.refreshToken").isString())
                 .andDo(MockMvcResultHandlers.print());
     }
 
