@@ -49,6 +49,17 @@ public class AuthService {
         return createTokenDtoByAuthentication(authentication);
     }
 
+    @Transactional
+    public TokenResponseDto reissue(ReissueRequestDto req) {
+        validateRefreshToken(req);
+        RefreshToken refreshToken = refreshTokenRepository.findByKey(getAuthentication(req).getName())
+                .orElseThrow(LogOutMemberException::new);
+        validateTokenInfo(refreshToken, req);
+        TokenDto tokenDto = tokenProvider.generateTokenDto(getAuthentication(req));
+        refreshToken.updateValue(tokenDto.getRefreshToken());
+        return new TokenResponseDto(tokenDto);
+    }
+
     // SignIn을 위한 로직1
     private Authentication getAuthenticationToSignIn(SignInRequestDto signInRequestDto){
         memberInstanceValidator.validateSignInRequest(signInRequestDto);
@@ -67,16 +78,7 @@ public class AuthService {
         return new TokenResponseDto(tokenDto);
     }
 
-    @Transactional
-    public TokenResponseDto reissue(ReissueRequestDto req) {
-        validateRefreshToken(req);
-        RefreshToken refreshToken = refreshTokenRepository.findByKey(getAuthentication(req).getName())
-                .orElseThrow(LogOutMemberException::new);
-        validateTokenInfo(refreshToken, req);
-        TokenDto tokenDto = tokenProvider.generateTokenDto(getAuthentication(req));
-        refreshToken.updateValue(tokenDto.getRefreshToken());
-        return new TokenResponseDto(tokenDto);
-    }
+
 
     private void validateRefreshToken(ReissueRequestDto req){
         if (!tokenProvider.validateToken(req.getRefreshToken())) {
