@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.concurrent.TimeUnit;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AuthControllerTest_Reissue {
@@ -51,7 +53,7 @@ public class AuthControllerTest_Reissue {
         authService.registerNewMember(registerRequestDto);
         TokenResponseDto tokenResponseDto = authService.signIn(
                 SignInRequestDto.builder().username("testUser1").password("테스트1").build());
-
+        TimeUnit.SECONDS.sleep(3);
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/api/auth/reissue")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))

@@ -3,7 +3,6 @@ package com.board.Board_Upgraded.controller;
 import com.board.Board_Upgraded.config.jwt.TokenPath;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
-import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.AuthService;
