@@ -52,7 +52,7 @@ public class AuthControllerTest_SignIn {
                 .password("test")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -73,7 +73,7 @@ public class AuthControllerTest_SignIn {
                 .password("test")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
@@ -92,7 +92,7 @@ public class AuthControllerTest_SignIn {
                 .password("test1")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -110,7 +110,7 @@ public class AuthControllerTest_SignIn {
                 .password("test")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -129,7 +129,7 @@ public class AuthControllerTest_SignIn {
                 .password("test")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -147,7 +147,7 @@ public class AuthControllerTest_SignIn {
                 .username("testUser")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -166,7 +166,7 @@ public class AuthControllerTest_SignIn {
                 .password("  ")
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/sign_in")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/sign_in")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
