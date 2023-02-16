@@ -35,7 +35,7 @@ public class AuthenticationExceptionAdvice {
     @ExceptionHandler(LogInAgainException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response logInAgainException(){
-        return Response.failure(400, "다시 로그인해주세요.");
+        return Response.failure(400, "로그인 후 이용해주세요.");
     }
 
 

@@ -80,7 +80,30 @@ public class AuthControllerTest_Reissue {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("다시 로그인해주세요."))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("로그인 후 이용해주세요."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("")
+    public void reissue_Fail2() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser" + 1)
+                .nickname("test" + 1)
+                .email("test"  + 1 + "@test.com")
+                .password("테스트" + 1)
+                .passwordCheck("테스트" + 1)
+                .build();
+        authService.registerNewMember(registerRequestDto);
+        TokenResponseDto tokenResponseDto = authService.signIn(
+                SignInRequestDto.builder().username("testUser1").password("테스트1").build());
+        TimeUnit.SECONDS.sleep(3);
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/reissue")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken())+"1")
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken())))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andDo(MockMvcResultHandlers.print());
     }
 }

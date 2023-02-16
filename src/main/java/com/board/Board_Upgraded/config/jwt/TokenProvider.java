@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.TokenDto;
+import com.board.Board_Upgraded.exception.authentication.LogInAgainException;
 import com.board.Board_Upgraded.exception.authentication.NotAuthenticationInfoException;
 import com.board.Board_Upgraded.exception.authentication.WrongTokenException;
 import io.jsonwebtoken.*;

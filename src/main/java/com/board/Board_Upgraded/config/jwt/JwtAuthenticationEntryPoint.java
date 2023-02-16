@@ -19,7 +19,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
         LocalDateTime now = LocalDateTime.now();
-        log.error("time : " + now + "\nrequest" + request + "\nException" + authException.getMessage());
-        response.sendError(401);
+        log.error("Unauthorized request : time : " + now + "\nrequest : " + request + "\nException : " + authException.getMessage());
+        response.sendError(401, "다시 로그인해주세요.");
     }
 }
