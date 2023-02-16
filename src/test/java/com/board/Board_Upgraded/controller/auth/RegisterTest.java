@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.controller;
+package com.board.Board_Upgraded.controller.auth;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
 @DisplayName("회원가입 기능 테스트")
-public class AuthControllerTest {
+public class RegisterTest {
 
     @Autowired
     private MockMvc mvc;

@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.controller;
+package com.board.Board_Upgraded.controller.auth;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthControllerTest_Reissue {
+public class ReissueTest {
 
     @Autowired
     private MockMvc mvc;
