@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.controller.member;
 
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
+import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,8 +19,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/search")
-    public Page<SearchMemberDto> search(@RequestBody @Valid SearchMemberDto searchMemberDto,
-                                        @PageableDefault Pageable pageable){
-        return memberService.search(searchMemberDto, pageable);
+    public Response search(@RequestBody @Valid SearchMemberDto searchMemberDto,
+                           @PageableDefault Pageable pageable){
+        Page<SearchMemberDto> searchResult = memberService.search(searchMemberDto, pageable);
+        return Response.success(searchResult);
     }
 }
