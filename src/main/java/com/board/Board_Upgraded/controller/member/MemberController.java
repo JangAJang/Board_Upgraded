@@ -12,11 +12,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/members")
 public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/members/{search_type}")
+    @GetMapping("/search")
     public Page<SearchMemberDto> search(@RequestBody @Valid SearchMemberDto searchMemberDto,
                                         @PageableDefault Pageable pageable){
         return memberService.search(searchMemberDto, pageable);

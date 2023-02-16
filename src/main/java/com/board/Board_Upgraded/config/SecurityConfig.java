@@ -55,6 +55,7 @@ public class SecurityConfig{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/reissue").access("hasAuthority('USER') or hasAuthority('MANAGER') or hasAuthority('ADMIN')")
+                .antMatchers("/api/member/**").access("hasAuthority('USER') or hasAuthority('MANAGER') or hasAuthority('ADMIN')")
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
         return http.build();
