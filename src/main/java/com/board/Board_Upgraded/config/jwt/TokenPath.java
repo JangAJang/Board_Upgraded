@@ -32,14 +32,15 @@ public class TokenPath {
     }
 
     private String resolveAccessToken(HttpServletRequest request) {
-        if(request.getHeader("Authorization") != null )
-            return request.getHeader("Authorization").substring(7);
-        return null;
+        if(request.getHeader("Authorization") == null) {
+            throw new LogInAgainException();
+        }
+        return request.getHeader("Authorization").substring(7);
     }
 
     private String resolveRefreshToken(HttpServletRequest request) {
-        if(request.getHeader("RefreshToken") != null )
-            return request.getHeader("RefreshToken").substring(7);
-        return null;
+        if(request.getHeader("RefreshToken") == null )
+            throw new LogInAgaimException();
+        return request.getHeader("RefreshToken").substring(7);
     }
 }
