@@ -53,6 +53,11 @@ public class MemberService {
 
     @Transactional
     public String deleteMember(Member member){
-        return null;
+        try{
+            memberRepository.delete(member);
+            return "회원이 삭제되었습니다. 그동한 감사합니다.";
+        }catch(Exception e){
+            throw new MemberNotFoundException();
+        }
     }
 }
