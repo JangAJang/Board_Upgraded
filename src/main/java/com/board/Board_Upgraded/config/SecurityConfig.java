@@ -54,7 +54,7 @@ public class SecurityConfig{
                 .accessDeniedHandler(jwtAccessDenialHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/reissue").access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
+                .antMatchers("/api/auth/reissue").access("hasAuthority('USER') or hasAuthority('MANAGER') or hasAuthority('ADMIN')")
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
         return http.build();
