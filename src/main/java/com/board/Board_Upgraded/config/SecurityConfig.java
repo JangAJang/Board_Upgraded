@@ -25,10 +25,11 @@ public class SecurityConfig{
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDenialHandler jwtAccessDenialHandler;
+    private final CorsConfig config;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/auth/**");
+        return (web) -> web.ignoring().antMatchers("/api/auth/sign_in", "/api/auth/join");
     }
 
     @Bean
@@ -41,7 +42,10 @@ public class SecurityConfig{
         http.httpBasic(withDefaults())
                 .authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 
-        http.csrf().disable()
+        http.addFilter(config.corsFilter())
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .formLogin().disable()
                 .httpBasic().disable();
 
@@ -49,11 +53,8 @@ public class SecurityConfig{
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDenialHandler)
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .authorizeRequests()
-                .antMatchers("/auth/reissue").access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/auth/reissue").access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
         return http.build();
