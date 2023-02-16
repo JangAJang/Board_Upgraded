@@ -49,6 +49,23 @@ public class SearchTest {
     }
 
     @Test
+    @DisplayName("토큰이 없으면, 401에러를 반환한다.")
+    public void searchNoToken_FAIL() throws Exception{
+        //given
+        SearchMemberDto searchMemberDto = SearchMemberDto.builder()
+                .username(null)
+                .email(null)
+                .nickname(null)
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/search")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(searchMemberDto)))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
     @DisplayName("검색 파라미터가 전부 null이면 400에러와, 검색조건이 없음을 반환한다.")
     public void searchAllNull_FAIL() throws Exception{
         //given
