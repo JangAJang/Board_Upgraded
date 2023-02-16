@@ -32,13 +32,13 @@ public class AuthController {
     public Response signIn(@RequestBody @Valid SignInRequestDto signInRequestDto, HttpServletResponse response){
         TokenResponseDto membersToken = authService.signIn(signInRequestDto);
         tokenPath.putTokensOnHeader(response, membersToken);
-        return Response.success(membersToken);
+        return Response.success("로그인 성공");
     }
 
     @PostMapping("/reissue")
     public Response reissue(HttpServletRequest request, HttpServletResponse response){
         TokenResponseDto tokenResponseDto = authService.reissue(tokenPath.getReissueResponseDtoFromHeader(request));
         tokenPath.putTokensOnHeader(response, tokenResponseDto);
-        return Response.success(tokenResponseDto);
+        return Response.success("재발행 성공");
     }
 }

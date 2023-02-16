@@ -13,13 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static com.board.Board_Upgraded.dto.token.TokenGeneratingComponent.BEARER_TYPE;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -40,7 +37,7 @@ public class AuthControllerTest_Reissue {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("헤더에 Access Token, Refresh Token이 있을 때 토큰이 재발행되어 헤더에 반환된다.")
     public void reissue_Success() throws Exception{
         //given
 
