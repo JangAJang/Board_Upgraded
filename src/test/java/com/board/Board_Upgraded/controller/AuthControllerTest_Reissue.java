@@ -5,8 +5,6 @@ import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.AuthService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +40,6 @@ public class AuthControllerTest_Reissue {
     @DisplayName("헤더에 Access Token, Refresh Token이 있을 때 토큰이 재발행되어 헤더에 반환된다.")
     public void reissue_Success() throws Exception{
         //given
-
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
                 .username("testUser" + 1)
                 .nickname("test" + 1)
@@ -62,12 +59,25 @@ public class AuthControllerTest_Reissue {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    private String makeJson(Object object){
-        try{
-            return new ObjectMapper().writeValueAsString(object);
-        }catch (JsonProcessingException e){
-            e.printStackTrace();
-            return "";
-        }
+    @Test
+    @DisplayName("")
+    public void reissue_Fail() throws Exception{
+        //given
+        RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
+                .username("testUser" + 1)
+                .nickname("test" + 1)
+                .email("test"  + 1 + "@test.com")
+                .password("테스트" + 1)
+                .passwordCheck("테스트" + 1)
+                .build();
+        authService.registerNewMember(registerRequestDto);
+        TokenResponseDto tokenResponseDto = authService.signIn(
+                SignInRequestDto.builder().username("testUser1").password("테스트1").build());
+        TimeUnit.SECONDS.sleep(3);
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/reissue")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken())))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 }
