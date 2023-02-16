@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static com.board.Board_Upgraded.dto.token.TokenGeneratingComponent.BEARER_TYPE;
@@ -55,11 +56,11 @@ public class AuthControllerTest_Reissue {
                 SignInRequestDto.builder().username("testUser1").password("테스트1").build());
 
         //expected
-        mvc.perform(MockMvcRequestBuilders.post("/auth/reissue")
+        mvc.perform(MockMvcRequestBuilders.post("/api/auth/reissue")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(makeJson(tokenResponseDto)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken())))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     private String makeJson(Object object){
