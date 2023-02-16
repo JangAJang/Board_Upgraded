@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.service.member;
 
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,5 +49,10 @@ public class MemberService {
     @Transactional(readOnly = true)
     public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable){
         return memberRepository.search(searchMemberDto, pageable);
+    }
+
+    @Transactional
+    public String deleteMember(Member member){
+        return null;
     }
 }
