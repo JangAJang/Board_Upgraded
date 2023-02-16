@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.service;
+package com.board.Board_Upgraded.service.member;
 
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;

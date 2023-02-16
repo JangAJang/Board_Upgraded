@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.service;
+package com.board.Board_Upgraded.service.auth;
 
 import com.board.Board_Upgraded.config.jwt.TokenProvider;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
@@ -8,6 +8,7 @@ import com.board.Board_Upgraded.entity.member.*;
 import com.board.Board_Upgraded.exception.token.*;
 import com.board.Board_Upgraded.repository.RefreshTokenRepository;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.service.member.MemberInstanceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

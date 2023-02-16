@@ -1,4 +1,4 @@
-package com.board.Board_Upgraded.service;
+package com.board.Board_Upgraded.service.member;
 
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;

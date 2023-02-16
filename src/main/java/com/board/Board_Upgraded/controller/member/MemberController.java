@@ -1,9 +1,7 @@
-package com.board.Board_Upgraded.controller;
+package com.board.Board_Upgraded.controller.member;
 
-import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
-import com.board.Board_Upgraded.service.MemberService;
-import lombok.Getter;
+import com.board.Board_Upgraded.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

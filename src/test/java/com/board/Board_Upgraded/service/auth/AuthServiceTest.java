@@ -9,7 +9,6 @@ import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
 import com.board.Board_Upgraded.exception.member.PasswordNotMatchingException;
 import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
-import com.board.Board_Upgraded.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

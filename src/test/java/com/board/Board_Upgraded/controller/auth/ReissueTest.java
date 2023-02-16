@@ -4,7 +4,7 @@ import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
-import com.board.Board_Upgraded.service.AuthService;
+import com.board.Board_Upgraded.service.auth.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

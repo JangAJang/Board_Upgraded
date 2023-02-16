@@ -3,7 +3,7 @@ package com.board.Board_Upgraded.controller.auth;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
-import com.board.Board_Upgraded.service.AuthService;
+import com.board.Board_Upgraded.service.auth.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
