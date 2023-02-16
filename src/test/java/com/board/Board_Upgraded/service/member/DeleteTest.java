@@ -42,4 +42,15 @@ public class DeleteTest {
         Assertions.assertThat(memberService.deleteMember(member))
                 .isEqualTo("회원이 삭제되었습니다. 그동한 감사합니다.");
     }
+
+    @Test
+    @DisplayName("삭제 실패시에 해당 회원이 존재하지 않는 것이기 때문에, MemberNotFoundException을 반환한다. ")
+    public void deleteFail() throws Exception{
+        //given
+        //when
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        //then
+        Assertions.assertThatThrownBy(()->memberService.deleteMember(member))
+                .isInstanceOf(MemberNotFoundException.class);
+    }
 }
