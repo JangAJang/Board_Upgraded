@@ -60,7 +60,7 @@ public class AuthControllerTest_Reissue {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("토큰이 유실되었을 경우, 400에러와 로그인 재요청을 반환")
     public void reissue_Fail() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
@@ -77,7 +77,10 @@ public class AuthControllerTest_Reissue {
         //expected
         mvc.perform(MockMvcRequestBuilders.post("/api/auth/reissue")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken())))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("다시 로그인해주세요."))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
