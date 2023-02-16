@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.service.member;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.entity.member.Role;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
@@ -48,7 +49,13 @@ public class DeleteTest {
     public void deleteFail() throws Exception{
         //given
         //when
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        Member member = Member.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .role(Role.USER).build();
+        memberRepository.deleteAll();
         //then
         Assertions.assertThatThrownBy(()->memberService.deleteMember(member))
                 .isInstanceOf(MemberNotFoundException.class);

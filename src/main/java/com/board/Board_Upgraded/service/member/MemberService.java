@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -53,11 +55,8 @@ public class MemberService {
 
     @Transactional
     public String deleteMember(Member member){
-        try{
-            memberRepository.delete(member);
-            return "회원이 삭제되었습니다. 그동한 감사합니다.";
-        }catch(Exception e){
-            throw new MemberNotFoundException();
-        }
+        memberRepository.findByUsername(member.getUsername()).orElseThrow(MemberNotFoundException::new);
+        memberRepository.delete(member);
+        return "회원이 삭제되었습니다. 그동한 감사합니다.";
     }
 }
