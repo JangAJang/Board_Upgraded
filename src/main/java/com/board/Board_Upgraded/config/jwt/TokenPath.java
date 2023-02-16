@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.config.jwt;
 
 import com.board.Board_Upgraded.dto.token.ReissueRequestDto;
 import com.board.Board_Upgraded.dto.token.TokenResponseDto;
+import com.board.Board_Upgraded.exception.authentication.LogInAgainException;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,7 @@ public class TokenPath {
 
     private String resolveRefreshToken(HttpServletRequest request) {
         if(request.getHeader("RefreshToken") == null )
-            throw new LogInAgaimException();
+            throw new LogInAgainException();
         return request.getHeader("RefreshToken").substring(7);
     }
 }

@@ -32,5 +32,11 @@ public class AuthenticationExceptionAdvice {
         return Response.failure(401, "JWT 토큰이 잘못되었습니다.");
     }
 
+    @ExceptionHandler(LogInAgainException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response logInAgainException(){
+        return Response.failure(400, "다시 로그인해주세요.");
+    }
+
 
 }
