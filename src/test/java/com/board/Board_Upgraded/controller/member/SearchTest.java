@@ -87,6 +87,32 @@ public class SearchTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("test라는 아이디를 기준으로 1페이지를 검색하면 test1~test10이 출력된다.")
+    public void searchAll_Success() throws Exception{
+        //given
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test1")
+                .password("test1").build());
+        SearchMemberDto searchMemberDto = SearchMemberDto.builder()
+                .username("test")
+                .email(null)
+                .nickname(null)
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/search?page=1")
+                        .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                        .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(searchMemberDto)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.[0].username").value("test1"))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
