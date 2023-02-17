@@ -16,6 +16,11 @@ spring:
     hibernate:
       ddl-auto: create #create update none
     show-sql: true
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+        default-page-size: 10
 
 
 jwt:

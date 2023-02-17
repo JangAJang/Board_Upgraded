@@ -100,7 +100,7 @@ public class SearchTest {
                 .nickname(null)
                 .build();
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/members/search?page=1")
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/search?page={}", 1)
                         .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                         .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                         .contentType(MediaType.APPLICATION_JSON)
