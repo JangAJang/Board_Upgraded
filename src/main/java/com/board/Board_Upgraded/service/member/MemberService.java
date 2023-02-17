@@ -49,8 +49,17 @@ public class MemberService {
     }
 
     @Transactional
-    public void editMember(EditMemberRequestDto editMemberRequestDto){
-
+    public void editMember(EditMemberRequestDto editMemberRequestDto, Member member){
+        if(editMemberRequestDto.getNickname() == null && editMemberRequestDto.getEmail() == null
+                && editMemberRequestDto.getPassword() == null)
+            throw new NeedToAddEditConditionException();
+        if(editMemberRequestDto.getNickname() != null)
+            changeMemberNickname(new ChangeNicknameRequestDto(editMemberRequestDto.getNickname()), member);
+        if(editMemberRequestDto.getEmail() != null)
+            changeMemberEmail(new ChangeEmailRequestDto(editMemberRequestDto.getEmail()), member);
+        if(editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() != null)
+            changeMemberPassword(new ChangePasswordRequestDto(editMemberRequestDto.getPassword()
+                    , editMemberRequestDto.getPasswordCheck()), member);
     }
 
     @Transactional(readOnly = true)
