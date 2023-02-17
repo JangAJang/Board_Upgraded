@@ -59,7 +59,13 @@ public class MemberExceptionAdvice {
 
     @ExceptionHandler(NeedToAddEditConditionException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Response NeedToAddEditConditionException(){
+    public Response needToAddEditConditionException(){
         return Response.failure(400,"수정 조건을 하나라도 입력해야 합니다.");
+    }
+
+    @ExceptionHandler(NeedToPutPasswordTwiceToEditException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response needToPutPasswordTwiceToEditException(){
+        return Response.failure(400, "비밀번호를 수정하기 위해서는, 비밀번호를 두 번 입력해야 합니다.");
     }
 }

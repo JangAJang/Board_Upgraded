@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
+import com.board.Board_Upgraded.exception.member.NeedToPutPasswordTwiceToEditException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +53,11 @@ public class MemberService {
     @Transactional
     public void editMember(EditMemberRequestDto editMemberRequestDto, Member member){
         if(editMemberRequestDto.getNickname() == null && editMemberRequestDto.getEmail() == null
-                && editMemberRequestDto.getPassword() == null)
+                && editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() == null)
             throw new NeedToAddEditConditionException();
+        if((editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() == null) ||
+                (editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() != null))
+            throw new NeedToPutPasswordTwiceToEditException();
         if(editMemberRequestDto.getNickname() != null)
             changeMemberNickname(new ChangeNicknameRequestDto(editMemberRequestDto.getNickname()), member);
         if(editMemberRequestDto.getEmail() != null)
