@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.controller.member;
 
 import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
+import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,8 @@ public class MemberController {
 
     @PutMapping("/update/nickname")
     public Response updateNickname(@RequestBody @Valid ChangeNicknameRequestDto changeNicknameRequestDto){
-        memberService.changeMemberNickname(changeNicknameRequestDto, getCurrentMembersUsername());
+        Member member = memberService.findMemberByUsername(getCurrentMembersUsername());
+        memberService.changeMemberNickname(changeNicknameRequestDto, member);
         return Response.success("닉네임 변경 성공");
     }
 
