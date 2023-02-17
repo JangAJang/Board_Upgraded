@@ -48,6 +48,11 @@ public class MemberService {
         member.changePassword(changePasswordRequestDto);
     }
 
+    @Transactional
+    public void editMember(EditMemberRequestDto editMemberRequestDto){
+
+    }
+
     @Transactional(readOnly = true)
     public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable){
         return memberRepository.search(searchMemberDto, pageable);
