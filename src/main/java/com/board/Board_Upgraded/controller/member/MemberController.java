@@ -21,6 +21,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
+
     @GetMapping("/search")
     public Response search(@RequestBody @Valid SearchMemberDto searchMemberDto,
                            @PageableDefault Pageable pageable){

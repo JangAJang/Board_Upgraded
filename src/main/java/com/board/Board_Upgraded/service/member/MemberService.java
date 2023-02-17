@@ -59,4 +59,8 @@ public class MemberService {
         memberRepository.delete(member);
         return "회원이 삭제되었습니다. 그동한 감사합니다.";
     }
+
+    public Member findMemberByUsername(String username){
+        return memberRepository.findByUsername(username).orElseThrow(MemberNotFoundException::new);
+    }
 }
