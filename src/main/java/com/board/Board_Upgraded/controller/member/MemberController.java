@@ -30,9 +30,11 @@ public class MemberController {
         return Response.success(searchResult);
     }
 
-    @PutMapping("/update/nickname")
+    @PatchMapping("/update/nickname")
     public Response updateNickname(@RequestBody @Valid ChangeNicknameRequestDto changeNicknameRequestDto){
+        System.out.println("멤버 닉네임 수정 시작");
         Member member = memberService.findMemberByUsername(getCurrentMembersUsername());
+        System.out.println("username : " + getCurrentMembersUsername());
         memberService.changeMemberNickname(changeNicknameRequestDto, member);
         return Response.success("닉네임 변경 성공");
     }
@@ -40,5 +42,4 @@ public class MemberController {
     private String getCurrentMembersUsername(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
-
 }

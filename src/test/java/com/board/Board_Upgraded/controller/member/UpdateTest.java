@@ -48,7 +48,7 @@ public class UpdateTest {
                 .password("test").build());
         ChangeNicknameRequestDto changeNicknameRequestDto = new ChangeNicknameRequestDto("nickname");
         //expected
-        mvc.perform(MockMvcRequestBuilders.put("/api/members/update/nickname")
+        mvc.perform(MockMvcRequestBuilders.patch("/api/members/update/nickname")
                 .header("Authorization", "Bearer ".concat(token.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(token.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
