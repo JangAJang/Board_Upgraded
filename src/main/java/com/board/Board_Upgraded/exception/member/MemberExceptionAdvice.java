@@ -56,4 +56,10 @@ public class MemberExceptionAdvice {
     public Response needToAddSearchConditionException(){
         return Response.failure(400, "검색 조건을 하나라도 입력해야 합니다.");
     }
+
+    @ExceptionHandler(NeedToAddEditConditionException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response NeedToAddEditConditionException(){
+        return Response.failure(400,"수정 조건을 하나라도 입력해야 합니다.");
+    }
 }

@@ -3,6 +3,7 @@ package com.board.Board_Upgraded.service.member;
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
+import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
