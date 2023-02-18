@@ -31,26 +31,6 @@ public class MemberService {
     }
 
     @Transactional
-    public void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
-        memberInstanceValidator.validateEmail(changeEmailRequestDto.getNewEmail());
-        member.changeEmail(changeEmailRequestDto);
-    }
-
-    @Transactional
-    public void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
-        memberInstanceValidator.validateNickname(changeNicknameRequestDto.getNewNickname());
-        member.changeNickname(changeNicknameRequestDto);
-    }
-
-    @Transactional
-    public void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
-        memberInstanceValidator.validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
-        memberInstanceValidator.validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
-        changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
-        member.changePassword(changePasswordRequestDto);
-    }
-
-    @Transactional
     public void editMember(EditMemberRequestDto editMemberRequestDto, Member member){
         if(editMemberRequestDto.getNickname() == null && editMemberRequestDto.getEmail() == null
                 && editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() == null)
@@ -77,6 +57,23 @@ public class MemberService {
         memberRepository.findByUsername(member.getUsername()).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(member);
         return "회원이 삭제되었습니다. 그동한 감사합니다.";
+    }
+
+    private void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
+        memberInstanceValidator.validateEmail(changeEmailRequestDto.getNewEmail());
+        member.changeEmail(changeEmailRequestDto);
+    }
+
+    private void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
+        memberInstanceValidator.validateNickname(changeNicknameRequestDto.getNewNickname());
+        member.changeNickname(changeNicknameRequestDto);
+    }
+
+    private void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
+        memberInstanceValidator.validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
+        memberInstanceValidator.validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
+        changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
+        member.changePassword(changePasswordRequestDto);
     }
 
     public Member findMemberByUsername(String username){
