@@ -35,6 +35,11 @@ public class MemberController {
         return Response.success("수정을 성공했습니다.");
     }
 
+    @DeleteMapping("/delete")
+    public Response delete(){
+        return Response.success(memberService.deleteMember(getUsingMember()));
+    }
+
     private Member getUsingMember(){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return memberService.findMemberByUsername(username);

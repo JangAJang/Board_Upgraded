@@ -44,6 +44,6 @@ public class DeleteTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value(""));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("회원이 삭제되었습니다. 그동한 감사합니다."));
     }
 }
