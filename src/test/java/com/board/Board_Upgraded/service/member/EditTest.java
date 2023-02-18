@@ -4,6 +4,7 @@ import com.board.Board_Upgraded.dto.member.EditMemberRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
+import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
@@ -95,18 +96,27 @@ public class EditTest {
                 .build();
         memberService.editMember(editMemberRequestDto, member);
         //then
+        Assertions.assertThat(member.getUsername()).isEqualTo("test");
         Assertions.assertThat(member.getPassword()).isNotEqualTo(formerPassword);
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("입력값이 전부 null이면 NeedToAddEditCondition예외를 반환한다.")
     public void editFail_AllNull() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .build();
         //then
-
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(NeedToAddEditConditionException.class);
     }
 
     @Test
