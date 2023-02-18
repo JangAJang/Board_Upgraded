@@ -289,6 +289,37 @@ public class EditTest {
                 .isTrue();
     }
 
+    @Test
+    @DisplayName("기존 비밀번호와 같은 비밀번호로 변경하는 경우, 400에러와 예외문구를 반환한다.")
+    public void editPassword_Fail_PasswordNotChanged() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .password("test")
+                .passwordCheck("test")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(editMemberRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
+                        .value("같은 비밀번호로 변경할 수 없습니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
