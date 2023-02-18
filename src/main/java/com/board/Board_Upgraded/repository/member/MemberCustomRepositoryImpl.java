@@ -6,6 +6,7 @@ import com.board.Board_Upgraded.exception.member.NeedToAddSearchConditionExcepti
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +16,10 @@ import javax.persistence.EntityManager;
 import static com.board.Board_Upgraded.entity.member.QMember.*;
 import static org.springframework.util.StringUtils.*;
 
+@RequiredArgsConstructor
 public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
     private final JPAQueryFactory query;
-
-    public MemberCustomRepositoryImpl(EntityManager em){
-        this.query = new JPAQueryFactory(em);
-    }
 
     @Override
     public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable) {
