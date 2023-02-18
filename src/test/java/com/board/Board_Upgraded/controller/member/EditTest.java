@@ -320,6 +320,28 @@ public class EditTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("토큰이 없을 경우, 401에러를 반환한다.")
+    public void editFail_No_Token() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .password("test")
+                .passwordCheck("test")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(makeJson(editMemberRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
