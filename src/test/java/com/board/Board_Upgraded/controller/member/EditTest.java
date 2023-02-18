@@ -73,6 +73,36 @@ public class EditTest {
     }
 
     @Test
+    @DisplayName("닉네임 변경을 요청할 떄,이미 사용중이거나 다른 사용자가 사용중이면 400에러와 이미 사용중임을 반환한다. 사용자의 닉네임은 변경되지 않는다")
+    public void editNickname_Fail_InUse() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .nickname("test")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(editMemberRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 닉네임입니다."))
+                .andDo(MockMvcResultHandlers.print());
+        Assertions.assertThat(memberRepository.findByUsername("test").get().getNickname()).isEqualTo("test");
+    }
+
+    @Test
     @DisplayName("이메일 변경을 요청할 떄, 성공하면 200코드와 수정에 성공했음을 반환해준다. ")
     public void editEmail_Success() throws Exception{
         //given
