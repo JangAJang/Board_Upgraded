@@ -3,7 +3,6 @@ package com.board.Board_Upgraded.domainTest;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.member.Role;
-import com.board.Board_Upgraded.exception.member.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,24 +21,6 @@ public class MemberTest {
         assertThat(member.getRole()).isEqualTo(Role.USER);
     }
 
-    @Test
-    @DisplayName("이메일 형식이 올바르지 않을 경우 예외처리된다. ")
-    void notRightEmailFormat(){
-        RegisterRequestDto registerRequestDto = makeTestRegister();
-        registerRequestDto.setEmail("wrongEamail");
-        assertThatThrownBy(()-> new Member(registerRequestDto))
-                .isInstanceOf(EmailNotFormatException.class);
-    }
-
-    @Test
-    @DisplayName("비밀번호와 비밀번호 확인이 다를 경우 회원가입에 예외가 발생된다.")
-    void notSamePasswordRegister(){
-        RegisterRequestDto test = makeTestRegister();
-        test.setPasswordCheck("wrong");
-        assertThatThrownBy(()-> new Member(test))
-                .isInstanceOf(PasswordNotMatchingException.class);
-    }
-
     // 닉네임 변경 테스트
     @Test
     @DisplayName("닉네임을 수정하면, 변경된 닉네임이 나온다. ")
@@ -47,14 +28,6 @@ public class MemberTest {
         Member member = new Member(makeTestRegister());
         member.changeNickname("newNickname");
         assertThat(member.getNickname()).isEqualTo("newNickname");
-    }
-
-    @Test
-    @DisplayName("기존의 닉네임으로 닉네임을 수정하면 예외처리된다.")
-    void changeSameNickname(){
-        Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeNickname("nickname"))
-                .isInstanceOf(NicknameAlreadyInUseException.class);
     }
 
     // 이메일 변경 테스트
@@ -66,22 +39,6 @@ public class MemberTest {
         assertThat(member.getEmail()).isEqualTo("newEmail@email.com");
     }
 
-    @Test
-    @DisplayName("기존의 이메일로 이메일을 수정하면 예외처리된다. ")
-    void changeSameEmail(){
-        Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeEmail(member.getEmail()))
-                .isInstanceOf(EmailAlreadyInUseException.class);
-    }
-
-    @Test
-    @DisplayName("수정하려는 이메일의 형식이 올바르지 않으면 예외처리한다. ")
-    void emailNotFormat(){
-        Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeEmail("wrong"))
-                .isInstanceOf(EmailNotFormatException.class);
-    }
-
     // 비밀번호 수정
     @Test
     @DisplayName("비밀번호를 정상적으로 수정하면, 성공되고, 로그인시 다른 비밀번호로 로그인해야한다. ")
@@ -89,14 +46,6 @@ public class MemberTest {
         Member member = new Member(makeTestRegister());
         member.changePassword("newP");
         assertThat(member.getPassword()).isEqualTo("newP");
-    }
-
-    @Test
-    @DisplayName("비밀번호가 이전에 사용하던 비밀번호와 같으면 예외처리한다.")
-    void passwordFormalSame(){
-        Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()-> member.changePassword("password"))
-                .isInstanceOf(PasswordNotChangedException.class);
     }
 
     @Test

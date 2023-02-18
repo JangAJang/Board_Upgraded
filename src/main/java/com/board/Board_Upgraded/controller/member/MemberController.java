@@ -1,6 +1,5 @@
 package com.board.Board_Upgraded.controller.member;
 
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.response.Response;
