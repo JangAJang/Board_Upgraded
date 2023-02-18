@@ -5,6 +5,7 @@ import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
+import com.board.Board_Upgraded.exception.member.NeedToPutPasswordTwiceToEditException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
@@ -120,14 +121,43 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("PasswordCheck는 null이고 Password는 null이 아니면 비밀번호를 변경할 수 없음을 예외처리한다.")
+    public void editFail_PasswordCheckNull() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        //when
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .password("new")
+                .build();
+        //then
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(NeedToPutPasswordTwiceToEditException.class);
+    }
+
+    @Test
+    @DisplayName("Password는 null이고 PasswordCheck는 null이 아니면 비밀번호를 변경할 수 없음을 예외처리한다.")
     public void editFail_PasswordNull() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .passwordCheck("new")
+                .build();
         //then
-
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(NeedToPutPasswordTwiceToEditException.class);
     }
 
     @Test
