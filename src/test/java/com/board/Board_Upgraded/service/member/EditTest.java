@@ -3,10 +3,7 @@ package com.board.Board_Upgraded.service.member;
 import com.board.Board_Upgraded.dto.member.EditMemberRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
-import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
-import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
-import com.board.Board_Upgraded.exception.member.NeedToPutPasswordTwiceToEditException;
-import com.board.Board_Upgraded.exception.member.NicknameAlreadyInUseException;
+import com.board.Board_Upgraded.exception.member.*;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
@@ -162,7 +159,7 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("이미 존재하는 닉네임으로 변경하려 할 때, NicknameAlreadyExists로 예외처리한다. ")
+    @DisplayName("이미 존재하는 닉네임으로 변경하려 할 때, NicknameAlreadyInUse로 예외처리한다. ")
     public void editFail_NicknameAlreadyExists() throws Exception{
         //given
         authService.registerNewMember(RegisterRequestDto.builder()
@@ -182,14 +179,23 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("이미 존재하는 이메일로 변경하려 할 때, EmailAlreadyInUse로 예외처리한다.")
     public void editFail_EmailAlreadyExists() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .email("test@test.com")
+                .build();
         //then
-
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(EmailAlreadyInUseException.class);
     }
 
     @Test
