@@ -102,6 +102,38 @@ public class EditTest {
         Assertions.assertThat(memberRepository.findByUsername("test").get().getEmail()).isEqualTo("newMail@test.com");
     }
 
+    @Test
+    @DisplayName("비밀번호 변경을 요청할 떄, 성공하면 200코드와 수정에 성공했음을 반환해준다. ")
+    public void editPassword_Success() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .password("newPassword")
+                .passwordCheck("newPassword")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(editMemberRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("수정을 성공했습니다."))
+                .andDo(MockMvcResultHandlers.print());
+        Assertions.assertThat(passwordEncoder.matches("newPassword", memberRepository.findByUsername("test").get().getPassword()))
+                .isTrue();
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
