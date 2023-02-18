@@ -65,7 +65,7 @@ public class MemberTest {
     @DisplayName("이메일을 수정하면, 변경된 이메일이 나온다. ")
     void changeEmailTest(){
         Member member = new Member(makeTestRegister());
-        member.changeEmail(new ChangeEmailRequestDto("newEmail@email.com"));
+        member.changeEmail("newEmail@email.com");
         assertThat(member.getEmail()).isEqualTo("newEmail@email.com");
     }
 
@@ -73,7 +73,7 @@ public class MemberTest {
     @DisplayName("기존의 이메일로 이메일을 수정하면 예외처리된다. ")
     void changeSameEmail(){
         Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeEmail(new ChangeEmailRequestDto(member.getEmail())))
+        assertThatThrownBy(()->member.changeEmail(member.getEmail()))
                 .isInstanceOf(EmailAlreadyInUseException.class);
     }
 
@@ -81,7 +81,7 @@ public class MemberTest {
     @DisplayName("수정하려는 이메일의 형식이 올바르지 않으면 예외처리한다. ")
     void emailNotFormat(){
         Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeEmail(new ChangeEmailRequestDto("wrong")))
+        assertThatThrownBy(()->member.changeEmail("wrong"))
                 .isInstanceOf(EmailNotFormatException.class);
     }
 
