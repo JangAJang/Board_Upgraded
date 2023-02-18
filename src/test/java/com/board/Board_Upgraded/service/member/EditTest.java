@@ -240,13 +240,23 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("변경하려는 비밀번호가 기존과 같을 떄, 예외처리시킨다.")
     public void editFail_PasswordNotChanged() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .password("test")
+                .passwordCheck("test")
+                .build();
         //then
-
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(PasswordNotChangedException.class);
     }
 }
