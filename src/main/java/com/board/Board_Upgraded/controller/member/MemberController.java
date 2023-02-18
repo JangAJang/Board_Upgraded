@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.controller.member;
 
 import com.board.Board_Upgraded.dto.member.EditMemberRequestDto;
 import com.board.Board_Upgraded.dto.member.SearchMemberDto;
+import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,12 @@ public class MemberController {
 
     @PatchMapping("/edit")
     public Response edit(@RequestBody EditMemberRequestDto editMemberRequestDto){
+        memberService.editMember(editMemberRequestDto, getUsingMember());
         return Response.success("수정을 성공했습니다.");
     }
 
-    private String getCurrentMembersUsername(){
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+    private Member getUsingMember(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return memberService.findMemberByUsername(username);
     }
 }
