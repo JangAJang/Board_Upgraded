@@ -1,7 +1,5 @@
 package com.board.Board_Upgraded.entity.member;
 
-import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.base.BaseEntity;
@@ -49,23 +47,13 @@ public class Member extends BaseEntity {
         this.setLastModifiedDate(LocalDateTime.now());
     }
 
-    public void changeNickname(ChangeNicknameRequestDto changeNicknameRequestDto){
-        if(isNicknameSameWithFormal(changeNicknameRequestDto)) throw new NicknameAlreadyInUseException();
-        this.nickname = changeNicknameRequestDto.getNewNickname();
-    }
-    
-    private boolean isNicknameSameWithFormal(ChangeNicknameRequestDto changeNicknameRequestDto){
-        return this.nickname.equals(changeNicknameRequestDto.getNewNickname());
+    public void changeNickname(String nickname){
+        this.nickname = nickname;
     }
 
     public void changeEmail(String email){
         if(isEmailNotFormat(email)) throw new EmailNotFormatException();
-        if(isEmailSameWithFormal(email)) throw new EmailAlreadyInUseException();
         this.email = email;
-    }
-    
-    private boolean isEmailSameWithFormal(String email){
-        return this.email.equals(email);
     }
 
     private boolean isEmailNotFormat(String email){
@@ -77,15 +65,7 @@ public class Member extends BaseEntity {
         this.setLastModifiedDate(LocalDateTime.now());
     }
 
-    private boolean isPasswordSameWithFormal(String pw1){
-        return this.password.equals(pw1);
-    }
-
     public boolean isPasswordOutdated(){
         return isLastModifiedDateAfter(DueTime.PASSWORD_CHANGE_DUETIME.getDays());
-    }
-
-    public boolean isPasswordRight(String password){
-        return password.equals(this.password);
     }
 }

@@ -39,7 +39,7 @@ public class MemberService {
                 (editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() != null))
             throw new NeedToPutPasswordTwiceToEditException();
         if(editMemberRequestDto.getNickname() != null)
-            changeMemberNickname(new ChangeNicknameRequestDto(editMemberRequestDto.getNickname()), member);
+            changeMemberNickname(editMemberRequestDto.getNickname(), member);
         if(editMemberRequestDto.getEmail() != null)
             changeMemberEmail(editMemberRequestDto.getEmail(), member);
         if(editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() != null)
@@ -64,9 +64,9 @@ public class MemberService {
         member.changeEmail(email);
     }
 
-    private void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){
-        memberInstanceValidator.validateNickname(changeNicknameRequestDto.getNewNickname());
-        member.changeNickname(changeNicknameRequestDto);
+    private void changeMemberNickname(String nickname, Member member){
+        memberInstanceValidator.validateNickname(nickname);
+        member.changeNickname(nickname);
     }
 
     private void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){

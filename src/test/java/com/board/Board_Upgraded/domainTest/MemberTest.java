@@ -1,7 +1,5 @@
 package com.board.Board_Upgraded.domainTest;
 
-import com.board.Board_Upgraded.dto.member.ChangeEmailRequestDto;
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
@@ -48,7 +46,7 @@ public class MemberTest {
     @DisplayName("닉네임을 수정하면, 변경된 닉네임이 나온다. ")
     void changeNicknameTest(){
         Member member = new Member(makeTestRegister());
-        member.changeNickname(new ChangeNicknameRequestDto("newNickname"));
+        member.changeNickname("newNickname");
         assertThat(member.getNickname()).isEqualTo("newNickname");
     }
 
@@ -56,7 +54,7 @@ public class MemberTest {
     @DisplayName("기존의 닉네임으로 닉네임을 수정하면 예외처리된다.")
     void changeSameNickname(){
         Member member = new Member(makeTestRegister());
-        assertThatThrownBy(()->member.changeNickname(new ChangeNicknameRequestDto("nickname")))
+        assertThatThrownBy(()->member.changeNickname("nickname"))
                 .isInstanceOf(NicknameAlreadyInUseException.class);
     }
 
