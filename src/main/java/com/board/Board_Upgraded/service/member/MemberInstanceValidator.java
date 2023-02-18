@@ -1,6 +1,5 @@
 package com.board.Board_Upgraded.service.member;
 
-import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
@@ -58,8 +57,8 @@ public class MemberInstanceValidator {
         return !Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email);
     }
 
-    public void validateWithCurrentPassword(ChangePasswordRequestDto changePasswordRequestDto, String currentPassword){
-        if(passwordEncoder.matches(changePasswordRequestDto.getNewPassword(), currentPassword))
+    public void validateWithCurrentPassword(String password, String currentPassword){
+        if(passwordEncoder.matches(password, currentPassword))
             throw new PasswordNotChangedException();
     }
 }

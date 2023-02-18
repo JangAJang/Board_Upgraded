@@ -1,6 +1,5 @@
 package com.board.Board_Upgraded.domainTest;
 
-import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.member.Role;
@@ -88,26 +87,15 @@ public class MemberTest {
     @DisplayName("비밀번호를 정상적으로 수정하면, 성공되고, 로그인시 다른 비밀번호로 로그인해야한다. ")
     void changePasswordTest(){
         Member member = new Member(makeTestRegister());
-        ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("newP", "newP");
-        member.changePassword(changePasswordRequestDto);
+        member.changePassword("newP");
         assertThat(member.getPassword()).isEqualTo("newP");
-    }
-
-    @Test
-    @DisplayName("비밀 번호수정시, 두번 쓴 비밀번호가 서로 다르면 예외처리한다.  ")
-    void passwordNotMatch(){
-        Member member = new Member(makeTestRegister());
-        ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("newP", "mextP");
-        assertThatThrownBy(()-> member.changePassword(changePasswordRequestDto))
-                .isInstanceOf(PasswordNotMatchingException.class);
     }
 
     @Test
     @DisplayName("비밀번호가 이전에 사용하던 비밀번호와 같으면 예외처리한다.")
     void passwordFormalSame(){
         Member member = new Member(makeTestRegister());
-        ChangePasswordRequestDto changePasswordRequestDto = new ChangePasswordRequestDto("password", "password");
-        assertThatThrownBy(()-> member.changePassword(changePasswordRequestDto))
+        assertThatThrownBy(()-> member.changePassword("password"))
                 .isInstanceOf(PasswordNotChangedException.class);
     }
 
@@ -115,7 +103,7 @@ public class MemberTest {
     @DisplayName("최종 수정일이 한달이 되지 않았을 경우, 거짓을 반환한다.")
     void isLastModifiedLessThanMonthTest(){
         Member member = new Member(makeTestRegister());
-        member.changePassword(new ChangePasswordRequestDto("newP", "newP"));
+        member.changePassword("newP");
         assertThat(member.isPasswordOutdated()).isFalse();
     }
 

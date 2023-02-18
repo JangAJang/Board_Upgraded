@@ -1,10 +1,8 @@
 package com.board.Board_Upgraded.entity.member;
 
-import com.board.Board_Upgraded.dto.member.ChangePasswordRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.base.BaseEntity;
 import com.board.Board_Upgraded.entity.base.DueTime;
-import com.board.Board_Upgraded.exception.member.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,8 +52,8 @@ public class Member extends BaseEntity {
         this.email = email;
     }
 
-    public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){
-        this.password = changePasswordRequestDto.getNewPassword();
+    public void changePassword(String password){
+        this.password = password;
         this.setLastModifiedDate(LocalDateTime.now());
     }
 

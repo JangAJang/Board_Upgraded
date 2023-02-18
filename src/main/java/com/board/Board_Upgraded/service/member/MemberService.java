@@ -43,8 +43,8 @@ public class MemberService {
         if(editMemberRequestDto.getEmail() != null)
             changeMemberEmail(editMemberRequestDto.getEmail(), member);
         if(editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() != null)
-            changeMemberPassword(new ChangePasswordRequestDto(editMemberRequestDto.getPassword()
-                    , editMemberRequestDto.getPasswordCheck()), member);
+            changeMemberPassword(editMemberRequestDto.getPassword()
+                    , editMemberRequestDto.getPasswordCheck(), member);
     }
 
     @Transactional(readOnly = true)
@@ -69,11 +69,10 @@ public class MemberService {
         member.changeNickname(nickname);
     }
 
-    private void changeMemberPassword(ChangePasswordRequestDto changePasswordRequestDto, Member member){
-        memberInstanceValidator.validatePasswordCheck(changePasswordRequestDto.getNewPassword(), changePasswordRequestDto.getNewPasswordCheck());
-        memberInstanceValidator.validateWithCurrentPassword(changePasswordRequestDto, member.getPassword());
-        changePasswordRequestDto.setNewPasswordCheck(passwordEncoder.encode(changePasswordRequestDto.getNewPassword()));
-        member.changePassword(changePasswordRequestDto);
+    private void changeMemberPassword(String password, String passwordCheck, Member member){
+        memberInstanceValidator.validatePasswordCheck(password, passwordCheck);
+        memberInstanceValidator.validateWithCurrentPassword(password, member.getPassword());
+        member.changePassword(passwordEncoder.encode(password));
     }
 
     public Member findMemberByUsername(String username){
