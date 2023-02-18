@@ -41,7 +41,7 @@ public class MemberService {
         if(editMemberRequestDto.getNickname() != null)
             changeMemberNickname(new ChangeNicknameRequestDto(editMemberRequestDto.getNickname()), member);
         if(editMemberRequestDto.getEmail() != null)
-            changeMemberEmail(new ChangeEmailRequestDto(editMemberRequestDto.getEmail()), member);
+            changeMemberEmail(editMemberRequestDto.getEmail(), member);
         if(editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() != null)
             changeMemberPassword(new ChangePasswordRequestDto(editMemberRequestDto.getPassword()
                     , editMemberRequestDto.getPasswordCheck()), member);
@@ -59,9 +59,9 @@ public class MemberService {
         return "회원이 삭제되었습니다. 그동한 감사합니다.";
     }
 
-    private void changeMemberEmail(ChangeEmailRequestDto changeEmailRequestDto, Member member){
-        memberInstanceValidator.validateEmail(changeEmailRequestDto.getNewEmail());
-        member.changeEmail(changeEmailRequestDto);
+    private void changeMemberEmail(String email, Member member){
+        memberInstanceValidator.validateEmail(email);
+        member.changeEmail(email);
     }
 
     private void changeMemberNickname(ChangeNicknameRequestDto changeNicknameRequestDto, Member member){

@@ -58,14 +58,14 @@ public class Member extends BaseEntity {
         return this.nickname.equals(changeNicknameRequestDto.getNewNickname());
     }
 
-    public void changeEmail(ChangeEmailRequestDto changeEmailRequestDto){
-        if(isEmailNotFormat(changeEmailRequestDto.getNewEmail())) throw new EmailNotFormatException();
-        if(isEmailSameWithFormal(changeEmailRequestDto)) throw new EmailAlreadyInUseException();
-        this.email = changeEmailRequestDto.getNewEmail();
+    public void changeEmail(String email){
+        if(isEmailNotFormat(email)) throw new EmailNotFormatException();
+        if(isEmailSameWithFormal(email)) throw new EmailAlreadyInUseException();
+        this.email = email;
     }
     
-    private boolean isEmailSameWithFormal(ChangeEmailRequestDto changeEmailRequestDto){
-        return this.email.equals(changeEmailRequestDto.getNewEmail());
+    private boolean isEmailSameWithFormal(String email){
+        return this.email.equals(email);
     }
 
     private boolean isEmailNotFormat(String email){
