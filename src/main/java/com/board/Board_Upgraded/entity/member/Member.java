@@ -38,7 +38,6 @@ public class Member extends BaseEntity {
     private Role role;
 
     public Member(RegisterRequestDto registerRequestDto){
-        if(isEmailNotFormat(registerRequestDto.getEmail())) throw new EmailNotFormatException();
         this.username = registerRequestDto.getUsername();
         this.nickname = registerRequestDto.getNickname();
         this.email = registerRequestDto.getEmail();
@@ -52,12 +51,7 @@ public class Member extends BaseEntity {
     }
 
     public void changeEmail(String email){
-        if(isEmailNotFormat(email)) throw new EmailNotFormatException();
         this.email = email;
-    }
-
-    private boolean isEmailNotFormat(String email){
-        return !Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email);
     }
 
     public void changePassword(ChangePasswordRequestDto changePasswordRequestDto){

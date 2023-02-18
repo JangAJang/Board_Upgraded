@@ -9,6 +9,8 @@ import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.regex.Pattern;
+
 @RequiredArgsConstructor
 public class MemberInstanceValidator {
     private final MemberRepository memberRepository;
@@ -42,12 +44,18 @@ public class MemberInstanceValidator {
     public void validateEmail(String email){
         if(memberRepository.findByEmail(email).isPresent())
             throw new EmailAlreadyInUseException();
+        if(isEmailNotFormat(email))
+            throw new EmailNotFormatException();
     }
 
     public void validatePasswordCheck(String password, String passwordCheck){
         if(!password.equals(passwordCheck)){
             throw new PasswordNotMatchingException();
         }
+    }
+
+    private boolean isEmailNotFormat(String email){
+        return !Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email);
     }
 
     public void validateWithCurrentPassword(ChangePasswordRequestDto changePasswordRequestDto, String currentPassword){

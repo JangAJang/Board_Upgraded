@@ -1,6 +1,5 @@
 package com.board.Board_Upgraded.repository;
 
-import com.board.Board_Upgraded.dto.member.ChangeNicknameRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
@@ -55,7 +54,7 @@ public class MemberRepositoryTest {
     public void updateTest() throws Exception{
         //given
         //when
-        memberRepository.findByUsername("testUser").get().changeNickname(new ChangeNicknameRequestDto("이건줄 몰랐지"));
+        memberRepository.findByUsername("testUser").get().changeNickname("이건줄 몰랐지");
         //then
         assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("이건줄 몰랐지");
     }
