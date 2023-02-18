@@ -75,14 +75,27 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("수정 dto에서 password, passwordCheck 제외한 값이 null일 때, 비밀번호를 변경하고 나머지는 원래 값을 유지한다.")
     public void editPassword_Success() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        String formerPassword = member.getPassword();
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .nickname(null)
+                .email(null)
+                .password("new")
+                .passwordCheck("new")
+                .build();
+        memberService.editMember(editMemberRequestDto, member);
         //then
-
+        Assertions.assertThat(member.getPassword()).isNotEqualTo(formerPassword);
     }
 
     @Test
