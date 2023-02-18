@@ -199,6 +199,26 @@ public class EditTest {
     }
 
     @Test
+    @DisplayName("이메일 형식이 올바르지 않을 때 예외처리된다. ")
+    public void editFail_EmailFormat() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        //when
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .email("newtest.com")
+                .build();
+        //then
+        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+                .isInstanceOf(EmailNotFormatException.class);
+    }
+
+    @Test
     @DisplayName("")
     public void editFail_PasswordNotMatching() throws Exception{
         //given
