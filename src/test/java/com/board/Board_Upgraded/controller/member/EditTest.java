@@ -7,6 +7,7 @@ import com.board.Board_Upgraded.dto.token.TokenResponseDto;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,6 +65,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("수정을 성공했습니다."))
                 .andDo(MockMvcResultHandlers.print());
+        Assertions.assertThat(memberRepository.findByUsername("test").get().getNickname()).isEqualTo("newNick");
     }
 
     private String makeJson(Object object){
