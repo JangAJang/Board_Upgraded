@@ -27,7 +27,7 @@ public class EditTest {
     private MemberService memberService;
 
     @Test
-    @DisplayName("")
+    @DisplayName("수정 dto에서 닉네임을 제외한 값이 null일 때, 닉네임을 변경하고 나머지는 원래 값을 유지한다.")
     public void editNickname_Success() throws Exception{
         //given
         authService.registerNewMember(RegisterRequestDto.builder()
@@ -51,14 +51,27 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("수정 dto에서 이메일을 제외한 값이 null일 때, 이메일 변경하고 나머지는 원래 값을 유지한다.")
     public void editEmail_Success() throws Exception{
         //given
-
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .email("test@test.com")
+                .nickname("test")
+                .passwordCheck("test")
+                .password("test").build());
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-
+        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
+                .nickname(null)
+                .email("new@test.com")
+                .password(null)
+                .passwordCheck(null)
+                .build();
+        memberService.editMember(editMemberRequestDto, member);
         //then
-
+        Assertions.assertThat(member.getNickname()).isEqualTo("test");
+        Assertions.assertThat(member.getEmail()).isEqualTo("new@test.com");
     }
 
     @Test
