@@ -38,9 +38,9 @@ public class PostTest {
         String title = "제목";
         String content = "내용";
         //then
-        Post post = Post.builder()
-                .title(title)
-                .content(content)
-                .member(member).build();
+        Post post = new Post(title, content, member);
+        Assertions.assertThat(post.getTitle()).isEqualTo(title);
+        Assertions.assertThat(post.getContent()).isEqualTo(content);
+        Assertions.assertThat(post.getMember()).isEqualTo(member);
     }
 }
