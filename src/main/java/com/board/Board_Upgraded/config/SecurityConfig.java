@@ -29,7 +29,7 @@ public class SecurityConfig{
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/api/auth/sign_in", "/api/auth/join");
+        return (web) -> web.ignoring().antMatchers();
     }
 
     @Bean
@@ -54,6 +54,7 @@ public class SecurityConfig{
                 .accessDeniedHandler(jwtAccessDenialHandler)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/auth/sign_in", "/api/auth/join").permitAll()
                 .antMatchers("/api/auth/reissue").access("hasAuthority('USER') or hasAuthority('MANAGER') or hasAuthority('ADMIN')")
                 .antMatchers("/api/members/**").access("hasAuthority('USER') or hasAuthority('MANAGER') or hasAuthority('ADMIN')")
                 .and()

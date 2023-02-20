@@ -85,7 +85,7 @@ public class ReissueTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("토큰이 조작되었을 때 401예외를 반환한다.")
     public void reissue_Fail2() throws Exception{
         //given
         RegisterRequestDto registerRequestDto = RegisterRequestDto.builder()
