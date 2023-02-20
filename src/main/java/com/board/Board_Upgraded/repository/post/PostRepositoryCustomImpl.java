@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-
 import static com.board.Board_Upgraded.entity.member.QMember.*;
 import static com.board.Board_Upgraded.entity.post.QPost.*;
 
@@ -37,6 +35,18 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     }
 
     private BooleanExpression makeConditionQuery(String text, SearchPostType searchPostType){
+        if(searchPostType.equals(SearchPostType.WRITER) || searchPostType.equals(SearchPostType.WRITER_AND_TITLE))
+            return makeConditionQueryWithMember(text, searchPostType);
+        return makeConditionQueryWithoutMember(text, searchPostType);
+    }
+
+    private BooleanExpression makeConditionQueryWithMember(String text, SearchPostType searchPostType){
+        if(searchPostType.equals(SearchPostType.WRITER))
+            return member.nickname.contains(text);
+        return member.nickname.contains(text).or(post.title.contains(text));
+    }
+
+    private BooleanExpression makeConditionQueryWithoutMember(String text, SearchPostType searchPostType){
         if(searchPostType.equals(SearchPostType.TITLE))
             return post.title.contains(text);
         if(searchPostType.equals(SearchPostType.CONTENT))
