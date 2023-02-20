@@ -14,7 +14,6 @@ public class SearchPostRequestDto {
     private String content;
     private String writer;
 
-    @QueryProjection
     @Builder
     public SearchPostRequestDto(String title, String content, String writer) {
         this.title = title;
