@@ -15,6 +15,10 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
 
     @Override
     public Page<PostResponseDto> searchPost(SearchPostRequestDto searchPostRequestDto, Pageable pageable) {
+        if(searchPostRequestDto.getWriter() == null
+                && searchPostRequestDto.getTitle() == null
+                && searchPostRequestDto.getContent() == null)
+            throw new IllegalArgumentException();
         queryFactory.selectFrom(QPost.post)
                 .where()
                 .offset(pageable.getOffset())
