@@ -2,5 +2,5 @@ package com.board.Board_Upgraded.repository.member;
 
 public enum SearchPostType {
 
-    MY_PAGE, TITLE, TITLE_AND_CONTENT, WRITER_AND_TITLE, WRITER, CONTENT;
+    TITLE, TITLE_AND_CONTENT, WRITER_AND_TITLE, WRITER, CONTENT;
 }
