@@ -56,11 +56,10 @@ public class SignInTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(signInRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.header().exists("Authorization"))
+                .andExpect(MockMvcResultMatchers.header().exists("RefreshToken"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.length()").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.accessToken").isString())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.refreshToken").isString())
                 .andDo(MockMvcResultHandlers.print());
     }
 
