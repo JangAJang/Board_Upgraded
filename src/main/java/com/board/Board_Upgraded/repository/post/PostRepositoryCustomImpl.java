@@ -34,6 +34,21 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
     }
 
+    @Override
+    public Page<PostResponseDto> getMembersPost(Long id, Pageable pageable) {
+        QueryResults<PostResponseDto> result = queryFactory
+                .select(new QPostResponseDto(member.nickname.as("writer"),
+                        post.title, post.content, post.lastModifiedDate))
+                .from(post)
+                .leftJoin(post.member, member)
+                .where(member.id.eq(id))
+                .orderBy(post.lastModifiedDate.asc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+        return new PageImpl<>(result.getResults(), pageable, result.getTotal());
+    }
+
     private BooleanExpression makeConditionQuery(String text, SearchPostType searchPostType){
         if(searchPostType.equals(SearchPostType.WRITER) || searchPostType.equals(SearchPostType.WRITER_AND_TITLE))
             return makeConditionQueryWithMember(text, searchPostType);
