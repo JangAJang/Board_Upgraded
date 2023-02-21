@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -34,6 +35,9 @@ public class PostRepositoryTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private EntityManager em;
 
     private static final PageRequest pageRequest = PageRequest.of(0, 10);
 
@@ -257,5 +261,22 @@ public class PostRepositoryTest {
                         "title4", "title3", "title2",
                         "title1");
         Assertions.assertThat(postRepository.getMembersPost(member.getId(), pageRequest).getTotalElements()).isEqualTo(10L);
+    }
+
+    @Test
+    @DisplayName("게시물을 수정하고 영속성 컨텍스트를 flush한 후 데이터를 불러오면, 변경감지로 수정된 데이터가 나온다. ")
+    public void editTest() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test")
+                .orElseThrow(MemberNotFoundException::new);
+        Post post = Post.builder().member(member).title("취업").content("하고싶다.").build();
+        postRepository.save(post);
+        //when
+        post.editPost("진짜 취업", "너무 하고 싶습니다.");
+        em.flush();
+        Post findPost = postRepository.findById(post.getId()).orElseThrow(IllegalArgumentException::new);
+        //then
+        Assertions.assertThat(findPost.getTitle()).isEqualTo(post.getTitle());
+        Assertions.assertThat(findPost.getContent()).isEqualTo(post.getContent());
     }
 }
