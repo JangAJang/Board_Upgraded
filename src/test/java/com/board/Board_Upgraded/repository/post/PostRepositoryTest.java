@@ -79,7 +79,7 @@ public class PostRepositoryTest {
     }
 
     @Test
-    @DisplayName("게시물 검색시에, 검색타입을 WRITER로 2를 검색하면 멤버의 username에 2가 포함된 모든 게시물을 조회해온다. ")
+    @DisplayName("게시물 검색시에, 검색타입을 WRITER로 2를 검색하면 멤버의 username에 2가 포함된 모든 게시물을 역순으로 페이징처리해 조회해온다. ")
     public void searchTest() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
@@ -102,14 +102,14 @@ public class PostRepositoryTest {
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
-                .containsExactly("title20", "title21", "title22",
-                        "title23", "title24", "title25",
-                        "title26", "title27", "title28",
-                        "title29");
+                .containsExactly("title29", "title28", "title27",
+                        "title26", "title25", "title24",
+                        "title23", "title22", "title21",
+                        "title20");
     }
 
     @Test
-    @DisplayName("제목에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
+    @DisplayName("제목에 3을 검색했을 때, 최근에 만들어진 39~30순으로 한 페이지에 나온다. ")
     public void searchTest_Title() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
@@ -133,14 +133,14 @@ public class PostRepositoryTest {
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
                 .containsExactly(
-                        "title13",
-                        "title23", "title30", "title31", "title32",
-                        "title33", "title34", "title35",
-                        "title36", "title37");
+                        "title39", "title38", "title37",
+                        "title36", "title35", "title34",
+                        "title33", "title32", "title31",
+                        "title30");
     }
 
     @Test
-    @DisplayName("내용에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
+    @DisplayName("내용에 3을 검색했을 때, 최근에 만들어진 39~30순으로 한 페이지에 나온다. ")
     public void searchTest_Content() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
@@ -164,14 +164,14 @@ public class PostRepositoryTest {
         Assertions.assertThat(postRepository.searchPost(searchMember, CONTENT, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
                 .containsExactly(
-                        "title13",
-                        "title23", "title30", "title31", "title32",
-                        "title33", "title34", "title35",
-                        "title36", "title37");
+                        "title39", "title38", "title37",
+                        "title36", "title35", "title34",
+                        "title33", "title32", "title31",
+                        "title30");
     }
 
     @Test
-    @DisplayName("제목과 내용에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
+    @DisplayName("제목과 내용에 3을 검색했을 때, 최근에 만들어진 39~30순으로 한 페이지에 나온다. ")
     public void searchTest_TITLE_AND_CONTENT() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
@@ -195,15 +195,15 @@ public class PostRepositoryTest {
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE_AND_CONTENT, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
                 .containsExactly(
-                        "title13",
-                        "title23", "title30", "title31", "title32",
-                        "title33", "title34", "title35",
-                        "title36", "title37");
+                        "title39", "title38", "title37",
+                        "title36", "title35", "title34",
+                        "title33", "title32", "title31",
+                        "title30");
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE_AND_CONTENT, pageRequest).getTotalElements()).isEqualTo(12L);
     }
 
     @Test
-    @DisplayName("글쓴이 이름과 제목에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
+    @DisplayName("글쓴이 이름과 제목에 3을 검색했을 때, 최근에 만들어진 39~30순으로 한 페이지에 나온다. ")
     public void searchTest_WRITER_AND_TITLE() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
@@ -227,10 +227,10 @@ public class PostRepositoryTest {
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
                 .containsExactly(
-                        "title13",
-                        "title23", "title30", "title31", "title32",
-                        "title33", "title34", "title35",
-                        "title36", "title37");
+                        "title39", "title38", "title37",
+                        "title36", "title35", "title34",
+                        "title33", "title32", "title31",
+                        "title30");
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest).getTotalElements()).isEqualTo(12L);
     }
 
