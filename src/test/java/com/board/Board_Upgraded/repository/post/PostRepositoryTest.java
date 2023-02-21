@@ -172,7 +172,7 @@ public class PostRepositoryTest {
 
     @Test
     @DisplayName("제목과 내용에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
-    public void searchTest_WRITER_AND_TITLE() throws Exception{
+    public void searchTest_TITLE_AND_CONTENT() throws Exception{
         //given
         IntStream.range(1, 4).forEach(i ->
                 authService.registerNewMember(RegisterRequestDto.builder()
@@ -200,5 +200,37 @@ public class PostRepositoryTest {
                         "title33", "title34", "title35",
                         "title36", "title37");
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE_AND_CONTENT, pageRequest).getTotalElements()).isEqualTo(12L);
+    }
+
+    @Test
+    @DisplayName("글쓴이 이름과 제목에 3을 검색했을 때, 13, 23, 30~37이 나온다. ")
+    public void searchTest_WRITER_AND_TITLE() throws Exception{
+        //given
+        IntStream.range(1, 4).forEach(i ->
+                authService.registerNewMember(RegisterRequestDto.builder()
+                        .username("test" + i)
+                        .nickname("test" + i)
+                        .email("test" + i + "@test.com")
+                        .password("test" + i)
+                        .passwordCheck("test" + i).build()));
+        for(int index = 10; index < 40; index++){
+            Member member = memberRepository.findByUsername("test" + index/10)
+                    .orElseThrow(MemberNotFoundException::new);
+            postRepository.save(Post.builder()
+                    .member(member)
+                    .title("title" + index)
+                    .content("content" + index).build());
+        }
+        //when
+        String searchMember = "3";
+        //then
+        Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest)
+                        .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
+                .containsExactly(
+                        "title13",
+                        "title23", "title30", "title31", "title32",
+                        "title33", "title34", "title35",
+                        "title36", "title37");
+        Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest).getTotalElements()).isEqualTo(12L);
     }
 }
