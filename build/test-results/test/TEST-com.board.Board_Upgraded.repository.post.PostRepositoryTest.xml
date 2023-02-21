@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.board.Board_Upgraded.repository.post.PostRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-21T08:49:31" hostname="ijanghuiui-MacBookPro.local" time="0.67">
+  <properties/>
+  <testcase name="게시물 검색시에, 검색타입을 WRITER로 2를 검색하면 멤버의 username에 2가 포함된 모든 게시물을 조회해온다." classname="com.board.Board_Upgraded.repository.post.PostRepositoryTest" time="0.67"/>
+  <system-out><![CDATA[17:49:29.688 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+17:49:29.692 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+17:49:29.706 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+17:49:29.710 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest], using SpringBootContextLoader
+17:49:29.712 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]: class path resource [com/board/Board_Upgraded/repository/post/PostRepositoryTest-context.xml] does not exist
+17:49:29.712 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]: class path resource [com/board/Board_Upgraded/repository/post/PostRepositoryTestContext.groovy] does not exist
+17:49:29.713 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+17:49:29.713 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]: PostRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:49:29.730 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]
+17:49:29.757 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/leeeehgnaj/Desktop/Coding/Board_Upgraded/build/classes/java/main/com/board/Board_Upgraded/BoardUpgradedApplication.class]
+17:49:29.757 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.board.Board_Upgraded.BoardUpgradedApplication for test class com.board.Board_Upgraded.repository.post.PostRepositoryTest
+17:49:29.791 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.board.Board_Upgraded.repository.post.PostRepositoryTest]: using defaults.
+17:49:29.791 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+17:49:29.797 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@29e6eb25, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@62435e70, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@339bf286, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38be305c, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@269f4bad, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5ed731d0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3234f74e, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7bc10d84, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@275fe372, org.springframework.test.context.event.EventPublishingTestExecutionListener@40e10ff8, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@557a1e2d, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@26a4842b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7e38a7fe, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@366ef90e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@33e01298, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@31e75d13, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@a5b0b86]
+17:49:29.799 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@36676c1a testClass = PostRepositoryTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5b408dc3 testClass = PostRepositoryTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@558bdf1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@130e116b, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2fd953a6, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@66c61024, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5bf0fe62, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@672872e1], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.0)
+
+2023-02-21 17:49:29.960  INFO 74413 --- [    Test worker] c.b.B.r.post.PostRepositoryTest          : Starting PostRepositoryTest using Java 17.0.2 on ijanghuiui-MacBookPro.local with PID 74413 (started by leeeehgnaj in /Users/leeeehgnaj/Desktop/Coding/Board_Upgraded)
+2023-02-21 17:49:29.961  INFO 74413 --- [    Test worker] c.b.B.r.post.PostRepositoryTest          : The following 1 profile is active: "local"
+2023-02-21 17:49:30.337  INFO 74413 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-21 17:49:30.365  INFO 74413 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 3 JPA repository interfaces.
+2023-02-21 17:49:30.621  INFO 74413 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-21 17:49:30.639  INFO 74413 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2023-02-21 17:49:30.705  INFO 74413 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-21 17:49:30.715 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BooleanType@315b5913
+2023-02-21 17:49:30.715 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BooleanType@315b5913
+2023-02-21 17:49:30.715 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@315b5913
+2023-02-21 17:49:30.715 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@2987d0fa
+2023-02-21 17:49:30.715 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -> org.hibernate.type.TrueFalseType@2e204155
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -> org.hibernate.type.YesNoType@2513155a
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.ByteType@2bfc8558
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.ByteType@2bfc8558
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@2bfc8558
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -> org.hibernate.type.CharacterType@353b0719
+2023-02-21 17:49:30.716 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -> org.hibernate.type.CharacterType@353b0719
+2023-02-21 17:49:30.717 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@353b0719
+2023-02-21 17:49:30.717 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.ShortType@30af23fd
+2023-02-21 17:49:30.717 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.ShortType@30af23fd
+2023-02-21 17:49:30.717 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -> org.hibernate.type.ShortType@30af23fd
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -> org.hibernate.type.IntegerType@6cf047cf
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -> org.hibernate.type.IntegerType@6cf047cf
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@6cf047cf
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.LongType@135e49b2
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.LongType@135e49b2
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -> org.hibernate.type.LongType@135e49b2
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.FloatType@13e1e816
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.FloatType@13e1e816
+2023-02-21 17:49:30.718 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -> org.hibernate.type.FloatType@13e1e816
+2023-02-21 17:49:30.719 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.DoubleType@5a8d676e
+2023-02-21 17:49:30.719 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.DoubleType@5a8d676e
+2023-02-21 17:49:30.719 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@5a8d676e
+2023-02-21 17:49:30.719 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@6ed51944
+2023-02-21 17:49:30.719 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@6ed51944
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -> org.hibernate.type.BigIntegerType@1f408ab6
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@1f408ab6
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -> org.hibernate.type.StringType@44a93f8a
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -> org.hibernate.type.StringType@44a93f8a
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -> org.hibernate.type.StringNVarcharType@1aed6f0b
+2023-02-21 17:49:30.720 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@4cc7e3ad
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -> org.hibernate.type.UrlType@77a2688d
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -> org.hibernate.type.UrlType@77a2688d
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> org.hibernate.type.DurationType@d85b399
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> org.hibernate.type.DurationType@d85b399
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Instant -> org.hibernate.type.InstantType@1d55dd21
+2023-02-21 17:49:30.721 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -> org.hibernate.type.InstantType@1d55dd21
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -> org.hibernate.type.LocalDateTimeType@a69f9d
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -> org.hibernate.type.LocalDateTimeType@a69f9d
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -> org.hibernate.type.LocalDateType@660296d5
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -> org.hibernate.type.LocalDateType@660296d5
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -> org.hibernate.type.LocalTimeType@71039ce1
+2023-02-21 17:49:30.722 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -> org.hibernate.type.LocalTimeType@71039ce1
+2023-02-21 17:49:30.723 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@70f85235
+2023-02-21 17:49:30.723 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@70f85235
+2023-02-21 17:49:30.723 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> org.hibernate.type.OffsetTimeType@1a6dc5ea
+2023-02-21 17:49:30.723 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> org.hibernate.type.OffsetTimeType@1a6dc5ea
+2023-02-21 17:49:30.723 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@483b7dc4
+2023-02-21 17:49:30.724 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@483b7dc4
+2023-02-21 17:49:30.724 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -> org.hibernate.type.DateType@58f7215c
+2023-02-21 17:49:30.724 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -> org.hibernate.type.DateType@58f7215c
+2023-02-21 17:49:30.725 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -> org.hibernate.type.TimeType@531ec2ca
+2023-02-21 17:49:30.725 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -> org.hibernate.type.TimeType@531ec2ca
+2023-02-21 17:49:30.725 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -> org.hibernate.type.TimestampType@4a833595
+2023-02-21 17:49:30.725 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@4a833595
+2023-02-21 17:49:30.725 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -> org.hibernate.type.TimestampType@4a833595
+2023-02-21 17:49:30.726 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@5d6b42cf
+2023-02-21 17:49:30.726 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -> org.hibernate.type.CalendarType@4bbf20d1
+2023-02-21 17:49:30.726 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@4bbf20d1
+2023-02-21 17:49:30.726 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@4bbf20d1
+2023-02-21 17:49:30.726 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@305aaedf
+2023-02-21 17:49:30.727 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -> org.hibernate.type.CalendarTimeType@69d2e517
+2023-02-21 17:49:30.727 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -> org.hibernate.type.LocaleType@2404abe2
+2023-02-21 17:49:30.727 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@2404abe2
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -> org.hibernate.type.CurrencyType@6113a26f
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@6113a26f
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -> org.hibernate.type.TimeZoneType@68d8eb4f
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@68d8eb4f
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -> org.hibernate.type.ClassType@24a8e40d
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -> org.hibernate.type.ClassType@24a8e40d
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@1f7336b2
+2023-02-21 17:49:30.728 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@1f7336b2
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@5403431a
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -> org.hibernate.type.BinaryType@72715e61
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -> org.hibernate.type.BinaryType@72715e61
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -> org.hibernate.type.BinaryType@72715e61
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@5611bba
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@5611bba
+2023-02-21 17:49:30.729 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@5611bba
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -> org.hibernate.type.RowVersionType@580c17a0
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -> org.hibernate.type.ImageType@2bc0b8c8
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -> org.hibernate.type.CharArrayType@5341e71a
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -> org.hibernate.type.CharArrayType@5341e71a
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -> org.hibernate.type.CharArrayType@5341e71a
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@283baa39
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@283baa39
+2023-02-21 17:49:30.730 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@283baa39
+2023-02-21 17:49:30.731 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -> org.hibernate.type.TextType@75452aea
+2023-02-21 17:49:30.731 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -> org.hibernate.type.NTextType@48e74764
+2023-02-21 17:49:30.731 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -> org.hibernate.type.BlobType@1cc9bd9b
+2023-02-21 17:49:30.731 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@1cc9bd9b
+2023-02-21 17:49:30.732 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@5a51336a
+2023-02-21 17:49:30.732 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -> org.hibernate.type.ClobType@3f6f9cef
+2023-02-21 17:49:30.732 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@3f6f9cef
+2023-02-21 17:49:30.733 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -> org.hibernate.type.NClobType@5db9f51f
+2023-02-21 17:49:30.733 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@5db9f51f
+2023-02-21 17:49:30.733 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@2a631049
+2023-02-21 17:49:30.733 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@343db2f6
+2023-02-21 17:49:30.733 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -> org.hibernate.type.SerializableType@429e7914
+2023-02-21 17:49:30.734 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -> org.hibernate.type.ObjectType@a4df251
+2023-02-21 17:49:30.734 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@a4df251
+2023-02-21 17:49:30.734 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@55e42684
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@18d610e1
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@528e5e38
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@16391278
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@621dc63d
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@4ae49387
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@6abb7b7d
+2023-02-21 17:49:30.735 DEBUG 74413 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@34cf0e80
+2023-02-21 17:49:30.753  INFO 74413 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-21 17:49:30.792  INFO 74413 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-21 17:49:30.806  INFO 74413 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-02-21 17:49:30.823 DEBUG 74413 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@29699283] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@5d32c1c7]
+2023-02-21 17:49:30.924 DEBUG 74413 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.board.Board_Upgraded.entity.member.Role
+2023-02-21 17:49:30.924 DEBUG 74413 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@29699283] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@639948a2]
+2023-02-21 17:49:31.059 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists member CASCADE 
+2023-02-21 17:49:31.061 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists post CASCADE 
+2023-02-21 17:49:31.062 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists refresh_token CASCADE 
+2023-02-21 17:49:31.064 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table member (
+       id bigint generated by default as identity,
+        created_time timestamp not null,
+        last_modified_time timestamp not null,
+        member_email varchar(255),
+        member_nickname varchar(255),
+        member_password varchar(255),
+        member_role varchar(255),
+        member_username varchar(255),
+        primary key (id)
+    )
+2023-02-21 17:49:31.065 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table post (
+       id bigint generated by default as identity,
+        created_time timestamp not null,
+        last_modified_time timestamp not null,
+        content varchar(255),
+        title varchar(255),
+        member_id bigint,
+        primary key (id)
+    )
+2023-02-21 17:49:31.066 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table refresh_token (
+       rt_key varchar(255) not null,
+        rt_value varchar(255),
+        primary key (rt_key)
+    )
+2023-02-21 17:49:31.067 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table post 
+       add constraint FK83s99f4kx8oiqm3ro0sasmpww 
+       foreign key (member_id) 
+       references member
+2023-02-21 17:49:31.069  INFO 74413 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-21 17:49:31.072 TRACE 74413 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@639948a2] for TypeConfiguration
+2023-02-21 17:49:31.072  INFO 74413 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-21 17:49:31.383  WARN 74413 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-21 17:49:31.557  INFO 74413 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4607cbe2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ff40324, org.springframework.security.web.context.SecurityContextPersistenceFilter@59301546, org.springframework.security.web.header.HeaderWriterFilter@4687fee7, org.springframework.web.filter.CorsFilter@1a82453, org.springframework.security.web.authentication.logout.LogoutFilter@46ae897c, com.board.Board_Upgraded.config.jwt.JwtFilter@3a22d69f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19b4dd60, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40f77135, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7164e54, org.springframework.security.web.session.SessionManagementFilter@1067bc4c, org.springframework.security.web.access.ExceptionTranslationFilter@15324f25, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5a5024eb]
+2023-02-21 17:49:31.927  INFO 74413 --- [    Test worker] c.b.B.r.post.PostRepositoryTest          : Started PostRepositoryTest in 2.114 seconds (JVM running for 2.538)
+2023-02-21 17:49:31.943  INFO 74413 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@36676c1a testClass = PostRepositoryTest, testInstance = com.board.Board_Upgraded.repository.post.PostRepositoryTest@724e82d9, testMethod = searchTest@PostRepositoryTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5b408dc3 testClass = PostRepositoryTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@558bdf1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@130e116b, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2fd953a6, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@66c61024, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5bf0fe62, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@672872e1], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@62d72091]; rollback [true]
+2023-02-21 17:49:32.059 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.062 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-02-21 17:49:32.070 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_nickname=?
+2023-02-21 17:49:32.071 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-02-21 17:49:32.073 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_email=?
+2023-02-21 17:49:32.073 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@test.com]
+2023-02-21 17:49:32.176 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.177 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.165421]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.156117]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test@test.com]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$MQTjyL8Gg.yNQglhyav4M.ccflIMddoEa5ZmLQBgWd7QgGtkwh7g6]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
+2023-02-21 17:49:32.178 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test]
+2023-02-21 17:49:32.185 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.185 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.186 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_nickname=?
+2023-02-21 17:49:32.186 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.187 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_email=?
+2023-02-21 17:49:32.187 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1@test.com]
+2023-02-21 17:49:32.266 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.265780]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.265513]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test1@test.com]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$QXAwjaec7ArwiUQo5GzGBe5/GscswnC8ywccijMrXcdSAhZ9VXmTa]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
+2023-02-21 17:49:32.266 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.268 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.268 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.269 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_nickname=?
+2023-02-21 17:49:32.269 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.269 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_email=?
+2023-02-21 17:49:32.270 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2@test.com]
+2023-02-21 17:49:32.347 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.347540]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.347295]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test2@test.com]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$jNYJPaRIUumuTN7Udw63se0qvaj15kdtgw12yEyXUup4u2pSm4x1O]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
+2023-02-21 17:49:32.348 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.349 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.349 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.350 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_nickname=?
+2023-02-21 17:49:32.351 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.352 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_email=?
+2023-02-21 17:49:32.352 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3@test.com]
+2023-02-21 17:49:32.428 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.428014]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.427787]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test3@test.com]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$jvppOxJ3cw9VWnxDCnEnoeuRHdzXyMqw6b0.PyLhTFyss652Tg0aW]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
+2023-02-21 17:49:32.428 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.429 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.430 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.430 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.432 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.433 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.432640]
+2023-02-21 17:49:32.433 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.431125]
+2023-02-21 17:49:32.433 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content10]
+2023-02-21 17:49:32.434 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.434 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title10]
+2023-02-21 17:49:32.435 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.435 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.435 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.436 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.436 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.435953]
+2023-02-21 17:49:32.436 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.435810]
+2023-02-21 17:49:32.436 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content11]
+2023-02-21 17:49:32.436 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.436 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title11]
+2023-02-21 17:49:32.436 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.437 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.437539]
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.437442]
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content12]
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.437 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title12]
+2023-02-21 17:49:32.438 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.439 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.439 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.439 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.440 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.439687]
+2023-02-21 17:49:32.440 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.439545]
+2023-02-21 17:49:32.440 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content13]
+2023-02-21 17:49:32.440 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.440 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title13]
+2023-02-21 17:49:32.442 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.443 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.443 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.444 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.444 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.443960]
+2023-02-21 17:49:32.444 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.443783]
+2023-02-21 17:49:32.444 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content14]
+2023-02-21 17:49:32.444 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.444 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title14]
+2023-02-21 17:49:32.445 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.445 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.446 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.446270]
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.446152]
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content15]
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.446 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title15]
+2023-02-21 17:49:32.447 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.447 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.448 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.448 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.449 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.448438]
+2023-02-21 17:49:32.449 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.448300]
+2023-02-21 17:49:32.449 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content16]
+2023-02-21 17:49:32.449 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.449 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title16]
+2023-02-21 17:49:32.451 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.451 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.451 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.452 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.452 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.452322]
+2023-02-21 17:49:32.452 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.452035]
+2023-02-21 17:49:32.453 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content17]
+2023-02-21 17:49:32.453 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.453 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title17]
+2023-02-21 17:49:32.453 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.454 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.454 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.454 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.455 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.454764]
+2023-02-21 17:49:32.455 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.454627]
+2023-02-21 17:49:32.455 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content18]
+2023-02-21 17:49:32.455 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.455 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title18]
+2023-02-21 17:49:32.455 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test1]
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-02-21 17:49:32.456 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.456561]
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.456449]
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content19]
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2023-02-21 17:49:32.456 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title19]
+2023-02-21 17:49:32.457 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.457 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.458 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.458378]
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.458275]
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content20]
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.458 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title20]
+2023-02-21 17:49:32.459 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.459 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.460 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.461 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.461 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.461097]
+2023-02-21 17:49:32.461 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.460538]
+2023-02-21 17:49:32.461 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content21]
+2023-02-21 17:49:32.461 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.461 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title21]
+2023-02-21 17:49:32.462 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.462 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.462 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.463 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.463 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.463115]
+2023-02-21 17:49:32.463 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.463006]
+2023-02-21 17:49:32.463 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content22]
+2023-02-21 17:49:32.463 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.463 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title22]
+2023-02-21 17:49:32.464 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.464 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.464 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.464 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.464 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.464729]
+2023-02-21 17:49:32.465 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.464616]
+2023-02-21 17:49:32.465 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content23]
+2023-02-21 17:49:32.465 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.465 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title23]
+2023-02-21 17:49:32.465 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.466 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.466 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.467 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.467 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.467076]
+2023-02-21 17:49:32.467 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.466848]
+2023-02-21 17:49:32.467 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content24]
+2023-02-21 17:49:32.467 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.468 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title24]
+2023-02-21 17:49:32.468 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.469 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.469 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.469 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.470 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.469805]
+2023-02-21 17:49:32.470 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.469424]
+2023-02-21 17:49:32.470 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content25]
+2023-02-21 17:49:32.470 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.470 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title25]
+2023-02-21 17:49:32.471 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.471 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.471 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.472 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.472 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.472144]
+2023-02-21 17:49:32.472 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.471855]
+2023-02-21 17:49:32.472 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content26]
+2023-02-21 17:49:32.472 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.472 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title26]
+2023-02-21 17:49:32.473 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.474 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.474 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.474 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.475 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.474655]
+2023-02-21 17:49:32.475 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.474508]
+2023-02-21 17:49:32.475 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content27]
+2023-02-21 17:49:32.475 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.475 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title27]
+2023-02-21 17:49:32.476 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.477 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.477 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.477 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.478 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.477758]
+2023-02-21 17:49:32.478 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.477619]
+2023-02-21 17:49:32.478 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content28]
+2023-02-21 17:49:32.478 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.478 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title28]
+2023-02-21 17:49:32.479 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.479 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test2]
+2023-02-21 17:49:32.479 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [3]
+2023-02-21 17:49:32.480 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.480 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.480188]
+2023-02-21 17:49:32.480 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.480037]
+2023-02-21 17:49:32.480 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content29]
+2023-02-21 17:49:32.480 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2023-02-21 17:49:32.480 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title29]
+2023-02-21 17:49:32.481 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.481 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.481 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.482 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.482 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.482029]
+2023-02-21 17:49:32.482 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.481881]
+2023-02-21 17:49:32.482 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content30]
+2023-02-21 17:49:32.482 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.482 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title30]
+2023-02-21 17:49:32.483 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.483 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.484 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.484 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.484 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.484524]
+2023-02-21 17:49:32.485 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.484375]
+2023-02-21 17:49:32.485 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content31]
+2023-02-21 17:49:32.485 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.485 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title31]
+2023-02-21 17:49:32.486 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.486 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.486 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.487 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.487 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.487310]
+2023-02-21 17:49:32.487 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.487077]
+2023-02-21 17:49:32.487 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content32]
+2023-02-21 17:49:32.487 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.487 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title32]
+2023-02-21 17:49:32.489 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.489 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.489 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.490 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.490 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.490272]
+2023-02-21 17:49:32.491 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.490135]
+2023-02-21 17:49:32.491 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content33]
+2023-02-21 17:49:32.491 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.491 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title33]
+2023-02-21 17:49:32.492 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.492 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.492 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.493 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.493 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.493398]
+2023-02-21 17:49:32.493 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.493134]
+2023-02-21 17:49:32.494 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content34]
+2023-02-21 17:49:32.494 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.494 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title34]
+2023-02-21 17:49:32.494 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.495 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.495 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.495 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.496 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.495765]
+2023-02-21 17:49:32.496 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.495641]
+2023-02-21 17:49:32.496 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content35]
+2023-02-21 17:49:32.496 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.496 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title35]
+2023-02-21 17:49:32.497 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.497 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.497 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.497 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.497 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.497662]
+2023-02-21 17:49:32.497 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.497557]
+2023-02-21 17:49:32.498 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content36]
+2023-02-21 17:49:32.498 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.498 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title36]
+2023-02-21 17:49:32.498 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.499 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.499 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.499 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.499 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.499645]
+2023-02-21 17:49:32.499 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.499527]
+2023-02-21 17:49:32.500 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content37]
+2023-02-21 17:49:32.500 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.500 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title37]
+2023-02-21 17:49:32.500 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.501 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.501 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.502 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.502 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.502126]
+2023-02-21 17:49:32.502 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.501991]
+2023-02-21 17:49:32.502 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content38]
+2023-02-21 17:49:32.502 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.502 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title38]
+2023-02-21 17:49:32.503 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-02-21 17:49:32.503 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test3]
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [4]
+2023-02-21 17:49:32.504 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        post
+        (id, created_time, last_modified_time, content, member_id, title) 
+    values
+        (default, ?, ?, ?, ?, ?)
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-21T17:49:32.504325]
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-21T17:49:32.504210]
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [content39]
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [4]
+2023-02-21 17:49:32.504 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [title39]
+2023-02-21 17:49:32.542 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        count(post0_.id) as col_0_0_ 
+    from
+        post post0_ 
+    left outer join
+        member member1_ 
+            on post0_.member_id=member1_.id 
+    where
+        member1_.member_nickname like ? escape '!'
+2023-02-21 17:49:32.542 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [%2%]
+2023-02-21 17:49:32.543 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [BIGINT]) - [10]
+2023-02-21 17:49:32.545 DEBUG 74413 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member1_.member_nickname as col_0_0_,
+        post0_.title as col_1_0_,
+        post0_.content as col_2_0_,
+        post0_.last_modified_time as col_3_0_ 
+    from
+        post post0_ 
+    left outer join
+        member member1_ 
+            on post0_.member_id=member1_.id 
+    where
+        member1_.member_nickname like ? escape '!' 
+    order by
+        post0_.last_modified_time asc limit ?
+2023-02-21 17:49:32.546 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [%2%]
+2023-02-21 17:49:32.547 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.547 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title20]
+2023-02-21 17:49:32.547 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content20]
+2023-02-21 17:49:32.548 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.458275]
+2023-02-21 17:49:32.548 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.548 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title21]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content21]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.460538]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title22]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content22]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.463006]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title23]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content23]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.464616]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title24]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content24]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.466848]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title25]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content25]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.469424]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title26]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content26]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.471855]
+2023-02-21 17:49:32.549 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title27]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content27]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.474508]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title28]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content28]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.477619]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_0_0_] : [VARCHAR]) - [test2]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_1_0_] : [VARCHAR]) - [title29]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_2_0_] : [VARCHAR]) - [content29]
+2023-02-21 17:49:32.550 TRACE 74413 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([col_3_0_] : [TIMESTAMP]) - [2023-02-21T17:49:32.480037]
+2023-02-21 17:49:32.604  INFO 74413 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@36676c1a testClass = PostRepositoryTest, testInstance = com.board.Board_Upgraded.repository.post.PostRepositoryTest@724e82d9, testMethod = searchTest@PostRepositoryTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5b408dc3 testClass = PostRepositoryTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@558bdf1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@130e116b, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2fd953a6, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@66c61024, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5bf0fe62, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@672872e1], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

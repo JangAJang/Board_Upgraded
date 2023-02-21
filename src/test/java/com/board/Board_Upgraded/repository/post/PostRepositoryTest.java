@@ -1,10 +1,12 @@
 package com.board.Board_Upgraded.repository.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +14,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 @Transactional
@@ -26,6 +32,8 @@ public class PostRepositoryTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    private static final PageRequest pageRequest = PageRequest.of(0, 10);
 
     @BeforeEach
     void makeMember(){
@@ -66,5 +74,35 @@ public class PostRepositoryTest {
         postRepository.delete(post);
         //then
         Assertions.assertThat(postRepository.count()).isNotEqualTo(countBefore);
+    }
+
+    @Test
+    @DisplayName("게시물 검색시에, 검색타입을 WRITER로 2를 검색하면 멤버의 username에 2가 포함된 모든 게시물을 조회해온다. ")
+    public void searchTest() throws Exception{
+        //given
+        IntStream.range(1, 4).forEach(i ->
+                authService.registerNewMember(RegisterRequestDto.builder()
+                        .username("test" + i)
+                        .nickname("test" + i)
+                        .email("test" + i + "@test.com")
+                        .password("test" + i)
+                        .passwordCheck("test" + i).build()));
+        for(int index = 10; index < 40; index++){
+            Member member = memberRepository.findByUsername("test" + index/10)
+                    .orElseThrow(MemberNotFoundException::new);
+            postRepository.save(Post.builder()
+                    .member(member)
+                    .title("title" + index)
+                    .content("content" + index).build());
+        }
+        //when
+        String searchMember = "2";
+        //then
+        Assertions.assertThat(postRepository.searchPost(searchMember, SearchPostType.WRITER, pageRequest)
+                        .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
+                .containsExactly("title20", "title21", "title22",
+                        "title23", "title24", "title25",
+                        "title26", "title27", "title28",
+                        "title29");
     }
 }
