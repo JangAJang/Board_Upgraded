@@ -248,14 +248,14 @@ public class PostRepositoryTest {
             TimeUnit.SECONDS.sleep(1);
         }
         //when
-        String searchMember = "3";
+
         //then
         Assertions.assertThat(postRepository.getMembersPost(member.getId(), pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
-                .containsExactly("test10", "test9", "test8",
-                        "test7", "test6", "test5",
-                        "test4", "test3", "test2",
-                        "test1");
-        Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest).getTotalElements()).isEqualTo(10L);
+                .containsExactly("title10", "title9", "title8",
+                        "title7", "title6", "title5",
+                        "title4", "title3", "title2",
+                        "title1");
+        Assertions.assertThat(postRepository.getMembersPost(member.getId(), pageRequest).getTotalElements()).isEqualTo(10L);
     }
 }
