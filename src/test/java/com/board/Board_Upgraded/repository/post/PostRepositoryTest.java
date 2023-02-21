@@ -6,7 +6,6 @@ import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
-import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -232,5 +232,30 @@ public class PostRepositoryTest {
                         "title33", "title34", "title35",
                         "title36", "title37");
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest).getTotalElements()).isEqualTo(12L);
+    }
+
+    @Test
+    @DisplayName("특정 번호 멤버의 게시물을 조회시키면 총 10개, 한 페이지에 10개의 결과가 반환된다. 결과는 최근 게시물 순으로 나온다.  ")
+    public void getMembersPostTest() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test")
+                .orElseThrow(MemberNotFoundException::new);
+        for(int index = 1; index <= 10; index++){
+            postRepository.save(Post.builder()
+                    .member(member)
+                    .title("title" + index)
+                    .content("content" + index).build());
+            TimeUnit.SECONDS.sleep(1);
+        }
+        //when
+        String searchMember = "3";
+        //then
+        Assertions.assertThat(postRepository.getMembersPost(member.getId(), pageRequest)
+                        .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
+                .containsExactly("test10", "test9", "test8",
+                        "test7", "test6", "test5",
+                        "test4", "test3", "test2",
+                        "test1");
+        Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest).getTotalElements()).isEqualTo(10L);
     }
 }
