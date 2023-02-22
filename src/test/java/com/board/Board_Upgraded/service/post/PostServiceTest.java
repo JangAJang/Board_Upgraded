@@ -5,8 +5,10 @@ import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.exception.post.NotMyPostException;
+import com.board.Board_Upgraded.exception.post.PostNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
@@ -75,8 +77,9 @@ public class PostServiceTest {
                 .title("진짜 취업")
                 .content("하고싶다.")
                 .build();
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("진짜 취업");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
@@ -96,8 +99,9 @@ public class PostServiceTest {
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .content("하고싶다.")
                 .build();
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("취업");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
@@ -117,8 +121,9 @@ public class PostServiceTest {
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("인턴")
                 .build();
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("인턴");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("가즈아");
@@ -142,14 +147,15 @@ public class PostServiceTest {
                         .password("pass")
                         .passwordCheck("pass").build());
         Member other = memberRepository.findByUsername("user").orElseThrow(MemberNotFoundException::new);
-        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        postService.write(writePostRequestDto, member);
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("인턴")
                 .build();
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
         //when
 
         //then
-        Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other, 1L))
+        Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other, post.getId()))
                 .isInstanceOf(NotMyPostException.class);
     }
 }
