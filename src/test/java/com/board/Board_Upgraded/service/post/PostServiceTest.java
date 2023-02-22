@@ -1,10 +1,12 @@
 package com.board.Board_Upgraded.service.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
+import com.board.Board_Upgraded.exception.post.NotMyPostException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
@@ -15,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 @SpringBootTest
 @Transactional
@@ -149,6 +150,6 @@ public class PostServiceTest {
 
         //then
         Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other))
-                .isInstanceOf(NotMyPostException);
+                .isInstanceOf(NotMyPostException.class);
     }
 }

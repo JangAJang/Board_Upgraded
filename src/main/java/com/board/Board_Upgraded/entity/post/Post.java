@@ -32,8 +32,11 @@ public class Post extends BaseEntity {
         setLastModifiedDate(LocalDateTime.now());
     }
 
-    public void editPost(String title, String content){
+    public void editTitle(String title){
         this.title = title;
+    }
+
+    public void editContent(String content){
         this.content = content;
     }
 }
