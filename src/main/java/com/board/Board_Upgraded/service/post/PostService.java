@@ -2,7 +2,6 @@ package com.board.Board_Upgraded.service.post;
 
 import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
-import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
@@ -38,18 +37,18 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public Page<PostResponseDto> search(SearchPostRequestDto searchPostRequestDto, Pageable pageable, SearchPostType searchPostType){
-        return null;
+    public Page<PostResponseDto> search(String text, Pageable pageable, SearchPostType searchPostType){
+        return postRepository.searchPost(text, searchPostType, pageable);
     }
 
     @Transactional(readOnly = true)
     public Page<PostResponseDto> getMembersPage(Long id, Pageable pageable){
-        return null;
+        return postRepository.getMembersPost(id, pageable);
     }
 
     @Transactional(readOnly = true)
-    public Page<PostResponseDto> getMyPost(Member member){
-        return null;
+    public Page<PostResponseDto> getMyPost(Member member, Pageable pageable){
+        return postRepository.getMembersPost(member.getId(), pageable);
     }
 
     @Transactional
