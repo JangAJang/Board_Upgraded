@@ -57,7 +57,7 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
         if(!post.getMember().equals(member)) throw new NotMyPostException();
         if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editTitle(editPostRequestDto.getTitle());
-        if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editContent(editPostRequestDto.getContent());
+        if(StringUtils.hasText(editPostRequestDto.getContent())) post.editContent(editPostRequestDto.getContent());
         return PostResponseDto.builder()
                 .title(post.getTitle())
                 .content(post.getContent())

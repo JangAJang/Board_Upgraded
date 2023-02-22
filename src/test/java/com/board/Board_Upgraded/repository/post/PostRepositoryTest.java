@@ -272,7 +272,8 @@ public class PostRepositoryTest {
         Post post = Post.builder().member(member).title("취업").content("하고싶다.").build();
         postRepository.save(post);
         //when
-        post.editPost("진짜 취업", "너무 하고 싶습니다.");
+        post.editTitle("진짜 취업");
+        post.editContent("너무 하고 싶습니다.");
         em.flush();
         Post findPost = postRepository.findById(post.getId()).orElseThrow(IllegalArgumentException::new);
         //then

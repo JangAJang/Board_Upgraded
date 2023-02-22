@@ -59,7 +59,8 @@ public class PostTest {
         String content = "내용";
         Post post = new Post(title, content, member);
         //when
-        post.editPost("제목1", "내용1");
+        post.editTitle("제목1");
+        post.editContent("내용1");
         //then
         Assertions.assertThat(post.getTitle()).isEqualTo("제목1");
         Assertions.assertThat(post.getContent()).isEqualTo("내용1");
