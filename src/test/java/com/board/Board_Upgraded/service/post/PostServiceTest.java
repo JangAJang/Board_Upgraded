@@ -1,6 +1,7 @@
 package com.board.Board_Upgraded.service.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
@@ -51,8 +52,11 @@ public class PostServiceTest {
                 .title("취업")
                 .content("가즈아").build();
         //when
-        postService.write(writePostRequestDto, member);
+        PostResponseDto postResponseDto = postService.write(writePostRequestDto, member);
         //then
         Assertions.assertThat(postRepository.count()).isEqualTo(1L);
+        Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("취업");
+        Assertions.assertThat(postResponseDto.getContent()).isEqualTo("가즈아");
+        Assertions.assertThat(postResponseDto.getWriter()).isEqualTo("test");
     }
 }
