@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 @SpringBootTest
 @Transactional
@@ -58,5 +59,96 @@ public class PostServiceTest {
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("취업");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("가즈아");
         Assertions.assertThat(postResponseDto.getWriter()).isEqualTo("test");
+    }
+
+    @Test
+    @DisplayName("게시물의 제목과 내용을 입력해 수정하면 제목과 내용이 바뀌고, 최종 수정일이 초기화된다. ")
+    public void editSuccess() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("진짜 취업")
+                .content("하고싶다.")
+                .build();
+        //when
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        //then
+        Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("진짜 취업");
+        Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
+        Assertions.assertThat(postResponseDto.getWriter()).isEqualTo("test");
+        Assertions.assertThat(postResponseDto.getLastModifiedDate()).isNotEqualTo(createResult.getLastModifiedDate());
+    }
+
+    @Test
+    @DisplayName("게시물의 제목과 내용을 입력해 수정하면 제목이 바뀌고, 최종 수정일이 초기화된다. ")
+    public void editSuccess_WithTitleNull() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .content("하고싶다.")
+                .build();
+        //when
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        //then
+        Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("취업");
+        Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
+        Assertions.assertThat(postResponseDto.getWriter()).isEqualTo("test");
+        Assertions.assertThat(postResponseDto.getLastModifiedDate()).isNotEqualTo(createResult.getLastModifiedDate());
+    }
+
+    @Test
+    @DisplayName("제목을 입력해 수정하면 내용이 바뀌고, 최종 수정일이 초기화된다. ")
+    public void editSuccess_WithTitleNull() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("인턴")
+                .build();
+        //when
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        //then
+        Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("인턴");
+        Assertions.assertThat(postResponseDto.getContent()).isEqualTo("가즈아");
+        Assertions.assertThat(postResponseDto.getWriter()).isEqualTo("test");
+        Assertions.assertThat(postResponseDto.getLastModifiedDate()).isNotEqualTo(createResult.getLastModifiedDate());
+    }
+
+    @Test
+    @DisplayName("다른 사람이 작성한 글을 수정하려고 하면 예외처리한다. ")
+    public void editFail_NotMyPost() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        authService.registerNewMember(
+                RegisterRequestDto.builder()
+                        .username("user")
+                        .nickname("nick")
+                        .email("em@em.com")
+                        .password("pass")
+                        .passwordCheck("pass").build());
+        Member other = memberRepository.findByUsername("user").orElseThrow(MemberNotFoundException::new);
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("인턴")
+                .build();
+        //when
+
+        //then
+        Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other))
+                .isInstanceOf(NotMyPostException);
     }
 }
