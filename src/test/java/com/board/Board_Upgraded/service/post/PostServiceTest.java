@@ -76,7 +76,7 @@ public class PostServiceTest {
                 .content("하고싶다.")
                 .build();
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("진짜 취업");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
@@ -85,7 +85,7 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("게시물의 제목과 내용을 입력해 수정하면 제목이 바뀌고, 최종 수정일이 초기화된다. ")
+    @DisplayName("게시물의 내용을 입력해 수정하면 내용이 바뀌고, 최종 수정일이 초기화된다. ")
     public void editSuccess_WithTitleNull() throws Exception{
         //given
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
@@ -97,7 +97,7 @@ public class PostServiceTest {
                 .content("하고싶다.")
                 .build();
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("취업");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("하고싶다.");
@@ -106,8 +106,8 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("제목을 입력해 수정하면 내용이 바뀌고, 최종 수정일이 초기화된다. ")
-    public void editSuccess_WithTitleNull() throws Exception{
+    @DisplayName("제목을 입력해 수정하면 제목이 바뀌고, 최종 수정일이 초기화된다. ")
+    public void editSuccess_WithContentNull() throws Exception{
         //given
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
@@ -118,7 +118,7 @@ public class PostServiceTest {
                 .title("인턴")
                 .build();
         //when
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member);
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, 1L);
         //then
         Assertions.assertThat(postResponseDto.getTitle()).isEqualTo("인턴");
         Assertions.assertThat(postResponseDto.getContent()).isEqualTo("가즈아");
@@ -149,7 +149,7 @@ public class PostServiceTest {
         //when
 
         //then
-        Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other))
+        Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other, 1L))
                 .isInstanceOf(NotMyPostException.class);
     }
 }
