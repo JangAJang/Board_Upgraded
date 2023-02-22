@@ -158,4 +158,62 @@ public class PostServiceTest {
         Assertions.assertThatThrownBy(()-> postService.edit(editPostRequestDto, other, post.getId()))
                 .isInstanceOf(NotMyPostException.class);
     }
+
+    @Test
+    @DisplayName("게시물이 존재하고 회원이 작성자 일 때 게시물을 삭제한다.")
+    public void deleteSuccess() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        //when
+        postService.delete(member, post.getId());
+        //then
+        Assertions.assertThat(postRepository.count()).isEqualTo(0L);
+    }
+
+    @Test
+    @DisplayName("게시물이 존재하지 않으면 예외처리시킨다.")
+    public void deleteFail_PostNotFound() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        //when
+
+        //then
+        Assertions.assertThatThrownBy(()-> postService.delete(member, post.getId()+1))
+                .isInstanceOf(PostNotFoundException.class);
+    }
+
+    @Test
+    @DisplayName("게시물의 작성자가 아니면 예외처리시킨다.")
+    public void deleteFail_NotMyPost() throws Exception{
+        //given
+        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("취업")
+                .content("가즈아").build();
+        PostResponseDto createResult = postService.write(writePostRequestDto, member);
+        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        authService.registerNewMember(
+                RegisterRequestDto.builder()
+                        .username("user")
+                        .nickname("nick")
+                        .email("em@em.com")
+                        .password("pass")
+                        .passwordCheck("pass").build());
+        Member other = memberRepository.findByUsername("user").orElseThrow(MemberNotFoundException::new);
+        //when
+
+        //then
+        Assertions.assertThatThrownBy(()-> postService.delete(other, post.getId()))
+                .isInstanceOf(NotMyPostException.class);
+    }
 }
