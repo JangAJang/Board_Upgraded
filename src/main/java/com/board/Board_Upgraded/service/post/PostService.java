@@ -54,8 +54,8 @@ public class PostService {
 
     @Transactional
     public PostResponseDto edit(EditPostRequestDto editPostRequestDto, Member member, Long id){
-        Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
-        if(!post.getMember().equals(member)) throw new NotMyPostException();
+        Post post = findPostById(id);
+        validateMember(member, post);
         if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editTitle(editPostRequestDto.getTitle());
         if(StringUtils.hasText(editPostRequestDto.getContent())) post.editContent(editPostRequestDto.getContent());
         return PostResponseDto.builder()
@@ -67,6 +67,16 @@ public class PostService {
 
     @Transactional
     public void delete(Member member, Long id){
+        Post post = findPostById(id);
+        validateMember(member, post);
+        postRepository.delete(post);
+    }
 
+    private Post findPostById(Long id){
+        return postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+    }
+
+    private void validateMember(Member member, Post post){
+        if(!post.getMember().equals(member)) throw new NotMyPostException();
     }
 }
