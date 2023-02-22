@@ -8,6 +8,7 @@ import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,8 @@ public class PostServiceTest {
     @Autowired
     private PostRepository postRepository;
 
-    @Test
-    @DisplayName("게시물의 제목과 내용이 있으면 글을 작성해준다. ")
-    public void writeSuccess() throws Exception{
-        //given
+    @BeforeEach
+    void createWriter(){
         authService.registerNewMember(RegisterRequestDto.builder()
                 .username("test")
                 .nickname("test")
@@ -41,6 +40,12 @@ public class PostServiceTest {
                 .password("test")
                 .passwordCheck("test")
                 .build());
+    }
+
+    @Test
+    @DisplayName("게시물의 제목과 내용이 있으면 글을 작성해준다. ")
+    public void writeSuccess() throws Exception{
+        //given
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
                 .title("취업")
