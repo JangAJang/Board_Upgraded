@@ -1,6 +1,8 @@
 package com.board.Board_Upgraded.service.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
+import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,5 +33,10 @@ public class SearchTest {
                 .email("test" + i + "@test.com")
                 .password("test")
                 .passwordCheck("test").build()));
+        IntStream.range(11, 51).forEach( i->
+                postService.write(WritePostRequestDto.builder()
+                        .title("title" + (i - 10 + i%10))
+                        .content("content" + ( i - 10 + i%10))
+                        .build(), memberRepository.findByUsername("test" + i/10).orElseThrow(MemberNotFoundException::new)));
     }
 }
