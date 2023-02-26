@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.repository.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
+import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
@@ -102,7 +103,7 @@ public class PostRepositoryTest {
                     .content("content" + index).build());
         }
         //when
-        String searchMember = "2";
+        SearchPostRequestDto searchMember = new SearchPostRequestDto("2");
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
@@ -132,7 +133,7 @@ public class PostRepositoryTest {
                     .content("content" + index).build());
         }
         //when
-        String searchMember = "3";
+        SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
@@ -163,7 +164,7 @@ public class PostRepositoryTest {
                     .content("content" + index).build());
         }
         //when
-        String searchMember = "3";
+        SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, CONTENT, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
@@ -194,7 +195,7 @@ public class PostRepositoryTest {
                     .content("content" + index).build());
         }
         //when
-        String searchMember = "3";
+        SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, TITLE_AND_CONTENT, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
@@ -226,7 +227,7 @@ public class PostRepositoryTest {
                     .content("content" + index).build());
         }
         //when
-        String searchMember = "3";
+        SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
         //then
         Assertions.assertThat(postRepository.searchPost(searchMember, WRITER_AND_TITLE, pageRequest)
                         .getContent().stream().map(PostResponseDto::getTitle).collect(Collectors.toList()))
