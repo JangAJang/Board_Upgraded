@@ -55,6 +55,11 @@ public class PostController {
         return Response.success(postService.getMembersPage(member, pageable));
     }
 
+    @GetMapping("/myPost")
+    public Response getMyPost(@PageableDefault Pageable pageable){
+        return Response.success(postService.getMyPost(getCurrentMember(), pageable));
+    }
+
     private Member getCurrentMember(){
         return memberRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(MemberNotFoundException::new);
