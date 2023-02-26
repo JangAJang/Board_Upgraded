@@ -68,6 +68,7 @@ public class PostService {
     public void delete(Member member, Long id){
         Post post = findPostById(id);
         validateMember(member, post);
+        member.deletePost(post);
         postRepository.delete(post);
     }
 
