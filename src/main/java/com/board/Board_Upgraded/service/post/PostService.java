@@ -47,11 +47,6 @@ public class PostService {
         return postRepository.getMembersPost(id, pageable);
     }
 
-    @Transactional(readOnly = true)
-    public Page<PostResponseDto> getMyPost(Member member, Pageable pageable){
-        return postRepository.getMembersPost(member.getId(), pageable);
-    }
-
     @Transactional
     public PostResponseDto edit(EditPostRequestDto editPostRequestDto, Member member, Long id){
         Post post = findPostById(id);
