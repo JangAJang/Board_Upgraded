@@ -11,6 +11,7 @@ import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.post.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,9 +45,14 @@ public class PostController {
         return Response.success("삭제 완료");
     }
 
-    @GetMapping("/")
+    @GetMapping("/search")
     public Response search(@RequestBody SearchPostRequestDto searchPostRequestDto, @PageableDefault Pageable pageable, @RequestParam SearchPostType searchPostType){
         return Response.success(postService.search(searchPostRequestDto, pageable, searchPostType));
+    }
+
+    @GetMapping("/of")
+    public Response getPostOf(@RequestParam Long member, @PageableDefault Pageable pageable){
+        return Response.success(postService.getMembersPage(member, pageable));
     }
 
     private Member getCurrentMember(){
