@@ -45,8 +45,8 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public Response search(@RequestBody String text, @PageableDefault Pageable pageable, @RequestParam SearchPostType searchPostType){
-        return Response.success(postService.search(text, pageable, searchPostType));
+    public Response search(@RequestBody SearchPostRequestDto searchPostRequestDto, @PageableDefault Pageable pageable, @RequestParam SearchPostType searchPostType){
+        return Response.success(postService.search(searchPostRequestDto, pageable, searchPostType));
     }
 
     private Member getCurrentMember(){

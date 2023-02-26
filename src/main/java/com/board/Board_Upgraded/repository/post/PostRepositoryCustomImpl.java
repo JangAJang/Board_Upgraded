@@ -2,6 +2,7 @@ package com.board.Board_Upgraded.repository.post;
 
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.QPostResponseDto;
+import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -20,13 +21,13 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Page<PostResponseDto> searchPost(String text, SearchPostType searchPostType, Pageable pageable) {
+    public Page<PostResponseDto> searchPost(SearchPostRequestDto searchPostRequestDto, SearchPostType searchPostType, Pageable pageable) {
         QueryResults<PostResponseDto> result = queryFactory
                 .select(new QPostResponseDto(member.nickname.as("writer"),
                         post.title, post.content, post.lastModifiedDate))
                 .from(post)
                 .leftJoin(post.member, member)
-                .where(makeConditionQuery(text, searchPostType))
+                .where(makeConditionQuery(searchPostRequestDto.getText(), searchPostType))
                 .orderBy(post.lastModifiedDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
