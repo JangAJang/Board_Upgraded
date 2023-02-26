@@ -22,6 +22,7 @@ public class Post extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @Builder
@@ -29,6 +30,7 @@ public class Post extends BaseEntity {
         this.title = title;
         this.content = content;
         this.member = member;
+        member.addPost(this);
         setLastModifiedDate(LocalDateTime.now());
     }
 
