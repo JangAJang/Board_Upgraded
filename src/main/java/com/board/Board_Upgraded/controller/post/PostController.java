@@ -11,7 +11,6 @@ import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.post.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,11 +52,6 @@ public class PostController {
     @GetMapping("/of")
     public Response getPostOf(@RequestParam Long member, @PageableDefault Pageable pageable){
         return Response.success(postService.getMembersPage(member, pageable));
-    }
-
-    @GetMapping("/myPost")
-    public Response getMyPost(@PageableDefault Pageable pageable){
-        return Response.success(postService.getMyPost(getCurrentMember(), pageable));
     }
 
     private Member getCurrentMember(){
