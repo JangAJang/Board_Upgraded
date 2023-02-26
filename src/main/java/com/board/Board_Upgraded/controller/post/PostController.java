@@ -34,6 +34,12 @@ public class PostController {
         return Response.success(postResponseDto);
     }
 
+    @DeleteMapping("/")
+    public Response delete(@RequestParam Long post){
+        postService.delete(getCurrentMember(), post);
+        return Response.success("삭제 완료");
+    }
+
     private Member getCurrentMember(){
         return memberRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(MemberNotFoundException::new);
