@@ -2,13 +2,17 @@ package com.board.Board_Upgraded.controller.post;
 
 import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
+import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.repository.member.SearchPostType;
 import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.post.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +42,11 @@ public class PostController {
     public Response delete(@RequestParam Long post){
         postService.delete(getCurrentMember(), post);
         return Response.success("삭제 완료");
+    }
+
+    @GetMapping("/")
+    public Response search(@RequestBody String text, @PageableDefault Pageable pageable, @RequestParam SearchPostType searchPostType){
+        return Response.success(postService.search(text, pageable, searchPostType));
     }
 
     private Member getCurrentMember(){
