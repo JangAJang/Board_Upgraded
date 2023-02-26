@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.controller.post;
 
+import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
@@ -9,10 +10,7 @@ import com.board.Board_Upgraded.response.Response;
 import com.board.Board_Upgraded.service.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,6 +25,12 @@ public class PostController {
     @PostMapping("/write")
     public Response write(@RequestBody @Valid WritePostRequestDto writePostRequestDto){
         PostResponseDto postResponseDto = postService.write(writePostRequestDto, getCurrentMember());
+        return Response.success(postResponseDto);
+    }
+
+    @PatchMapping("/")
+    public Response edit(@RequestBody @Valid EditPostRequestDto editPostRequestDto, @RequestParam Long post){
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, getCurrentMember(), post);
         return Response.success(postResponseDto);
     }
 
