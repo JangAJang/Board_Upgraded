@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class CreateEditDeleteTest {
+public class CreateTest {
 
     @Autowired
     private MockMvc mvc;
