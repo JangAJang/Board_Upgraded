@@ -114,4 +114,23 @@ public class SearchTest {
         Assertions.assertThat(responseDtoPage.getContent().stream().map(PostResponseDto::getTitle))
                 .containsExactly("title50", "title45", "title35", "title25", "title15");
     }
+
+    @Test
+    @DisplayName("작성자와 제목에 3을 입력하면, 3번 작성자가 작성한 30~39번 게시물과, 13, 23, 43번 게시물이 최근 게시/수정된 순서로 나온다 (즉, 작성자명에 3이 있고 제목에 3이 있어도 중복되지 않는다.)")
+    public void searchByWriterAndTitle() throws Exception{
+        //given
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("3");
+        //when
+        Page<PostResponseDto> responseDtoPage0 = postService.search(
+                searchPostRequestDto, PageRequest.of(0, 10), SearchPostType.WRITER_AND_TITLE);
+        Page<PostResponseDto> responseDtoPage1 = postService.search(
+                searchPostRequestDto, PageRequest.of(1, 10), SearchPostType.WRITER_AND_TITLE);
+        //then
+        Assertions.assertThat(responseDtoPage0.getTotalElements()).isEqualTo(13L);
+        Assertions.assertThat(responseDtoPage0.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title43", "title39", "title38", "title37", "title36",
+                        "title35", "title34", "title33", "title32", "title31");
+        Assertions.assertThat(responseDtoPage1.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title30", "title23", "title13");
+    }
 }
