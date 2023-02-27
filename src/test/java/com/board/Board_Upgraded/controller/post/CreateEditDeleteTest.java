@@ -100,6 +100,66 @@ public class CreateEditDeleteTest {
     }
 
     @Test
+    @DisplayName("게시물을 작성할 때, 제목이 공백문자이면 400(bad request)에러와 제목을 입력해야함을 반환한다. ")
+    public void writePostTest_BlankTitle() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("  ")
+                .content("내용입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/api/posts/write")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(writePostRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("제목을 입력하세요."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("게시물을 작성할 때, 제목이 공백문자이면 400(bad request)에러와 제목을 입력해야함을 반환한다. ")
+    public void writePostTest_EmptyTitle() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test")
+                .nickname("test")
+                .email("test@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("")
+                .content("내용입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/api/posts/write")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(writePostRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("제목을 입력하세요."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
     @DisplayName("게시물을 작성할 때, 토큰이 없으면 401에러를 반환한다.")
     public void writePostTest_NoToken() throws Exception{
         //given
