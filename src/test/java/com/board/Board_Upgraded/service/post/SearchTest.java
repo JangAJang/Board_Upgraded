@@ -90,4 +90,21 @@ public class SearchTest {
                 "title34", "title24", "title14"
         );
     }
+
+    @Test
+    @DisplayName("작성자에 2를 입력하면 test2 닉네임의 게시물 10개가 최근 게시/수정된 순으로 반환된다. ")
+    public void searchByWriterTest() throws Exception{
+        //given
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("2");
+        PageRequest pageRequest0 = PageRequest.of(0, 10);
+        //when
+        Page<PostResponseDto> result = postService.search(searchPostRequestDto, pageRequest0, SearchPostType.WRITER);
+        //then
+        Assertions.assertThat(result.getTotalElements()).isEqualTo(10L);
+        Assertions.assertThat(result.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title29", "title28", "title27",
+                        "title26", "title25", "title24",
+                        "title23", "title22", "title21",
+                        "title20");
+    }
 }
