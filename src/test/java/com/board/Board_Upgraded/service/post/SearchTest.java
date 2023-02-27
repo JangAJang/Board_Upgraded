@@ -1,15 +1,27 @@
 package com.board.Board_Upgraded.service.post;
 
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
+import com.board.Board_Upgraded.dto.post.PostResponseDto;
+import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
+import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
+import com.board.Board_Upgraded.repository.member.SearchPostType;
+import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -25,6 +37,9 @@ public class SearchTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private PostRepository postRepository;
+
     @BeforeEach
     void makeMembers(){
         IntStream.range(1, 6).forEach(i -> authService.registerNewMember(RegisterRequestDto.builder()
@@ -35,8 +50,23 @@ public class SearchTest {
                 .passwordCheck("test").build()));
         IntStream.range(11, 51).forEach( i->
                 postService.write(WritePostRequestDto.builder()
-                        .title("title" + (i - 10 + i%10))
-                        .content("content" + ( i - 10 + i%10))
+                        .title("title" + i)
+                        .content("content" + i)
                         .build(), memberRepository.findByUsername("test" + i/10).orElseThrow(MemberNotFoundException::new)));
+    }
+
+    @Test
+    @DisplayName("제목에 5를 입력하면 11~50까지 만들어진 게시물 중에 50, 45, 35, 25, 15가 나온다.(게시글 생성의 역순)")
+    public void searchByTitleTest() throws Exception{
+        //given
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("5");
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        //when
+
+        //then
+        Page<PostResponseDto> responseDtoPage = postService.search(searchPostRequestDto, pageRequest, SearchPostType.TITLE);
+        Assertions.assertThat(responseDtoPage.getTotalElements()).isEqualTo(5L);
+        Assertions.assertThat(responseDtoPage.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title50", "title45", "title35", "title25", "title15");
     }
 }
