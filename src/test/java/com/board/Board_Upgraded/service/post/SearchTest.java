@@ -69,4 +69,25 @@ public class SearchTest {
         Assertions.assertThat(responseDtoPage.getContent().stream().map(PostResponseDto::getTitle))
                 .containsExactly("title50", "title45", "title35", "title25", "title15");
     }
+
+    @Test
+    @DisplayName("내용에 4를 입력하면 11~50까지 만들어진 게시물 중에 49, 48, 47, 46, 45, 44, 43, 42, 41, 40이 나온다.(게시글 생성의 역순) 다음 페이지에 34, 24, 14가 나온다.")
+    public void searchByContentTest() throws Exception{
+        //given
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("4");
+        PageRequest pageRequest0 = PageRequest.of(0, 10);
+        PageRequest pageRequest1 = PageRequest.of(1, 10);
+        //when
+
+        //then
+        Page<PostResponseDto> responseDtoPage = postService.search(searchPostRequestDto, pageRequest0, SearchPostType.CONTENT);
+        Assertions.assertThat(responseDtoPage.getTotalElements()).isEqualTo(13L);
+        Assertions.assertThat(responseDtoPage.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title49", "title48", "title47", "title46", "title45",
+                        "title44", "title43", "title42", "title41", "title40");
+        Assertions.assertThat(postService.search(searchPostRequestDto, pageRequest1, SearchPostType.CONTENT)
+                .getContent().stream().map(PostResponseDto::getTitle)).containsExactly(
+                "title34", "title24", "title14"
+        );
+    }
 }
