@@ -38,8 +38,8 @@ public class CreateEditDeleteTest {
 
     @BeforeEach
     void clearDB(){
-        memberRepository.deleteAll();
         postRepository.deleteAll();
+        memberRepository.deleteAll();
     }
 
     @Test
