@@ -32,14 +32,14 @@ public class PostController {
         return Response.success(postResponseDto);
     }
 
-    @PatchMapping("/")
-    public Response edit(@RequestBody @Valid EditPostRequestDto editPostRequestDto, @RequestParam Long post){
-        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, getCurrentMember(), post);
+    @PatchMapping("/edit")
+    public Response edit(@RequestBody @Valid EditPostRequestDto editPostRequestDto, @RequestParam("id") Long id){
+        PostResponseDto postResponseDto = postService.edit(editPostRequestDto, getCurrentMember(), id);
         return Response.success(postResponseDto);
     }
 
-    @DeleteMapping("/")
-    public Response delete(@RequestParam Long post){
+    @DeleteMapping("/delete")
+    public Response delete(@RequestParam("id") Long post){
         postService.delete(getCurrentMember(), post);
         return Response.success("삭제 완료");
     }
