@@ -4,11 +4,9 @@ import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
-import com.board.Board_Upgraded.entity.post.Post;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.repository.member.SearchPostType;
-import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -36,9 +31,6 @@ public class SearchTest {
 
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private PostRepository postRepository;
 
     @BeforeEach
     void makeMembers(){
@@ -106,5 +98,20 @@ public class SearchTest {
                         "title26", "title25", "title24",
                         "title23", "title22", "title21",
                         "title20");
+    }
+
+    @Test
+    @DisplayName("제목과 내용에 5를 입력하면, 50, 45, 35, 25, 15번의 5개 게시물이 출력된다. (즉, 제목에 5가 있고 내용에 5가 있더라도 중복되지 않는다)")
+    public void searchByTitleAndContent() throws Exception{
+        //given
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("5");
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        //when
+
+        //then
+        Page<PostResponseDto> responseDtoPage = postService.search(searchPostRequestDto, pageRequest, SearchPostType.TITLE_AND_CONTENT);
+        Assertions.assertThat(responseDtoPage.getTotalElements()).isEqualTo(5L);
+        Assertions.assertThat(responseDtoPage.getContent().stream().map(PostResponseDto::getTitle))
+                .containsExactly("title50", "title45", "title35", "title25", "title15");
     }
 }
