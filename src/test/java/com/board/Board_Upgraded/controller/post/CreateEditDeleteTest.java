@@ -70,6 +70,22 @@ public class CreateEditDeleteTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("게시물을 작성할 때, 토큰이 없으면 401에러를 반환한다.")
+    public void writePostTest_NoToken() throws Exception{
+        //given
+        WritePostRequestDto writePostRequestDto = WritePostRequestDto.builder()
+                .title("제목입니다.")
+                .content("내용입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.post("/api/posts/write")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(writePostRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
