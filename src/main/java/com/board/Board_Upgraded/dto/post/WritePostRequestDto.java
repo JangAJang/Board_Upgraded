@@ -1,14 +1,17 @@
 package com.board.Board_Upgraded.dto.post;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@RequiredArgsConstructor
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class WritePostRequestDto {
 
-    private final String title;
-    private final String content;
+    private String title;
+    private String content;
+
+    @Builder
+    public WritePostRequestDto(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
