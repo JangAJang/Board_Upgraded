@@ -71,7 +71,7 @@ public class CreateEditDeleteTest {
     }
 
     @Test
-    @DisplayName("게시물을 작성할 때, 제목이 null이면 404에러와 제목을 입력해야함을 반환한다. ")
+    @DisplayName("게시물을 작성할 때, 제목이 null이면 400(bad request)에러와 제목을 입력해야함을 반환한다. ")
     public void writePostTest_NoTitle() throws Exception{
         //given
         authService.registerNewMember(RegisterRequestDto.builder()
@@ -93,6 +93,9 @@ public class CreateEditDeleteTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(makeJson(writePostRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("제목을 입력하세요."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
