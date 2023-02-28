@@ -33,7 +33,7 @@ public class PostController {
     }
 
     @PatchMapping("/edit")
-    public Response edit(@RequestBody @Valid EditPostRequestDto editPostRequestDto, @RequestParam("id") Long id){
+    public Response edit(@RequestBody EditPostRequestDto editPostRequestDto, @RequestParam("id") Long id){
         PostResponseDto postResponseDto = postService.edit(editPostRequestDto, getCurrentMember(), id);
         return Response.success(postResponseDto);
     }

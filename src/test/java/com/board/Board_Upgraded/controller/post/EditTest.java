@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class EditTest {
     @Autowired
     private MockMvc mvc;
@@ -70,7 +71,6 @@ public class EditTest {
 
     @Test
     @DisplayName("게시물을 수정할 때, 회원권한이 있으면 정상적으로 게시물을 수정한다. ")
-    @Transactional
     public void editPostTest() throws Exception{
         //given
         Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
@@ -89,6 +89,23 @@ public class EditTest {
                         .content(makeJson(editPostRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("토큰이 없이 게시물을 수정할 때, 401에러를 반환한다.")
+    public void editPost_Unauthorized() throws Exception{
+        //given
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("바뀐 제목입니다.")
+                .content("바뀐 내용입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/posts/edit?id="+post.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(makeJson(editPostRequestDto)))
+            .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+            .andDo(MockMvcResultHandlers.print());
     }
 
     private String makeJson(Object object){
