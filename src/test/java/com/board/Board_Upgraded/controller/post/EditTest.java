@@ -108,6 +108,37 @@ public class EditTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("다른 사람이 작성한 게시물을 수정하려 한 경우, 401에러와 권한없음을 반환한다.")
+    public void editPost_NotMyPost() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("newT")
+                .nickname("newT")
+                .email("new@test.com")
+                .passwordCheck("new")
+                .password("new").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("newT")
+                .password("new").build());
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("바뀐 제목입니다.")
+                .content("바뀐 내용입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/posts/edit?id="+post.getId())
+                    .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                    .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(makeJson(editPostRequestDto)))
+            .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(401))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("권한이 없는 게시물 입니다."))
+            .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
