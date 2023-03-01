@@ -191,6 +191,30 @@ public class EditTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("입력이 없을 경우 게시물이 그대로 나온다.")
+    public void editPost_AllNull() throws Exception{
+        //given
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/posts/edit?id="+post.getId())
+                    .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                    .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(makeJson(editPostRequestDto)))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.title").value("제목입니다."))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content").value("내용입니다."))
+            .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
