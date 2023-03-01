@@ -105,6 +105,32 @@ public class DeleteTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("다른 사용자의 게시물을 삭제 요청하면 401에러를 반환한다.")
+    public void deletePost_NotMyPost() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("test1")
+                .nickname("test1")
+                .email("test1@test.com")
+                .password("test")
+                .passwordCheck("test").build());
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test1")
+                .password("test").build());
+        //expected
+        mvc.perform(MockMvcRequestBuilders.delete("/api/posts/delete?id="+post.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                        .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken())))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(401))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("권한이 없는 게시물 입니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     void clearDB(){
         postRepository.deleteAll();
         memberRepository.deleteAll();
