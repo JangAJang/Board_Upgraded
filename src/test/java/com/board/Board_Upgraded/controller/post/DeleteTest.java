@@ -85,6 +85,26 @@ public class DeleteTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("없는 게시물의 삭제를 요청하면 404(NotFound)에러를 반환한다")
+    public void deletePost_NoPost() throws Exception{
+        //given
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        //expected
+        mvc.perform(MockMvcRequestBuilders.delete("/api/posts/delete?id="+post.getId()+1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                        .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken())))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(404))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("해당 게시물을 찾을 수 없습니다."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     void clearDB(){
         postRepository.deleteAll();
         memberRepository.deleteAll();
