@@ -70,6 +70,21 @@ public class DeleteTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("토큰이 없을 때, 삭제를 요청하면 401에러를 반환한다")
+    public void deletePost_NoToken() throws Exception{
+        //given
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        //expected
+        mvc.perform(MockMvcRequestBuilders.delete("/api/posts/delete?id="+post.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     void clearDB(){
         postRepository.deleteAll();
         memberRepository.deleteAll();
