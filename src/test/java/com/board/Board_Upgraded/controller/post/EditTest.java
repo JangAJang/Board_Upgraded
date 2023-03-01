@@ -88,6 +88,8 @@ public class EditTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(makeJson(editPostRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.title").value("바뀐 제목입니다."))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content").value("바뀐 내용입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -136,6 +138,31 @@ public class EditTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
             .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(401))
             .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("권한이 없는 게시물 입니다."))
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("제목만 존재하고, 내용이 null이면 제목만 변경된다.")
+    public void editPost_OnlyTitle() throws Exception{
+        //given
+        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test")
+                .password("test").build());
+        EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
+                .title("바뀐 제목입니다.")
+                .build();
+        //expected
+        mvc.perform(MockMvcRequestBuilders.patch("/api/posts/edit?id="+post.getId())
+                    .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                    .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(makeJson(editPostRequestDto)))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.title").value("바뀐 제목입니다."))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content").value("내용입니다."))
             .andDo(MockMvcResultHandlers.print());
     }
 

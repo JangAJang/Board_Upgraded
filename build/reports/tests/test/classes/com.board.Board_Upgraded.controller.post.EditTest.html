@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.731s</div>
+<div class="counter">0.662s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,9 +79,9 @@
 </tr>
 </thead>
 <tr>
-<td class="success">다른 사람이 작성한 게시물을 수정하려 한 경우, 401에러와 권한없음을 반환한다.</td>
-<td class="success">editPost_NotMyPost()</td>
-<td class="success">0.731s</td>
+<td class="success">제목만 존재하고, 내용이 null이면 제목만 변경된다.</td>
+<td class="success">editPost_OnlyTitle()</td>
+<td class="success">0.662s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -89,21 +89,21 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>19:13:55.565 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-19:13:55.569 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-19:13:55.586 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.board.Board_Upgraded.controller.post.EditTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-19:13:55.591 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.board.Board_Upgraded.controller.post.EditTest], using SpringBootContextLoader
-19:13:55.592 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.controller.post.EditTest]: class path resource [com/board/Board_Upgraded/controller/post/EditTest-context.xml] does not exist
-19:13:55.593 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.controller.post.EditTest]: class path resource [com/board/Board_Upgraded/controller/post/EditTestContext.groovy] does not exist
-19:13:55.593 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.board.Board_Upgraded.controller.post.EditTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-19:13:55.593 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.board.Board_Upgraded.controller.post.EditTest]: EditTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-19:13:55.618 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.board.Board_Upgraded.controller.post.EditTest]
-19:13:55.653 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/leeeehgnaj/Desktop/Coding/Board_Upgraded/build/classes/java/main/com/board/Board_Upgraded/BoardUpgradedApplication.class]
-19:13:55.654 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.board.Board_Upgraded.BoardUpgradedApplication for test class com.board.Board_Upgraded.controller.post.EditTest
-19:13:55.690 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.board.Board_Upgraded.controller.post.EditTest]: using defaults.
-19:13:55.690 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-19:13:55.701 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@741b3bc3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2ed3b1f5, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@63648ee9, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@68d6972f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@45be7cd5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7651218e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3185fa6b, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6d366c9b, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@5b58ed3c, org.springframework.test.context.event.EventPublishingTestExecutionListener@24faea88, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@3a320ade, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@64beebb7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7813cb11, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@bcec031, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@21005f6c, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@32f0fba8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@545de5a4]
-19:13:55.702 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@25ddbbbb testClass = EditTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1536602f testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1e461e41, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4f5991f6, [ImportsContextCustomizer@4ebea12c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@6eb2384f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@12f9af83, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@386f0da3, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@568ff82], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+<pre>23:01:42.047 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+23:01:42.052 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+23:01:42.068 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.board.Board_Upgraded.controller.post.EditTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+23:01:42.074 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.board.Board_Upgraded.controller.post.EditTest], using SpringBootContextLoader
+23:01:42.076 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.controller.post.EditTest]: class path resource [com/board/Board_Upgraded/controller/post/EditTest-context.xml] does not exist
+23:01:42.076 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.board.Board_Upgraded.controller.post.EditTest]: class path resource [com/board/Board_Upgraded/controller/post/EditTestContext.groovy] does not exist
+23:01:42.076 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.board.Board_Upgraded.controller.post.EditTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+23:01:42.077 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.board.Board_Upgraded.controller.post.EditTest]: EditTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:01:42.102 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.board.Board_Upgraded.controller.post.EditTest]
+23:01:42.138 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/leeeehgnaj/Desktop/Coding/Board_Upgraded/build/classes/java/main/com/board/Board_Upgraded/BoardUpgradedApplication.class]
+23:01:42.138 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.board.Board_Upgraded.BoardUpgradedApplication for test class com.board.Board_Upgraded.controller.post.EditTest
+23:01:42.173 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.board.Board_Upgraded.controller.post.EditTest]: using defaults.
+23:01:42.173 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+23:01:42.182 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@63648ee9, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@68d6972f, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@45be7cd5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7651218e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@3185fa6b, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6d366c9b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5b58ed3c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@24faea88, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@3a320ade, org.springframework.test.context.event.EventPublishingTestExecutionListener@64beebb7, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@7813cb11, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@bcec031, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@21005f6c, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@32f0fba8, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@545de5a4, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@29ef6856, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@ab7a938]
+23:01:42.183 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4ebea12c testClass = EditTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2a1edad4 testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@56928307, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@38234a38, [ImportsContextCustomizer@6256ac4f key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3a4621bd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e6ef134, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@34f22f9d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@50caa560], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -113,142 +113,142 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.0)
 
-2023-02-28 19:13:55.842  INFO 31238 --- [    Test worker] c.b.B.controller.post.EditTest           : Starting EditTest using Java 17.0.2 on ijanghuiui-MacBookPro.local with PID 31238 (started by leeeehgnaj in /Users/leeeehgnaj/Desktop/Coding/Board_Upgraded)
-2023-02-28 19:13:55.843  INFO 31238 --- [    Test worker] c.b.B.controller.post.EditTest           : The following 1 profile is active: &quot;local&quot;
-2023-02-28 19:13:56.251  INFO 31238 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-28 19:13:56.283  INFO 31238 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29 ms. Found 3 JPA repository interfaces.
-2023-02-28 19:13:56.570  INFO 31238 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-02-28 19:13:56.590  INFO 31238 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
-2023-02-28 19:13:56.669  INFO 31238 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-02-28 19:13:56.681 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@54defd69
-2023-02-28 19:13:56.681 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@54defd69
-2023-02-28 19:13:56.681 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -&gt; org.hibernate.type.BooleanType@54defd69
-2023-02-28 19:13:56.682 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -&gt; org.hibernate.type.NumericBooleanType@70884875
-2023-02-28 19:13:56.682 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -&gt; org.hibernate.type.TrueFalseType@3d88ce0e
-2023-02-28 19:13:56.682 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -&gt; org.hibernate.type.YesNoType@31006a75
-2023-02-28 19:13:56.682 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@38a38ed4
-2023-02-28 19:13:56.683 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@38a38ed4
-2023-02-28 19:13:56.683 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -&gt; org.hibernate.type.ByteType@38a38ed4
-2023-02-28 19:13:56.683 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -&gt; org.hibernate.type.CharacterType@299fc582
-2023-02-28 19:13:56.683 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -&gt; org.hibernate.type.CharacterType@299fc582
-2023-02-28 19:13:56.683 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -&gt; org.hibernate.type.CharacterType@299fc582
-2023-02-28 19:13:56.684 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@31693a86
-2023-02-28 19:13:56.684 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@31693a86
-2023-02-28 19:13:56.684 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -&gt; org.hibernate.type.ShortType@31693a86
-2023-02-28 19:13:56.685 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -&gt; org.hibernate.type.IntegerType@4de91056
-2023-02-28 19:13:56.685 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -&gt; org.hibernate.type.IntegerType@4de91056
-2023-02-28 19:13:56.685 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -&gt; org.hibernate.type.IntegerType@4de91056
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@7c5c20ed
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@7c5c20ed
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -&gt; org.hibernate.type.LongType@7c5c20ed
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@7e31d53b
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@7e31d53b
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -&gt; org.hibernate.type.FloatType@7e31d53b
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@504b8705
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@504b8705
-2023-02-28 19:13:56.686 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -&gt; org.hibernate.type.DoubleType@504b8705
-2023-02-28 19:13:56.687 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -&gt; org.hibernate.type.BigDecimalType@779228dc
-2023-02-28 19:13:56.687 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -&gt; org.hibernate.type.BigDecimalType@779228dc
-2023-02-28 19:13:56.687 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -&gt; org.hibernate.type.BigIntegerType@3d798e76
-2023-02-28 19:13:56.687 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -&gt; org.hibernate.type.BigIntegerType@3d798e76
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -&gt; org.hibernate.type.StringType@68f776ee
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -&gt; org.hibernate.type.StringType@68f776ee
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -&gt; org.hibernate.type.StringNVarcharType@23469199
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ncharacter -&gt; org.hibernate.type.CharacterNCharType@4cfc0c48
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -&gt; org.hibernate.type.UrlType@4540c7
-2023-02-28 19:13:56.688 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -&gt; org.hibernate.type.UrlType@4540c7
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -&gt; org.hibernate.type.DurationType@1c6ac73c
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -&gt; org.hibernate.type.DurationType@1c6ac73c
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Instant -&gt; org.hibernate.type.InstantType@1a7e799e
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -&gt; org.hibernate.type.InstantType@1a7e799e
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@6c24f61d
-2023-02-28 19:13:56.689 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@6c24f61d
-2023-02-28 19:13:56.690 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -&gt; org.hibernate.type.LocalDateType@55071497
-2023-02-28 19:13:56.690 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -&gt; org.hibernate.type.LocalDateType@55071497
-2023-02-28 19:13:56.690 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -&gt; org.hibernate.type.LocalTimeType@2f471037
-2023-02-28 19:13:56.690 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -&gt; org.hibernate.type.LocalTimeType@2f471037
-2023-02-28 19:13:56.691 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@312a738d
-2023-02-28 19:13:56.691 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@312a738d
-2023-02-28 19:13:56.691 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -&gt; org.hibernate.type.OffsetTimeType@61dd1c3d
-2023-02-28 19:13:56.692 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -&gt; org.hibernate.type.OffsetTimeType@61dd1c3d
-2023-02-28 19:13:56.692 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@14656be5
-2023-02-28 19:13:56.693 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@14656be5
-2023-02-28 19:13:56.693 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -&gt; org.hibernate.type.DateType@2c815fdc
-2023-02-28 19:13:56.693 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -&gt; org.hibernate.type.DateType@2c815fdc
-2023-02-28 19:13:56.694 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -&gt; org.hibernate.type.TimeType@6e364f1f
-2023-02-28 19:13:56.694 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -&gt; org.hibernate.type.TimeType@6e364f1f
-2023-02-28 19:13:56.694 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -&gt; org.hibernate.type.TimestampType@5a6f6cac
-2023-02-28 19:13:56.694 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -&gt; org.hibernate.type.TimestampType@5a6f6cac
-2023-02-28 19:13:56.694 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -&gt; org.hibernate.type.TimestampType@5a6f6cac
-2023-02-28 19:13:56.695 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration dbtimestamp -&gt; org.hibernate.type.DbTimestampType@7417ef4f
-2023-02-28 19:13:56.696 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -&gt; org.hibernate.type.CalendarType@4269aad7
-2023-02-28 19:13:56.696 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -&gt; org.hibernate.type.CalendarType@4269aad7
-2023-02-28 19:13:56.696 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -&gt; org.hibernate.type.CalendarType@4269aad7
-2023-02-28 19:13:56.696 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -&gt; org.hibernate.type.CalendarDateType@55e42684
-2023-02-28 19:13:56.696 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -&gt; org.hibernate.type.CalendarTimeType@34cf0e80
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -&gt; org.hibernate.type.LocaleType@55061418
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -&gt; org.hibernate.type.LocaleType@55061418
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -&gt; org.hibernate.type.CurrencyType@5a466dd
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -&gt; org.hibernate.type.CurrencyType@5a466dd
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -&gt; org.hibernate.type.TimeZoneType@a03529c
-2023-02-28 19:13:56.697 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -&gt; org.hibernate.type.TimeZoneType@a03529c
-2023-02-28 19:13:56.698 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -&gt; org.hibernate.type.ClassType@52285a5f
-2023-02-28 19:13:56.698 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -&gt; org.hibernate.type.ClassType@52285a5f
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -&gt; org.hibernate.type.UUIDBinaryType@3c9e19de
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -&gt; org.hibernate.type.UUIDBinaryType@3c9e19de
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -&gt; org.hibernate.type.UUIDCharType@57f0bfc3
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -&gt; org.hibernate.type.BinaryType@542ff147
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -&gt; org.hibernate.type.BinaryType@542ff147
-2023-02-28 19:13:56.699 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -&gt; org.hibernate.type.BinaryType@542ff147
-2023-02-28 19:13:56.700 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -&gt; org.hibernate.type.WrapperBinaryType@3d8d52be
-2023-02-28 19:13:56.700 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Byte[] -&gt; org.hibernate.type.WrapperBinaryType@3d8d52be
-2023-02-28 19:13:56.700 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Byte; -&gt; org.hibernate.type.WrapperBinaryType@3d8d52be
-2023-02-28 19:13:56.700 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -&gt; org.hibernate.type.RowVersionType@70cf7d1e
-2023-02-28 19:13:56.700 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -&gt; org.hibernate.type.ImageType@41be8db9
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -&gt; org.hibernate.type.CharArrayType@5cbe95b1
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -&gt; org.hibernate.type.CharArrayType@5cbe95b1
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -&gt; org.hibernate.type.CharArrayType@5cbe95b1
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -&gt; org.hibernate.type.CharacterArrayType@43d3995f
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Character; -&gt; org.hibernate.type.CharacterArrayType@43d3995f
-2023-02-28 19:13:56.701 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Character[] -&gt; org.hibernate.type.CharacterArrayType@43d3995f
-2023-02-28 19:13:56.702 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -&gt; org.hibernate.type.TextType@4a336377
-2023-02-28 19:13:56.702 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -&gt; org.hibernate.type.NTextType@7d537616
-2023-02-28 19:13:56.703 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -&gt; org.hibernate.type.BlobType@c4cceb
-2023-02-28 19:13:56.703 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -&gt; org.hibernate.type.BlobType@c4cceb
-2023-02-28 19:13:56.703 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -&gt; org.hibernate.type.MaterializedBlobType@118fbaf0
-2023-02-28 19:13:56.703 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -&gt; org.hibernate.type.ClobType@1ba35152
-2023-02-28 19:13:56.704 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -&gt; org.hibernate.type.ClobType@1ba35152
-2023-02-28 19:13:56.704 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -&gt; org.hibernate.type.NClobType@6253e59a
-2023-02-28 19:13:56.704 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -&gt; org.hibernate.type.NClobType@6253e59a
-2023-02-28 19:13:56.704 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -&gt; org.hibernate.type.MaterializedClobType@6f7a20da
-2023-02-28 19:13:56.704 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -&gt; org.hibernate.type.MaterializedNClobType@6851b296
-2023-02-28 19:13:56.705 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -&gt; org.hibernate.type.SerializableType@3de56885
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -&gt; org.hibernate.type.ObjectType@7cdfa824
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -&gt; org.hibernate.type.ObjectType@7cdfa824
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -&gt; org.hibernate.type.AdaptedImmutableType@1ddf42dd
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -&gt; org.hibernate.type.AdaptedImmutableType@5c1c9881
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -&gt; org.hibernate.type.AdaptedImmutableType@1c18ee69
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_dbtimestamp -&gt; org.hibernate.type.AdaptedImmutableType@2f99d8c
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -&gt; org.hibernate.type.AdaptedImmutableType@65d7eea4
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -&gt; org.hibernate.type.AdaptedImmutableType@5d37aa0f
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -&gt; org.hibernate.type.AdaptedImmutableType@6076c66
-2023-02-28 19:13:56.706 DEBUG 31238 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -&gt; org.hibernate.type.AdaptedImmutableType@485c84d7
-2023-02-28 19:13:56.724  INFO 31238 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-02-28 19:13:56.767  INFO 31238 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-02-28 19:13:56.781  INFO 31238 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-02-28 19:13:56.798 DEBUG 31238 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@6f52a229] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@3fe98084]
-2023-02-28 19:13:56.924 DEBUG 31238 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.board.Board_Upgraded.entity.member.Role
-2023-02-28 19:13:56.925 DEBUG 31238 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@6f52a229] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@3d2b13b1]
-2023-02-28 19:13:57.076 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:42.350  INFO 49523 --- [    Test worker] c.b.B.controller.post.EditTest           : Starting EditTest using Java 17.0.2 on ijanghuiui-MacBookPro.local with PID 49523 (started by leeeehgnaj in /Users/leeeehgnaj/Desktop/Coding/Board_Upgraded)
+2023-03-01 23:01:42.350  INFO 49523 --- [    Test worker] c.b.B.controller.post.EditTest           : The following 1 profile is active: &quot;local&quot;
+2023-03-01 23:01:42.754  INFO 49523 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-01 23:01:42.786  INFO 49523 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 3 JPA repository interfaces.
+2023-03-01 23:01:43.065  INFO 49523 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-01 23:01:43.089  INFO 49523 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2023-03-01 23:01:43.171  INFO 49523 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-03-01 23:01:43.183 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@377dbc50
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@377dbc50
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -&gt; org.hibernate.type.BooleanType@377dbc50
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -&gt; org.hibernate.type.NumericBooleanType@2a5c6b76
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -&gt; org.hibernate.type.TrueFalseType@4ad1a276
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -&gt; org.hibernate.type.YesNoType@e97f115
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@7b4b8199
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@7b4b8199
+2023-03-01 23:01:43.184 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -&gt; org.hibernate.type.ByteType@7b4b8199
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -&gt; org.hibernate.type.CharacterType@2a425cf5
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -&gt; org.hibernate.type.CharacterType@2a425cf5
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -&gt; org.hibernate.type.CharacterType@2a425cf5
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@1f9a7684
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@1f9a7684
+2023-03-01 23:01:43.185 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -&gt; org.hibernate.type.ShortType@1f9a7684
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -&gt; org.hibernate.type.IntegerType@16cf7fd0
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -&gt; org.hibernate.type.IntegerType@16cf7fd0
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -&gt; org.hibernate.type.IntegerType@16cf7fd0
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@2aac8ad7
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@2aac8ad7
+2023-03-01 23:01:43.186 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -&gt; org.hibernate.type.LongType@2aac8ad7
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@64757d56
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@64757d56
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -&gt; org.hibernate.type.FloatType@64757d56
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@175f859e
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@175f859e
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -&gt; org.hibernate.type.DoubleType@175f859e
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -&gt; org.hibernate.type.BigDecimalType@4c030fe1
+2023-03-01 23:01:43.187 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -&gt; org.hibernate.type.BigDecimalType@4c030fe1
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -&gt; org.hibernate.type.BigIntegerType@386e9fd8
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -&gt; org.hibernate.type.BigIntegerType@386e9fd8
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -&gt; org.hibernate.type.StringType@8af1c49
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -&gt; org.hibernate.type.StringType@8af1c49
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -&gt; org.hibernate.type.StringNVarcharType@5611bba
+2023-03-01 23:01:43.188 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ncharacter -&gt; org.hibernate.type.CharacterNCharType@5464b97c
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -&gt; org.hibernate.type.UrlType@2bc0b8c8
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -&gt; org.hibernate.type.UrlType@2bc0b8c8
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -&gt; org.hibernate.type.DurationType@5341e71a
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -&gt; org.hibernate.type.DurationType@5341e71a
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Instant -&gt; org.hibernate.type.InstantType@283baa39
+2023-03-01 23:01:43.189 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -&gt; org.hibernate.type.InstantType@283baa39
+2023-03-01 23:01:43.190 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@14292d71
+2023-03-01 23:01:43.190 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@14292d71
+2023-03-01 23:01:43.190 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -&gt; org.hibernate.type.LocalDateType@58b8f9e3
+2023-03-01 23:01:43.190 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -&gt; org.hibernate.type.LocalDateType@58b8f9e3
+2023-03-01 23:01:43.191 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -&gt; org.hibernate.type.LocalTimeType@ba562e0
+2023-03-01 23:01:43.191 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -&gt; org.hibernate.type.LocalTimeType@ba562e0
+2023-03-01 23:01:43.191 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@34cb0e49
+2023-03-01 23:01:43.191 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@34cb0e49
+2023-03-01 23:01:43.192 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -&gt; org.hibernate.type.OffsetTimeType@782e6b40
+2023-03-01 23:01:43.192 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -&gt; org.hibernate.type.OffsetTimeType@782e6b40
+2023-03-01 23:01:43.192 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@5db9f51f
+2023-03-01 23:01:43.192 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@5db9f51f
+2023-03-01 23:01:43.192 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -&gt; org.hibernate.type.DateType@dae5e0
+2023-03-01 23:01:43.193 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -&gt; org.hibernate.type.DateType@dae5e0
+2023-03-01 23:01:43.193 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -&gt; org.hibernate.type.TimeType@298263fa
+2023-03-01 23:01:43.194 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -&gt; org.hibernate.type.TimeType@298263fa
+2023-03-01 23:01:43.195 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -&gt; org.hibernate.type.TimestampType@59127611
+2023-03-01 23:01:43.195 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -&gt; org.hibernate.type.TimestampType@59127611
+2023-03-01 23:01:43.195 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -&gt; org.hibernate.type.TimestampType@59127611
+2023-03-01 23:01:43.195 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration dbtimestamp -&gt; org.hibernate.type.DbTimestampType@4fa8bebb
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -&gt; org.hibernate.type.CalendarType@71e7830a
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -&gt; org.hibernate.type.CalendarType@71e7830a
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -&gt; org.hibernate.type.CalendarType@71e7830a
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -&gt; org.hibernate.type.CalendarDateType@528e5e38
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -&gt; org.hibernate.type.CalendarTimeType@56f9de3b
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -&gt; org.hibernate.type.LocaleType@6ec3d8e4
+2023-03-01 23:01:43.196 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -&gt; org.hibernate.type.LocaleType@6ec3d8e4
+2023-03-01 23:01:43.197 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -&gt; org.hibernate.type.CurrencyType@6e981e78
+2023-03-01 23:01:43.197 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -&gt; org.hibernate.type.CurrencyType@6e981e78
+2023-03-01 23:01:43.197 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -&gt; org.hibernate.type.TimeZoneType@4af70b83
+2023-03-01 23:01:43.198 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -&gt; org.hibernate.type.TimeZoneType@4af70b83
+2023-03-01 23:01:43.198 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -&gt; org.hibernate.type.ClassType@224e6e88
+2023-03-01 23:01:43.198 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -&gt; org.hibernate.type.ClassType@224e6e88
+2023-03-01 23:01:43.198 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -&gt; org.hibernate.type.UUIDBinaryType@6115846e
+2023-03-01 23:01:43.198 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -&gt; org.hibernate.type.UUIDBinaryType@6115846e
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -&gt; org.hibernate.type.UUIDCharType@5922cff3
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -&gt; org.hibernate.type.BinaryType@b9b97ad
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -&gt; org.hibernate.type.BinaryType@b9b97ad
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -&gt; org.hibernate.type.BinaryType@b9b97ad
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -&gt; org.hibernate.type.WrapperBinaryType@5f6a8efe
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Byte[] -&gt; org.hibernate.type.WrapperBinaryType@5f6a8efe
+2023-03-01 23:01:43.199 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Byte; -&gt; org.hibernate.type.WrapperBinaryType@5f6a8efe
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -&gt; org.hibernate.type.RowVersionType@4cb4c4cc
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -&gt; org.hibernate.type.ImageType@46524ebe
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -&gt; org.hibernate.type.CharArrayType@5a82bc58
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -&gt; org.hibernate.type.CharArrayType@5a82bc58
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -&gt; org.hibernate.type.CharArrayType@5a82bc58
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -&gt; org.hibernate.type.CharacterArrayType@6c830ebd
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Character; -&gt; org.hibernate.type.CharacterArrayType@6c830ebd
+2023-03-01 23:01:43.200 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Character[] -&gt; org.hibernate.type.CharacterArrayType@6c830ebd
+2023-03-01 23:01:43.201 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -&gt; org.hibernate.type.TextType@11ad095c
+2023-03-01 23:01:43.201 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -&gt; org.hibernate.type.NTextType@19d27c27
+2023-03-01 23:01:43.202 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -&gt; org.hibernate.type.BlobType@74bbc273
+2023-03-01 23:01:43.202 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -&gt; org.hibernate.type.BlobType@74bbc273
+2023-03-01 23:01:43.202 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -&gt; org.hibernate.type.MaterializedBlobType@a0d875d
+2023-03-01 23:01:43.202 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -&gt; org.hibernate.type.ClobType@3ff8a3ad
+2023-03-01 23:01:43.202 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -&gt; org.hibernate.type.ClobType@3ff8a3ad
+2023-03-01 23:01:43.203 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -&gt; org.hibernate.type.NClobType@16ccd2bc
+2023-03-01 23:01:43.203 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -&gt; org.hibernate.type.NClobType@16ccd2bc
+2023-03-01 23:01:43.203 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -&gt; org.hibernate.type.MaterializedClobType@77ba583
+2023-03-01 23:01:43.203 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -&gt; org.hibernate.type.MaterializedNClobType@5368e981
+2023-03-01 23:01:43.203 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -&gt; org.hibernate.type.SerializableType@2d07aacc
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -&gt; org.hibernate.type.ObjectType@318e3942
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -&gt; org.hibernate.type.ObjectType@318e3942
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -&gt; org.hibernate.type.AdaptedImmutableType@1c18ee69
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -&gt; org.hibernate.type.AdaptedImmutableType@2f99d8c
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -&gt; org.hibernate.type.AdaptedImmutableType@65d7eea4
+2023-03-01 23:01:43.205 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_dbtimestamp -&gt; org.hibernate.type.AdaptedImmutableType@5d37aa0f
+2023-03-01 23:01:43.206 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -&gt; org.hibernate.type.AdaptedImmutableType@6076c66
+2023-03-01 23:01:43.206 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -&gt; org.hibernate.type.AdaptedImmutableType@485c84d7
+2023-03-01 23:01:43.206 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -&gt; org.hibernate.type.AdaptedImmutableType@1224e1b6
+2023-03-01 23:01:43.206 DEBUG 49523 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -&gt; org.hibernate.type.AdaptedImmutableType@72a3462f
+2023-03-01 23:01:43.225  INFO 49523 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-01 23:01:43.268  INFO 49523 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-01 23:01:43.282  INFO 49523 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-03-01 23:01:43.297 DEBUG 49523 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@5f33e6d] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@151a6598]
+2023-03-01 23:01:43.421 DEBUG 49523 --- [    Test worker] org.hibernate.type.EnumType              : Using NAMED-based conversion for Enum com.board.Board_Upgraded.entity.member.Role
+2023-03-01 23:01:43.421 DEBUG 49523 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@5f33e6d] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@2524d07a]
+2023-03-01 23:01:43.577 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     drop table if exists member CASCADE 
-2023-02-28 19:13:57.078 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.580 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     drop table if exists post CASCADE 
-2023-02-28 19:13:57.079 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.581 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     drop table if exists refresh_token CASCADE 
-2023-02-28 19:13:57.080 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.582 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     create table member (
        id bigint generated by default as identity,
@@ -261,7 +261,7 @@
         member_username varchar(255),
         primary key (id)
     )
-2023-02-28 19:13:57.081 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.584 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     create table post (
        id bigint generated by default as identity,
@@ -272,30 +272,30 @@
         member_id bigint,
         primary key (id)
     )
-2023-02-28 19:13:57.082 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.585 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     create table refresh_token (
        rt_key varchar(255) not null,
         rt_value varchar(255),
         primary key (rt_key)
     )
-2023-02-28 19:13:57.082 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.585 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     
     alter table post 
        add constraint FK83s99f4kx8oiqm3ro0sasmpww 
        foreign key (member_id) 
        references member
-2023-02-28 19:13:57.084  INFO 31238 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-02-28 19:13:57.086 TRACE 31238 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@3d2b13b1] for TypeConfiguration
-2023-02-28 19:13:57.087  INFO 31238 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-28 19:13:57.464  WARN 31238 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-02-28 19:13:57.648  INFO 31238 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@38eafdab, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@373c8f35, org.springframework.security.web.context.SecurityContextPersistenceFilter@31dbca5d, org.springframework.security.web.header.HeaderWriterFilter@16160a37, org.springframework.web.filter.CorsFilter@32029cd, org.springframework.security.web.authentication.logout.LogoutFilter@e38d655, com.board.Board_Upgraded.config.jwt.JwtFilter@1d86b636, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@379df603, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58fb5b8f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e0c03bd, org.springframework.security.web.session.SessionManagementFilter@7b45f7ef, org.springframework.security.web.access.ExceptionTranslationFilter@4b20a8e4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1db7a4ae]
-2023-02-28 19:13:57.948  INFO 31238 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-02-28 19:13:57.948  INFO 31238 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-02-28 19:13:57.949  INFO 31238 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2023-02-28 19:13:58.102  INFO 31238 --- [    Test worker] c.b.B.controller.post.EditTest           : Started EditTest in 2.384 seconds (JVM running for 2.858)
-2023-02-28 19:13:58.118  INFO 31238 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@25ddbbbb testClass = EditTest, testInstance = com.board.Board_Upgraded.controller.post.EditTest@1da53092, testMethod = editPost_NotMyPost@EditTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1536602f testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1e461e41, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4f5991f6, [ImportsContextCustomizer@4ebea12c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@6eb2384f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@12f9af83, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@386f0da3, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@568ff82], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@4b59a1c1]; rollback [true]
-2023-02-28 19:13:58.225 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:43.588  INFO 49523 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-01 23:01:43.591 TRACE 49523 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@2524d07a] for TypeConfiguration
+2023-03-01 23:01:43.592  INFO 49523 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-01 23:01:43.916  WARN 49523 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-01 23:01:44.083  INFO 49523 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e86b2d1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@65029fc, org.springframework.security.web.context.SecurityContextPersistenceFilter@16160a37, org.springframework.security.web.header.HeaderWriterFilter@6f09cb98, org.springframework.web.filter.CorsFilter@2c1a0f82, org.springframework.security.web.authentication.logout.LogoutFilter@1c0a4f87, com.board.Board_Upgraded.config.jwt.JwtFilter@4865434e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b45f7ef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5da41d02, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c6e407, org.springframework.security.web.session.SessionManagementFilter@4b20a8e4, org.springframework.security.web.access.ExceptionTranslationFilter@fe38d1e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6195ce27]
+2023-03-01 23:01:44.350  INFO 49523 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-03-01 23:01:44.350  INFO 49523 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-03-01 23:01:44.350  INFO 49523 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2023-03-01 23:01:44.478  INFO 49523 --- [    Test worker] c.b.B.controller.post.EditTest           : Started EditTest in 2.276 seconds (JVM running for 2.841)
+2023-03-01 23:01:44.497  INFO 49523 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@4ebea12c testClass = EditTest, testInstance = com.board.Board_Upgraded.controller.post.EditTest@73e0c775, testMethod = editPost_OnlyTitle@EditTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2a1edad4 testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@56928307, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@38234a38, [ImportsContextCustomizer@6256ac4f key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3a4621bd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e6ef134, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@34f22f9d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@50caa560], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25c756f0]; rollback [true]
+2023-03-01 23:01:44.605 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         post0_.id as id1_1_,
         post0_.created_time as created_2_1_,
@@ -305,7 +305,7 @@
         post0_.title as title5_1_ 
     from
         post post0_
-2023-02-28 19:13:58.233 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.615 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -317,7 +317,7 @@
         member0_.member_username as member_u8_0_ 
     from
         member member0_
-2023-02-28 19:13:58.242 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.624 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -331,8 +331,8 @@
         member member0_ 
     where
         member0_.member_username=?
-2023-02-28 19:13:58.244 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
-2023-02-28 19:13:58.246 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.625 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:44.628 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -346,8 +346,8 @@
         member member0_ 
     where
         member0_.member_nickname=?
-2023-02-28 19:13:58.247 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
-2023-02-28 19:13:58.248 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.628 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:44.630 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -361,22 +361,22 @@
         member member0_ 
     where
         member0_.member_email=?
-2023-02-28 19:13:58.249 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@test.com]
-2023-02-28 19:13:58.359 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.631 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@test.com]
+2023-03-01 23:01:44.739 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         member
         (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
     values
         (default, ?, ?, ?, ?, ?, ?, ?)
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-28T19:13:58.342685]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-28T19:13:58.333765]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test@test.com]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$p6Pq3TLyfZHfsMK0cVZn0.hBrGwqyxtA5a45R.Rhjvh0cDRPTTSty]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
-2023-02-28 19:13:58.360 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test]
-2023-02-28 19:13:58.366 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.739 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-03-01T23:01:44.723054]
+2023-03-01 23:01:44.740 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-03-01T23:01:44.714802]
+2023-03-01 23:01:44.740 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [test@test.com]
+2023-03-01 23:01:44.740 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [test]
+2023-03-01 23:01:44.740 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$T.VfpUdnYkKjc1lGXYguHO4D3ubtyFwp/wbBeK7Usexo4G/kWxvlK]
+2023-03-01 23:01:44.740 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
+2023-03-01 23:01:44.741 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [test]
+2023-03-01 23:01:44.746 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -390,130 +390,21 @@
         member member0_ 
     where
         member0_.member_username=?
-2023-02-28 19:13:58.367 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
-2023-02-28 19:13:58.367 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [1]
-2023-02-28 19:13:58.372 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.746 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:44.747 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [1]
+2023-03-01 23:01:44.751 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         post
         (id, created_time, last_modified_time, content, member_id, title) 
     values
         (default, ?, ?, ?, ?, ?)
-2023-02-28 19:13:58.372 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-28T19:13:58.372159]
-2023-02-28 19:13:58.372 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-28T19:13:58.370127]
-2023-02-28 19:13:58.373 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [내용입니다.]
-2023-02-28 19:13:58.373 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [1]
-2023-02-28 19:13:58.373 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [제목입니다.]
-2023-02-28 19:13:58.376 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        member0_.id as id1_0_,
-        member0_.created_time as created_2_0_,
-        member0_.last_modified_time as last_mod3_0_,
-        member0_.member_email as member_e4_0_,
-        member0_.member_nickname as member_n5_0_,
-        member0_.member_password as member_p6_0_,
-        member0_.member_role as member_r7_0_,
-        member0_.member_username as member_u8_0_ 
-    from
-        member member0_ 
-    where
-        member0_.member_username=?
-2023-02-28 19:13:58.376 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.377 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        member0_.id as id1_0_,
-        member0_.created_time as created_2_0_,
-        member0_.last_modified_time as last_mod3_0_,
-        member0_.member_email as member_e4_0_,
-        member0_.member_nickname as member_n5_0_,
-        member0_.member_password as member_p6_0_,
-        member0_.member_role as member_r7_0_,
-        member0_.member_username as member_u8_0_ 
-    from
-        member member0_ 
-    where
-        member0_.member_nickname=?
-2023-02-28 19:13:58.377 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.378 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        member0_.id as id1_0_,
-        member0_.created_time as created_2_0_,
-        member0_.last_modified_time as last_mod3_0_,
-        member0_.member_email as member_e4_0_,
-        member0_.member_nickname as member_n5_0_,
-        member0_.member_password as member_p6_0_,
-        member0_.member_role as member_r7_0_,
-        member0_.member_username as member_u8_0_ 
-    from
-        member member0_ 
-    where
-        member0_.member_email=?
-2023-02-28 19:13:58.378 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [new@test.com]
-2023-02-28 19:13:58.460 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    insert 
-    into
-        member
-        (id, created_time, last_modified_time, member_email, member_nickname, member_password, member_role, member_username) 
-    values
-        (default, ?, ?, ?, ?, ?, ?, ?)
-2023-02-28 19:13:58.460 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-02-28T19:13:58.460346]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-02-28T19:13:58.460099]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [new@test.com]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [$2a$10$Jg5toEn8lOcB/aaXHLv9JuVHAViHjePyyey3KMmnhSpCHq.Y.86YG]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [USER]
-2023-02-28 19:13:58.461 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.462 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        member0_.id as id1_0_,
-        member0_.created_time as created_2_0_,
-        member0_.last_modified_time as last_mod3_0_,
-        member0_.member_email as member_e4_0_,
-        member0_.member_nickname as member_n5_0_,
-        member0_.member_password as member_p6_0_,
-        member0_.member_role as member_r7_0_,
-        member0_.member_username as member_u8_0_ 
-    from
-        member member0_ 
-    where
-        member0_.member_username=?
-2023-02-28 19:13:58.463 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.463 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
-2023-02-28 19:13:58.620 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        member0_.id as id1_0_,
-        member0_.created_time as created_2_0_,
-        member0_.last_modified_time as last_mod3_0_,
-        member0_.member_email as member_e4_0_,
-        member0_.member_nickname as member_n5_0_,
-        member0_.member_password as member_p6_0_,
-        member0_.member_role as member_r7_0_,
-        member0_.member_username as member_u8_0_ 
-    from
-        member member0_ 
-    where
-        member0_.member_username=?
-2023-02-28 19:13:58.621 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.621 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
-2023-02-28 19:13:58.732 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        refreshtok0_.rt_key as rt_key1_2_0_,
-        refreshtok0_.rt_value as rt_value2_2_0_ 
-    from
-        refresh_token refreshtok0_ 
-    where
-        refreshtok0_.rt_key=?
-2023-02-28 19:13:58.732 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.738 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
-    insert 
-    into
-        refresh_token
-        (rt_value, rt_key) 
-    values
-        (?, ?)
-2023-02-28 19:13:58.739 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzgxODQwMzh9.grJjXMHKA2XIp1TDyQRfdipq_nD_9_I2UJ5jcheYAre8dozELiwhdOJibe5UE-9TbBwsTh8IyZY20kNpJvKUGw]
-2023-02-28 19:13:58.739 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.741 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.752 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2023-03-01T23:01:44.751218]
+2023-03-01 23:01:44.752 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2023-03-01T23:01:44.749659]
+2023-03-01 23:01:44.752 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [내용입니다.]
+2023-03-01 23:01:44.753 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [1]
+2023-03-01 23:01:44.753 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [제목입니다.]
+2023-03-01 23:01:44.757 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         post0_.id as id1_1_,
         post0_.created_time as created_2_1_,
@@ -525,9 +416,9 @@
         post post0_ 
     where
         post0_.title=?
-2023-02-28 19:13:58.741 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [제목입니다.]
-2023-02-28 19:13:58.742 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_1_] : [BIGINT]) - [1]
-2023-02-28 19:13:58.797 DEBUG 31238 --- [    Test worker] org.hibernate.SQL                        : 
+2023-03-01 23:01:44.758 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [제목입니다.]
+2023-03-01 23:01:44.759 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_1_] : [BIGINT]) - [1]
+2023-03-01 23:01:44.761 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
     select
         member0_.id as id1_0_,
         member0_.created_time as created_2_0_,
@@ -541,15 +432,56 @@
         member member0_ 
     where
         member0_.member_username=?
-2023-02-28 19:13:58.798 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [newT]
-2023-02-28 19:13:58.799 TRACE 31238 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [2]
+2023-03-01 23:01:44.761 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:44.762 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [1]
+2023-03-01 23:01:44.936 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-03-01 23:01:44.936 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:44.937 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [1]
+2023-03-01 23:01:45.052 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        refreshtok0_.rt_key as rt_key1_2_0_,
+        refreshtok0_.rt_value as rt_value2_2_0_ 
+    from
+        refresh_token refreshtok0_ 
+    where
+        refreshtok0_.rt_key=?
+2023-03-01 23:01:45.053 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:45.105 DEBUG 49523 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        member0_.id as id1_0_,
+        member0_.created_time as created_2_0_,
+        member0_.last_modified_time as last_mod3_0_,
+        member0_.member_email as member_e4_0_,
+        member0_.member_nickname as member_n5_0_,
+        member0_.member_password as member_p6_0_,
+        member0_.member_role as member_r7_0_,
+        member0_.member_username as member_u8_0_ 
+    from
+        member member0_ 
+    where
+        member0_.member_username=?
+2023-03-01 23:01:45.106 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]
+2023-03-01 23:01:45.106 TRACE 49523 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([id1_0_] : [BIGINT]) - [1]
 
 MockHttpServletRequest:
       HTTP Method = PATCH
       Request URI = /api/posts/edit
        Parameters = {id=[1]}
-          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Authorization:&quot;Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuZXdUIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE2Nzc2NjU2Mzh9.sCOf0ZqGfo2mq8gP_Q4_2mRQRE8Sl03RoIfU7h4CxlstDrr0IoWjl34t797ABIFE6Ag9R-9K0BA3WGpO6DTkRA&quot;, RefreshToken:&quot;Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzgxODQwMzh9.grJjXMHKA2XIp1TDyQRfdipq_nD_9_I2UJ5jcheYAre8dozELiwhdOJibe5UE-9TbBwsTh8IyZY20kNpJvKUGw&quot;, Content-Length:&quot;71&quot;]
-             Body = {&quot;title&quot;:&quot;바뀐 제목입니다.&quot;,&quot;content&quot;:&quot;바뀐 내용입니다.&quot;}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Authorization:&quot;Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aCI6IlVTRVIiLCJleHAiOjE2Nzc3NjU3MDV9.UP4vatVeUbG95_TMcJg2p-nPpvzWDMOTf7-5egrrFggaFRGJhxpdDO2eIlQPZsDdTlR-8oqKxA-L9Z_JJBmDcQ&quot;, RefreshToken:&quot;Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzgyODQxMDV9.pSWmoEg-kBoJpr7rERYKV6jrVc4X0mW-8CGiMxYRibdGjPKGLHV2cW37odTyaYN99QDGIl4cOthbIdz9M_A5cw&quot;, Content-Length:&quot;50&quot;]
+             Body = {&quot;title&quot;:&quot;바뀐 제목입니다.&quot;,&quot;content&quot;:null}
     Session Attrs = {}
 
 Handler:
@@ -561,7 +493,7 @@ Async:
      Async result = null
 
 Resolved Exception:
-             Type = com.board.Board_Upgraded.exception.post.NotMyPostException
+             Type = null
 
 ModelAndView:
         View name = null
@@ -572,15 +504,15 @@ FlashMap:
        Attributes = null
 
 MockHttpServletResponse:
-           Status = 401
+           Status = 200
     Error message = null
           Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
      Content type = application/json
-             Body = {&quot;success&quot;:false,&quot;code&quot;:401,&quot;result&quot;:{&quot;failMessage&quot;:&quot;권한이 없는 게시물 입니다.&quot;}}
+             Body = {&quot;success&quot;:true,&quot;code&quot;:200,&quot;result&quot;:{&quot;data&quot;:{&quot;writer&quot;:&quot;test&quot;,&quot;title&quot;:&quot;바뀐 제목입니다.&quot;,&quot;content&quot;:&quot;내용입니다.&quot;,&quot;lastModifiedDate&quot;:[2023,3,1,23,1,45,107961000]}}}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2023-02-28 19:13:58.842  INFO 31238 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@25ddbbbb testClass = EditTest, testInstance = com.board.Board_Upgraded.controller.post.EditTest@1da53092, testMethod = editPost_NotMyPost@EditTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1536602f testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1e461e41, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4f5991f6, [ImportsContextCustomizer@4ebea12c key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@6eb2384f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@12f9af83, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@386f0da3, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@568ff82], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2023-03-01 23:01:45.150  INFO 49523 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@4ebea12c testClass = EditTest, testInstance = com.board.Board_Upgraded.controller.post.EditTest@73e0c775, testMethod = editPost_OnlyTitle@EditTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2a1edad4 testClass = EditTest, locations = '{}', classes = '{class com.board.Board_Upgraded.BoardUpgradedApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@56928307, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@38234a38, [ImportsContextCustomizer@6256ac4f key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3a4621bd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e6ef134, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@34f22f9d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@50caa560], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
 </pre>
 </span>
 </div>
@@ -592,7 +524,7 @@ MockHttpServletResponse:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6</a> at 2023. 2. 28. 오후 7:13:58</p>
+<a href="http://www.gradle.org">Gradle 7.6</a> at 2023. 3. 1. 오후 11:01:45</p>
 </div>
 </div>
 </body>
