@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public Response search(@RequestBody @Valid SearchPostRequestDto searchPostRequestDto, @PageableDefault Pageable pageable, @RequestParam SearchPostType searchPostType){
+    public Response search(@RequestBody @Valid SearchPostRequestDto searchPostRequestDto, @PageableDefault Pageable pageable, @RequestParam("type") SearchPostType searchPostType){
         return Response.success(postService.search(searchPostRequestDto, pageable, searchPostType));
     }
 
