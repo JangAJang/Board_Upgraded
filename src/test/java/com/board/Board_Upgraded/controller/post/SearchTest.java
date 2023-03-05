@@ -82,7 +82,7 @@ public class SearchTest {
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=TITLE")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=1&type=TITLE")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -109,7 +109,7 @@ public class SearchTest {
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=CONTENT")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=1&type=CONTENT")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -136,7 +136,7 @@ public class SearchTest {
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=WRITER")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=1&type=WRITER")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -163,7 +163,7 @@ public class SearchTest {
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=WRITER_AND_TITLE")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=1&type=WRITER_AND_TITLE")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -190,7 +190,7 @@ public class SearchTest {
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=TITLE_AND_CONTENT")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=1&type=TITLE_AND_CONTENT")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
