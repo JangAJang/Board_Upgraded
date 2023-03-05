@@ -49,8 +49,8 @@ public class PostController {
         return Response.success(postService.search(searchPostRequestDto, pageable, searchPostType));
     }
 
-    @GetMapping("/of")
-    public Response getPostOf(@RequestParam Long member, @PageableDefault Pageable pageable){
+    @GetMapping("")
+    public Response getPostOf(@RequestParam("member") Long member, @PageableDefault Pageable pageable){
         return Response.success(postService.getMembersPage(member, pageable));
     }
 
