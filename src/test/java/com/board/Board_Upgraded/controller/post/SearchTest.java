@@ -94,6 +94,33 @@ public class SearchTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @DisplayName("제목에 10을 이용해 검색하면, 100, 10순서로 데이터가 반환된다.")
+    public void searchContent() throws Exception{
+        //given
+        authService.registerNewMember(RegisterRequestDto.builder()
+                .username("user")
+                .nickname("nick")
+                .email("em@em.com")
+                .password("pass")
+                .passwordCheck("pass").build());
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("user")
+                .password("pass").build());
+        SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
+        //expected
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=CONTENT")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(makeJson(searchPostRequestDto)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(2))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
     private String makeJson(Object object){
         try{
             return new ObjectMapper().writeValueAsString(object);
