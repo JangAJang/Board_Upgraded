@@ -75,19 +75,22 @@ public class SearchTest {
                 .username("user")
                 .nickname("nick")
                 .email("em@em.com")
-                .passwordCheck("pass")
+                .password("pass")
                 .passwordCheck("pass").build());
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("user")
                 .password("pass").build());
         SearchPostRequestDto searchPostRequestDto = new SearchPostRequestDto("10");
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("api/posts/search?page=0&type=TITLE")
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts/search?page=0&type=TITLE")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(makeJson(searchPostRequestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(2))
                 .andDo(MockMvcResultHandlers.print());
     }
 
