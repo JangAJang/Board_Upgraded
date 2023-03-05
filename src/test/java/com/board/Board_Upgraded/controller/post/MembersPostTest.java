@@ -10,7 +10,6 @@ import com.board.Board_Upgraded.repository.member.MemberRepository;
 import com.board.Board_Upgraded.repository.post.PostRepository;
 import com.board.Board_Upgraded.service.auth.AuthService;
 import com.board.Board_Upgraded.service.post.PostService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,6 +79,7 @@ public class MembersPostTest {
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(10))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
