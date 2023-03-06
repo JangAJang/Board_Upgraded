@@ -98,4 +98,15 @@ public class MembersPostTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("존재하지 않는 사용자이거나, 게시물이 존재하지 않습니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
+    @Test
+    @DisplayName("토큰이 존재하지 않을 때, 멤버의 게시물을 불러오게 할 때, 401에러를 반환한다.")
+    public void searchNoToken() throws Exception{
+        //given
+
+        //expected
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts?member=30&page=0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
