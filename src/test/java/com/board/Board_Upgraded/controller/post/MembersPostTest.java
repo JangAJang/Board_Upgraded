@@ -82,4 +82,20 @@ public class MembersPostTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(10))
                 .andDo(MockMvcResultHandlers.print());
     }
+    @Test
+    @DisplayName("멤버의 게시물을 조회할 때, 해당 멤버가 존재하지 않으면 404에러와 예외를 반환한다.")
+    public void searchNoMember() throws Exception{
+        //given
+        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
+                .username("test1")
+                .password("pa").build());
+        //expected
+        mvc.perform(MockMvcRequestBuilders.get("/api/posts?member=30&page=0")
+                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
+                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("해당 사용자를 찾을 수 없습니다"))
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
