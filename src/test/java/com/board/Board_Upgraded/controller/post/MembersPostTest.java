@@ -18,12 +18,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.IntStream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -74,13 +75,13 @@ public class MembersPostTest {
                 .username("test1")
                 .password("pa").build());
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts?member=1&page=0")
+        mvc.perform(get("/api/posts?member=1&page=0")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data.content.length()").value(10))
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result.data.content.length()").value(10))
+                .andDo(print());
     }
     @Test
     @DisplayName("멤버의 게시물을 조회할 때, 해당 멤버가 존재하지 않으면 404에러와 예외를 반환한다.")
@@ -90,23 +91,24 @@ public class MembersPostTest {
                 .username("test1")
                 .password("pa").build());
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts?member=30&page=0")
+        mvc.perform(get("/api/posts?member=30&page=0")
                 .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("존재하지 않는 사용자이거나, 게시물이 존재하지 않습니다."))
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.result.failMessage").value("존재하지 않는 사용자이거나, 게시물이 존재하지 않습니다."))
+                .andDo(print());
     }
+
     @Test
     @DisplayName("토큰이 존재하지 않을 때, 멤버의 게시물을 불러오게 할 때, 401에러를 반환한다.")
     public void searchNoToken() throws Exception{
         //given
 
         //expected
-        mvc.perform(MockMvcRequestBuilders.get("/api/posts?member=30&page=0")
+        mvc.perform(get("/api/posts?member=30&page=0")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(status().isUnauthorized())
+                .andDo(print());
     }
 }
