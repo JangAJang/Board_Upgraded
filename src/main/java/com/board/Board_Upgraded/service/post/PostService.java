@@ -6,6 +6,7 @@ import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
 import com.board.Board_Upgraded.dto.post.WritePostRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
+import com.board.Board_Upgraded.exception.post.MembersPostNotFoundException;
 import com.board.Board_Upgraded.exception.post.NotMyPostException;
 import com.board.Board_Upgraded.exception.post.PostNotFoundException;
 import com.board.Board_Upgraded.repository.member.SearchPostType;
@@ -44,7 +45,9 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public Page<PostResponseDto> getMembersPage(Long id, Pageable pageable){
-        return postRepository.getMembersPost(id, pageable);
+        Page<PostResponseDto> result = postRepository.getMembersPost(id, pageable);
+        if(result.isEmpty()) throw new MembersPostNotFoundException();
+        return result;
     }
 
     @Transactional

@@ -95,7 +95,7 @@ public class MembersPostTest {
                 .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("해당 사용자를 찾을 수 없습니다"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("존재하지 않는 사용자이거나, 게시물이 존재하지 않습니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
