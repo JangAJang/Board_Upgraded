@@ -9,7 +9,13 @@ const password = ref('')
 const passwordCheck = ref('')
 
 const join = function () {
-  axios.get('http://localhost:8080')
+  axios.post('http://localhost:8080/api/auth/join', {
+    username:username.value,
+    nickname:nickname.value,
+    email:email.value,
+    password:password.value,
+    passwordCheck:passwordCheck.value
+  })
 }
 </script>
 
