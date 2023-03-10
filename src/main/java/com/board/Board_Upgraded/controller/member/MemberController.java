@@ -40,6 +40,11 @@ public class MemberController {
         return Response.success(memberService.deleteMember(getUsingMember()));
     }
 
+    @GetMapping("/welcome")
+    public Response welcome(){
+        return Response.success("어서오세요! " + getUsingMember().getNickname() +"님");
+    }
+
     private Member getUsingMember(){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return memberService.findMemberByUsername(username);
