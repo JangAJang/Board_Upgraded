@@ -9,12 +9,12 @@ const password = ref('')
 const passwordCheck = ref('')
 
 const join = function () {
-  axios.post('http://localhost:8080/api/auth/join', {
-    username:username.value,
-    nickname:nickname.value,
-    email:email.value,
-    password:password.value,
-    passwordCheck:passwordCheck.value
+  axios.post('/auth/join', {
+    username: username.value,
+    nickname: nickname.value,
+    email: email.value,
+    password: password.value,
+    passwordCheck: passwordCheck.value
   })
 }
 </script>

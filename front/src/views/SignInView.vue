@@ -6,9 +6,9 @@ const username = ref('')
 const password = ref('')
 
 const signIn = function () {
-  axios.post('http://localhost:8080/api/auth/sign_in', {
-    username:username.value,
-    password:password.value
+  axios.post('/auth/sign_in', {
+    username: username.value,
+    password: password.value
   })
 }
 </script>
