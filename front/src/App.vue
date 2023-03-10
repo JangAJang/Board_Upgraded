@@ -5,10 +5,16 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/join">회원가입</RouterLink>
-        <RouterLink to="/signIn">로그인</RouterLink>
-      </nav>
+      <div>
+        <nav>
+          <RouterLink to="/signIn">이미 회원이신가요?</RouterLink>
+        </nav>
+      </div>
+      <div class="mt-2">
+        <nav>
+          <RouterLink to="/join">회원이 아니신가요?</RouterLink>
+        </nav>
+      </div>
     </div>
   </header>
 
