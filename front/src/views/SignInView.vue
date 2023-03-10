@@ -6,7 +6,7 @@ const username = ref('')
 const password = ref('')
 
 const signIn = function () {
-  axios.post('/auth/sign_in', {
+  axios.post('/jangs-board/auth/sign_in', {
     username: username.value,
     password: password.value
   })

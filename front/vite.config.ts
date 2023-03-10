@@ -14,9 +14,9 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/auth": {
-        target: "http://localhost:8080/api/auth",
-        rewrite: (path)=> path.replace(/^\/auth/, ""),
+      "/jangs-board/auth": {
+        target: "http://localhost:8080/api",
+        rewrite: (path)=> path.replace(/^\/jangs-board/, ""),
       }
     },
   }

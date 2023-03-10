@@ -9,7 +9,7 @@ const password = ref('')
 const passwordCheck = ref('')
 
 const join = function () {
-  axios.post('/auth/join', {
+  axios.post('/jangs-board/auth/join', {
     username: username.value,
     nickname: nickname.value,
     email: email.value,
