@@ -12,12 +12,12 @@ const router = createRouter({
     {
       path: '/join',
       name: 'join',
-      component: () => import('../views/JoinView.vue')
+      component: () => import('../views/auth/JoinView.vue')
     },
     {
       path: '/signIn',
       name: 'signIn',
-      component: () => import('../views/SignInView.vue')
+      component: () => import('../views/auth/SignInView.vue')
     }
   ]
 })
