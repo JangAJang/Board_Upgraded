@@ -7,9 +7,17 @@ const username = ref('')
 const password = ref('')
 
 const signIn = function () {
-  axios.post('/jangs-board/auth/sign_in', {
-    username: username.value,
-    password: password.value
+  axios
+    .post('/jangs-board/auth/sign_in', {
+      username: username.value,
+      password: password.value
+    })
+    .then((res) => {
+      console.log(res.headers.get("Authorization", String))
+      console.log(res.headers.get("RefreshToken", String))
+    }).catch(()=> {
+      alert("아이디와 비밀번호를 확인하세요.")
+      router.replace({name: 'signIn'})
   })
 }
 </script>

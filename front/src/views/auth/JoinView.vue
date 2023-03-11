@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
-import router from "@/router";
+import router from '@/router'
 
 const username = ref('')
 const nickname = ref('')
@@ -10,16 +10,17 @@ const password = ref('')
 const passwordCheck = ref('')
 
 const join = function () {
-  axios.post('/jangs-board/auth/join', {
-    username: username.value,
-    nickname: nickname.value,
-    email: email.value,
-    password: password.value,
-    passwordCheck: passwordCheck.value
-  })
-      .then(()=>{
-        router.replace( { name: "signIn"})
-      })
+  axios
+    .post('/jangs-board/auth/join', {
+      username: username.value,
+      nickname: nickname.value,
+      email: email.value,
+      password: password.value,
+      passwordCheck: passwordCheck.value
+    })
+    .then(() => {
+      router.replace({ name: 'signIn' })
+    })
 }
 </script>
 
