@@ -5,7 +5,7 @@ import { ref } from 'vue'
 const welcome = ref()
 
 axios.get('/jangs-board/members/welcome').then((response) => {
-  welcome.value = response
+  welcome.value = response.data
 })
 </script>
 

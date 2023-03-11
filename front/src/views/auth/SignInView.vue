@@ -13,8 +13,11 @@ const signIn = function () {
       password: password.value
     })
     .then((res) => {
+      axios.defaults.headers.common['Authorization'] = res.headers.get("Authorization", String)
+      axios.defaults.headers.common['RefreshToken'] = res.headers.get("RefreshToken", String)
       console.log(res.headers.get("Authorization", String))
       console.log(res.headers.get("RefreshToken", String))
+      router.replace({name:'welcome'})
     }).catch(()=> {
       alert("아이디와 비밀번호를 확인하세요.")
       router.replace({name: 'signIn'})
