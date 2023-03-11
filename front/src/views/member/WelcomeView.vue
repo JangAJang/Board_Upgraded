@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import axios from 'axios';
+import {ref} from "vue";
 
-const welcome = {
-  message: "회원1번가"
-}
+const welcome = ref();
 
-axios.get("/members/welcome").then((response)=> {
-  console.log(response)
+axios.get("/jangs-board/members/welcome").then((response)=> {
+  welcome.value = response
 });
 
 </script>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
+import router from "@/router";
 
 const username = ref('')
 const nickname = ref('')
@@ -16,6 +17,9 @@ const join = function () {
     password: password.value,
     passwordCheck: passwordCheck.value
   })
+      .then(()=>{
+        router.replace( { name: "signIn"})
+      })
 }
 </script>
 

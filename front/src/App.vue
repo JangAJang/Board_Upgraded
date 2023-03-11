@@ -7,12 +7,12 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
       <div>
         <nav>
-          <RouterLink to="/signIn">이미 회원이신가요?</RouterLink>
+          <RouterLink to="/auth/signIn">이미 회원이신가요?</RouterLink>
         </nav>
       </div>
       <div class="mt-2">
         <nav>
-          <RouterLink to="/join">회원이 아니신가요?</RouterLink>
+          <RouterLink to="/auth/join">회원이 아니신가요?</RouterLink>
         </nav>
       </div>
     </div>

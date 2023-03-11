@@ -5,17 +5,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: '/members/welcome',
+      name: 'welcome',
       component: HomeView
     },
     {
-      path: '/join',
+      path: '/auth/join',
       name: 'join',
       component: () => import('../views/auth/JoinView.vue')
     },
     {
-      path: '/signIn',
+      path: '/auth/signIn',
       name: 'signIn',
       component: () => import('../views/auth/SignInView.vue')
     }
