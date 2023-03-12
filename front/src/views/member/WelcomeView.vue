@@ -8,7 +8,6 @@ axios.get('/jangs-board/members/welcome').then((response) => {
   const tmp = response.data
   welcome.value = tmp.result.data
 })
-
 </script>
 
 <template>
