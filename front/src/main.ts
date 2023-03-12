@@ -32,5 +32,20 @@ router.beforeEach( async (to, from, next)=>{
     return next({name:'signIn'});
 })
 
+const reissue = function () {
+    axios
+        .post('/jangs-board/auth/reissue')
+        .then((res) => {
+            const accessToken =  res.headers.get('Authorization', String)
+            const refreshToken = res.headers.get('RefreshToken', String)
+            VueCookies.set('Authorization', accessToken)
+            VueCookies.set('RefreshToken', refreshToken)
+        }).catch(e =>{
+        console.log(e)
+    })
+}
+
+
+
 export default router
 
