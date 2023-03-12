@@ -29,7 +29,7 @@ public class MemberController {
         return Response.success(searchResult);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public Response getMemberInfo(@RequestParam("id")String username){
         return Response.success(memberService.getMemberInfo(username));
     }

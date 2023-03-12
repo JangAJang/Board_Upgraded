@@ -8,13 +8,18 @@ axios.get('/jangs-board/members/welcome').then((response) => {
   const tmp = response.data
   welcome.value = tmp.result.data
 })
+
 </script>
 
 <template>
   <div class="align-content-center">
     <h2>{{ welcome }}</h2>
-    <div>회원 정보</div>
-    <div>회원 게시글</div>
+    <div class="align-content-center">
+      <h4>회원 정보</h4>
+    </div>
+    <div class="align-content-center">
+      <h4>회원 게시글</h4>
+    </div>
   </div>
 </template>
 
