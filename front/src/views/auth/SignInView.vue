@@ -16,8 +16,8 @@ const signIn = function () {
     .then((res) => {
       const accessToken =  res.headers.get('Authorization', String)
       const refreshToken = res.headers.get('RefreshToken', String)
-      VueCookies.set('Authorization', accessToken)
-      VueCookies.set('RefreshToken', refreshToken)
+      VueCookies.set('Authorization', accessToken, 60 * 60 * 24)
+      VueCookies.set('RefreshToken', refreshToken, 60 * 60 * 24 * 7)
       axios.defaults.headers.common['Authorization'] = VueCookies.get('Authorization')
       axios.defaults.headers.common['RefreshToken'] = VueCookies.get('RefreshToken')
       router.replace({name: 'welcome'})
