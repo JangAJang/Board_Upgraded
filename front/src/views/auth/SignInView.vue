@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import router from '@/router'
+import VueCookies from "vue-cookies";
 
 const username = ref('')
 const password = ref('')
@@ -13,16 +14,15 @@ const signIn = function () {
       password: password.value
     })
     .then((res) => {
-      axios.defaults.headers.common['Authorization'] = res.headers.get('Authorization', String)
-      axios.defaults.headers.common['RefreshToken'] = res.headers.get('RefreshToken', String)
-      console.log(res.headers.get('Authorization', String))
-      console.log(res.headers.get('RefreshToken', String))
-      router.replace({ name: 'welcome' })
-    })
-    .catch(() => {
-      alert('아이디와 비밀번호를 확인하세요.')
-      router.replace({ name: 'signIn' })
-    })
+
+      const accessToken =  res.headers.get('Authorization', String)
+      const refreshToken = res.headers.get('RefreshToken', String)
+      this.VueCookies.set("Authorization", accessToken)
+      this.VueCookies.set("RefreshToken", refreshToken)
+    }).catch(e =>{
+      console.log(e)
+      e.stackTrace
+  })
 }
 </script>
 

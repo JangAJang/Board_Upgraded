@@ -13,13 +13,21 @@ const router = createRouter({
     {
       path: '/auth/join',
       name: 'join',
-      component: () => import('../views/auth/JoinView.vue')
+      component: () => import('../views/auth/JoinView.vue'),
+      meta: {unauthorized: true}
     },
     {
       path: '/auth/signIn',
       name: 'signIn',
-      component: () => import('../views/auth/SignInView.vue')
+      component: () => import('../views/auth/SignInView.vue'),
+      meta: {unauthorized: true}
     },
+    {
+      path: '/auth/reissue',
+      name: 'reissue',
+      component: () => import('../views/auth/Reissue.vue')
+    },
+
     {
       path: '/members/welcome',
       name: 'welcome',
