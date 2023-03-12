@@ -52,6 +52,15 @@ public class MemberService {
         return memberRepository.search(searchMemberDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public SearchMemberDto getMemberInfo(String username){
+        Member member = findMemberByUsername(username);
+        return SearchMemberDto.builder()
+                .username(member.getUsername())
+                .nickname(member.getNickname())
+                .email(member.getEmail()).build();
+    }
+
     @Transactional
     public String deleteMember(Member member){
         memberRepository.findByUsername(member.getUsername()).orElseThrow(MemberNotFoundException::new);

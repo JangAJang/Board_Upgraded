@@ -29,6 +29,11 @@ public class MemberController {
         return Response.success(searchResult);
     }
 
+    @GetMapping("/")
+    public Response getMemberInfo(@RequestParam("id")String username){
+        return Response.success(memberService.getMemberInfo(username));
+    }
+
     @PatchMapping("/edit")
     public Response edit(@RequestBody EditMemberRequestDto editMemberRequestDto){
         memberService.editMember(editMemberRequestDto, getUsingMember());

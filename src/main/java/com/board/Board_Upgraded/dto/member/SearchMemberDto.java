@@ -22,11 +22,4 @@ public class SearchMemberDto {
         this.nickname = nickname;
         this.email = email;
     }
-
-
-    public SearchMemberDto(Member member){
-        this.username = member.getUsername();
-        this.nickname = member.getNickname();
-        this.email = member.getEmail();
-    }
 }
