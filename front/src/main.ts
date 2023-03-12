@@ -10,6 +10,7 @@ import 'element-plus/dist/index.css'
 import 'bootstrap/dist/css/bootstrap-utilities.css'
 
 import './assets/main.css'
+import axios from "axios";
 
 const app = createApp(App)
 app.use(createPinia())
@@ -21,9 +22,10 @@ app.use(VueCookies)
 app.$cookies.config("1d");
 
 router.beforeEach( async (to, from, next)=>{
-
     if(VueCookies.get('Authorization') == null && VueCookies.get('RefreshToken') != null) await reissue();
-    if (to.matched.some(record => record.meta.unauthorized) || VueCookies.get('token')){
+    if (to.matched.some(record => record.meta.unauthorized) || (VueCookies.isKey('Authorization'))){
+        axios.defaults.headers.common['Authorization'] = VueCookies.get('Authorization')
+        axios.defaults.headers.common['RefreshToken'] = VueCookies.get('RefreshToken')
         return next();
     }
     alert('로그인 해주세요');

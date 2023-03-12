@@ -18,6 +18,8 @@ const signIn = function () {
       const refreshToken = res.headers.get('RefreshToken', String)
       VueCookies.set('Authorization', accessToken)
       VueCookies.set('RefreshToken', refreshToken)
+      axios.defaults.headers.common['Authorization'] = VueCookies.get('Authorization')
+      axios.defaults.headers.common['RefreshToken'] = VueCookies.get('RefreshToken')
       router.replace({name: 'welcome'})
     }).catch(e =>{
       console.log(e)
