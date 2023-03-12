@@ -14,14 +14,13 @@ const signIn = function () {
       password: password.value
     })
     .then((res) => {
-
       const accessToken =  res.headers.get('Authorization', String)
       const refreshToken = res.headers.get('RefreshToken', String)
-      this.VueCookies.set("Authorization", accessToken)
-      this.VueCookies.set("RefreshToken", refreshToken)
+      VueCookies.set('Authorization', accessToken)
+      VueCookies.set('RefreshToken', refreshToken)
+      router.replace({name: 'welcome'})
     }).catch(e =>{
       console.log(e)
-      e.stackTrace
   })
 }
 </script>

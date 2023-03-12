@@ -18,8 +18,7 @@ app.use(ElementPlus)
 app.mount('#app')
 app.use(VueCookies)
 
-// @ts-ignore
-VueCookies.config("1d");
+app.$cookies.config("1d");
 
 router.beforeEach( async (to, from, next)=>{
 
