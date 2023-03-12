@@ -4,28 +4,35 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 import router from '@/router'
 
-const info = ref()
+const info = ref({})
 const route = useRoute()
 
 axios
   .get('/jangs-board/members/info')
   .then((response) => {
-    console.log(response.data)
+    console.log(response.data.result.data)
+    info.value = {
+      username: response.data.result.data.username,
+      nickname: response.data.result.data.nickname,
+      email: response.data.result.data.email
+    }
+    console.log(info.value)
   })
-  .catch(() => {
+  .catch(e => {
+    console.log(e)
     router.replace({ name: 'signIn' })
   })
 </script>
 <template>
   <div class="align-content-center">
     <div>
-      <h1>you are {{ route.query.id }}</h1>
+      <h1>해당 회원의 아이디는 입니다.</h1>
     </div>
     <div>
-      <h2></h2>
+      <h2>해당 회원의 닉네임은 입니다. </h2>
     </div>
     <div>
-      <h2></h2>
+      <h2>해당 회원의 이메일은  입니다.</h2>
     </div>
   </div>
 </template>
