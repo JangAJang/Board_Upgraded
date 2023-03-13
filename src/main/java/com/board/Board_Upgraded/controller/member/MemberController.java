@@ -30,7 +30,7 @@ public class MemberController {
     }
 
     @GetMapping("/info")
-    public Response getMemberInfo(@RequestParam("id")String username){
+    public Response getMemberInfo(@RequestParam("username")String username){
         return Response.success(memberService.getMemberInfo(username));
     }
 
@@ -47,7 +47,7 @@ public class MemberController {
 
     @GetMapping("/welcome")
     public Response welcome(){
-        return Response.success("어서오세요! " + getUsingMember().getNickname() +"님");
+        return Response.success(getUsingMember().getUsername());
     }
 
     private Member getUsingMember(){

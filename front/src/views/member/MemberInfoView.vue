@@ -1,38 +1,44 @@
 <script setup lang="ts">
 import axios from 'axios'
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import router from '@/router'
 
-const info = ref({})
+
 const route = useRoute()
 
+const username = ref()
+const nickname = ref()
+const email = ref()
+
+const props = defineProps({
+  username: {
+    type: String,
+    require: true
+  }
+})
+
 axios
-  .get('/jangs-board/members/info')
+  .get('/jangs-board/members/info?username=' + props.username)
   .then((response) => {
-    console.log(response.data.result.data)
-    info.value = {
-      username: response.data.result.data.username,
-      nickname: response.data.result.data.nickname,
-      email: response.data.result.data.email
-    }
-    console.log(info.value)
+    username.value = response.data.result.data.username
+    nickname.value = response.data.result.data.nickname
+    email.value = response.data.result.data.email
   })
   .catch((e) => {
-    console.log(e)
     router.replace({ name: 'signIn' })
   })
 </script>
 <template>
   <div class="align-content-center">
     <div>
-      <h1>해당 회원의 아이디는 입니다.</h1>
+      <h1>해당 회원의 아이디는 {{username}}입니다.</h1>
     </div>
     <div>
-      <h2>해당 회원의 닉네임은 입니다.</h2>
+      <h2>해당 회원의 닉네임은 {{nickname}}입니다.</h2>
     </div>
     <div>
-      <h2>해당 회원의 이메일은 입니다.</h2>
+      <h2>해당 회원의 이메일은 {{email}}입니다.</h2>
     </div>
   </div>
 </template>
