@@ -1,11 +1,11 @@
 package com.board.Board_Upgraded.entity.member;
 
 import com.board.Board_Upgraded.domain.member.MemberPosts;
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.base.BaseEntity;
 import com.board.Board_Upgraded.entity.base.DueTime;
 import com.board.Board_Upgraded.entity.post.Post;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,11 +21,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Member extends BaseEntity {
-
-    @Column(name = "MEMBER_USERNAME")
-    private String username;
-
-//    private Username username;
+    @Embedded
+    private Username username;
 //    private MemberInfo memberInfo;
 //    private Password password;
 
@@ -47,12 +43,16 @@ public class Member extends BaseEntity {
     private Role role;
 
     public Member(RegisterRequestDto registerRequestDto){
-        this.username = registerRequestDto.getUsername();
+        this.username = new Username(registerRequestDto.getUsername());
         this.nickname = registerRequestDto.getNickname();
         this.email = registerRequestDto.getEmail();
         this.role = Role.USER;
         this.password = registerRequestDto.getPassword();
         this.setLastModifiedDate(LocalDateTime.now());
+    }
+
+    public String getUsername(){
+        return username.getUsername();
     }
 
     public void changeNickname(String nickname){
