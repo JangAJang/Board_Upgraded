@@ -65,7 +65,7 @@ public class Member extends BaseEntity {
 
     public void changePassword(String password){
         this.password = password;
-        this.setLastModifiedDate(LocalDateTime.now());
+        setLastModifiedDate(LocalDateTime.now());
     }
 
     public void deletePost(Post post){

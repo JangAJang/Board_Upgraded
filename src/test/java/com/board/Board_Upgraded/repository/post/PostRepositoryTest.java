@@ -1,5 +1,7 @@
 package com.board.Board_Upgraded.repository.post;
 
+import com.board.Board_Upgraded.domain.post.Content;
+import com.board.Board_Upgraded.domain.post.Title;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
@@ -59,8 +61,8 @@ public class PostRepositoryTest {
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
         postRepository.save(Post.builder()
-                .title("title")
-                .content("content")
+                .title(new Title("title"))
+                .content(new Content("content"))
                 .member(member).build());
         //then
         Assertions.assertThat(postRepository.count()).isEqualTo(1L);
@@ -70,15 +72,8 @@ public class PostRepositoryTest {
     @DisplayName("게시물을 삭제하면 리포지토리에서 사이즈가 감소한다.")
     public void deleteTest() throws Exception{
         //given
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        //when
-        Post post = Post.builder()
-                .title("title")
-                .content("content")
-                .member(member).build();
-        postRepository.save(post);
         long countBefore = postRepository.count();
-        postRepository.delete(post);
+        postRepository.deleteAll();
         //then
         Assertions.assertThat(postRepository.count()).isNotEqualTo(countBefore);
     }
@@ -99,8 +94,8 @@ public class PostRepositoryTest {
                     .orElseThrow(MemberNotFoundException::new);
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
         }
         //when
         SearchPostRequestDto searchMember = new SearchPostRequestDto("2");
@@ -129,8 +124,8 @@ public class PostRepositoryTest {
                     .orElseThrow(MemberNotFoundException::new);
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
         }
         //when
         SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
@@ -160,8 +155,8 @@ public class PostRepositoryTest {
                     .orElseThrow(MemberNotFoundException::new);
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
         }
         //when
         SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
@@ -191,8 +186,8 @@ public class PostRepositoryTest {
                     .orElseThrow(MemberNotFoundException::new);
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
         }
         //when
         SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
@@ -223,8 +218,8 @@ public class PostRepositoryTest {
                     .orElseThrow(MemberNotFoundException::new);
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
         }
         //when
         SearchPostRequestDto searchMember = new SearchPostRequestDto("3");
@@ -248,8 +243,8 @@ public class PostRepositoryTest {
         for(int index = 1; index <= 10; index++){
             postRepository.save(Post.builder()
                     .member(member)
-                    .title("title" + index)
-                    .content("content" + index).build());
+                    .title(new Title("title" + index))
+                    .content(new Content("content" + index)).build());
             TimeUnit.SECONDS.sleep(1);
         }
         //when
@@ -270,11 +265,11 @@ public class PostRepositoryTest {
         //given
         Member member = memberRepository.findByUsername("test")
                 .orElseThrow(MemberNotFoundException::new);
-        Post post = Post.builder().member(member).title("취업").content("하고싶다.").build();
+        Post post = Post.builder().member(member).title(new Title("취업")).content(new Content("하고싶다.")).build();
         postRepository.save(post);
         //when
-        post.editTitle("진짜 취업");
-        post.editContent("너무 하고 싶습니다.");
+        post.editTitle(new Title("진짜 취업"));
+        post.editContent(new Content("너무 하고 싶습니다."));
         em.flush();
         Post findPost = postRepository.findById(post.getId()).orElseThrow(IllegalArgumentException::new);
         //then

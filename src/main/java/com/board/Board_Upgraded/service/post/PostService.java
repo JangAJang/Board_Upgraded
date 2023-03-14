@@ -1,5 +1,7 @@
 package com.board.Board_Upgraded.service.post;
 
+import com.board.Board_Upgraded.domain.post.Content;
+import com.board.Board_Upgraded.domain.post.Title;
 import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
@@ -27,8 +29,8 @@ public class PostService {
     @Transactional
     public PostResponseDto write(WritePostRequestDto writePostRequestDto , Member member){
         Post post = Post.builder()
-                .title(writePostRequestDto.getTitle())
-                .content(writePostRequestDto.getContent())
+                .title(new Title(writePostRequestDto.getTitle()))
+                .content(new Content(writePostRequestDto.getContent()))
                 .member(member).build();
         postRepository.save(post);
         return PostResponseDto.builder()
@@ -54,8 +56,8 @@ public class PostService {
     public PostResponseDto edit(EditPostRequestDto editPostRequestDto, Member member, Long id){
         Post post = findPostById(id);
         validateMember(member, post);
-        if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editTitle(editPostRequestDto.getTitle());
-        if(StringUtils.hasText(editPostRequestDto.getContent())) post.editContent(editPostRequestDto.getContent());
+        if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editTitle(new Title(editPostRequestDto.getTitle()));
+        if(StringUtils.hasText(editPostRequestDto.getContent())) post.editContent(new Content(editPostRequestDto.getContent()));
         return PostResponseDto.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -76,6 +78,6 @@ public class PostService {
     }
 
     private void validateMember(Member member, Post post){
-        if(!post.getMember().equals(member)) throw new NotMyPostException();
+        if(!post.isWriter(member)) throw new NotMyPostException();
     }
 }

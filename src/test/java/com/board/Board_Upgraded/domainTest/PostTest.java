@@ -1,5 +1,7 @@
 package com.board.Board_Upgraded.domainTest;
 
+import com.board.Board_Upgraded.domain.post.Content;
+import com.board.Board_Upgraded.domain.post.Title;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.entity.post.Post;
@@ -35,13 +37,12 @@ public class PostTest {
                 .passwordCheck("test").build());
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
         //when
-        String title = "제목";
-        String content = "내용";
+        Title title = new Title("제목");
+        Content content = new Content("내용");
         //then
         Post post = new Post(title, content, member);
         Assertions.assertThat(post.getTitle()).isEqualTo(title);
         Assertions.assertThat(post.getContent()).isEqualTo(content);
-        Assertions.assertThat(post.getMember()).isEqualTo(member);
     }
 
     @Test
@@ -55,12 +56,12 @@ public class PostTest {
                 .password("test")
                 .passwordCheck("test").build());
         Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        String title = "제목";
-        String content = "내용";
+        Title title = new Title("제목");
+        Content content = new Content("내용");
         Post post = new Post(title, content, member);
         //when
-        post.editTitle("제목1");
-        post.editContent("내용1");
+        post.editTitle(new Title("제목1"));
+        post.editContent(new Content("내용1"));
         //then
         Assertions.assertThat(post.getTitle()).isEqualTo("제목1");
         Assertions.assertThat(post.getContent()).isEqualTo("내용1");

@@ -10,6 +10,7 @@ onMounted(()=> {
     welcome.value = response.data.result.data
   })
 })
+
 </script>
 
 <template>
@@ -21,6 +22,11 @@ onMounted(()=> {
       </div>
       <div>
         <router-link to="/members/posts">회원 게시글</router-link>
+      </div>
+    </div>
+    <div class="align-content-center">
+      <div>
+        <router-link to="/posts">전체 게시글</router-link>
       </div>
     </div>
   </div>
