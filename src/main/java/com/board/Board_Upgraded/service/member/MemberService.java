@@ -3,8 +3,6 @@ package com.board.Board_Upgraded.service.member;
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
-import com.board.Board_Upgraded.exception.member.NeedToAddEditConditionException;
-import com.board.Board_Upgraded.exception.member.NeedToPutPasswordTwiceToEditException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,20 +29,10 @@ public class MemberService {
     }
 
     @Transactional
-    public void editMember(EditMemberRequestDto editMemberRequestDto, Member member){
-        if(editMemberRequestDto.getNickname() == null && editMemberRequestDto.getEmail() == null
-                && editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() == null)
-            throw new NeedToAddEditConditionException();
-        if((editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() == null) ||
-                (editMemberRequestDto.getPassword() == null && editMemberRequestDto.getPasswordCheck() != null))
-            throw new NeedToPutPasswordTwiceToEditException();
-        if(editMemberRequestDto.getNickname() != null)
-            changeMemberNickname(editMemberRequestDto.getNickname(), member);
-        if(editMemberRequestDto.getEmail() != null)
-            changeMemberEmail(editMemberRequestDto.getEmail(), member);
-        if(editMemberRequestDto.getPassword() != null && editMemberRequestDto.getPasswordCheck() != null)
-            changeMemberPassword(editMemberRequestDto.getPassword()
-                    , editMemberRequestDto.getPasswordCheck(), member);
+    public void editMemberInfo(EditMemberRequestDto editMemberRequestDto, Member member){
+        memberInstanceValidator.validateNickname(editMemberRequestDto.getNickname());
+        memberInstanceValidator.validateEmail(editMemberRequestDto.getEmail());
+        member.changeMemberInfo(editMemberRequestDto.toMemberInfo());
     }
 
     @Transactional(readOnly = true)
@@ -66,16 +54,6 @@ public class MemberService {
         memberRepository.findByUsername(member.getUsername()).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(member);
         return "회원이 삭제되었습니다. 그동한 감사합니다.";
-    }
-
-    private void changeMemberEmail(String email, Member member){
-        memberInstanceValidator.validateEmail(email);
-        member.changeEmail(email);
-    }
-
-    private void changeMemberNickname(String nickname, Member member){
-        memberInstanceValidator.validateNickname(nickname);
-        member.changeNickname(nickname);
     }
 
     private void changeMemberPassword(String password, String passwordCheck, Member member){

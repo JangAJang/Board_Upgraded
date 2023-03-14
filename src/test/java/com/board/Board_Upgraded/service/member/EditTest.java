@@ -41,10 +41,8 @@ public class EditTest {
         EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
                 .nickname("newNick")
                 .email(null)
-                .password(null)
-                .passwordCheck(null)
                 .build();
-        memberService.editMember(editMemberRequestDto, member);
+        memberService.editMemberInfo(editMemberRequestDto, member);
         //then
         Assertions.assertThat(member.getNickname()).isEqualTo("newNick");
         Assertions.assertThat(member.getEmail()).isEqualTo("test@test.com");
@@ -65,38 +63,11 @@ public class EditTest {
         EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
                 .nickname(null)
                 .email("new@test.com")
-                .password(null)
-                .passwordCheck(null)
                 .build();
-        memberService.editMember(editMemberRequestDto, member);
+        memberService.editMemberInfo(editMemberRequestDto, member);
         //then
         Assertions.assertThat(member.getNickname()).isEqualTo("test");
         Assertions.assertThat(member.getEmail()).isEqualTo("new@test.com");
-    }
-
-    @Test
-    @DisplayName("수정 dto에서 password, passwordCheck 제외한 값이 null일 때, 비밀번호를 변경하고 나머지는 원래 값을 유지한다.")
-    public void editPassword_Success() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .email("test@test.com")
-                .nickname("test")
-                .passwordCheck("test")
-                .password("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        String formerPassword = member.getPassword();
-        //when
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .nickname(null)
-                .email(null)
-                .password("new")
-                .passwordCheck("new")
-                .build();
-        memberService.editMember(editMemberRequestDto, member);
-        //then
-        Assertions.assertThat(member.getUsername()).isEqualTo("test");
-        Assertions.assertThat(member.getPassword()).isNotEqualTo(formerPassword);
     }
 
     @Test
@@ -114,48 +85,8 @@ public class EditTest {
         EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
                 .build();
         //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+        Assertions.assertThatThrownBy(()->memberService.editMemberInfo(editMemberRequestDto, member))
                 .isInstanceOf(NeedToAddEditConditionException.class);
-    }
-
-    @Test
-    @DisplayName("PasswordCheck는 null이고 Password는 null이 아니면 비밀번호를 변경할 수 없음을 예외처리한다.")
-    public void editFail_PasswordCheckNull() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .email("test@test.com")
-                .nickname("test")
-                .passwordCheck("test")
-                .password("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        //when
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("new")
-                .build();
-        //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
-                .isInstanceOf(NeedToPutPasswordTwiceToEditException.class);
-    }
-
-    @Test
-    @DisplayName("Password는 null이고 PasswordCheck는 null이 아니면 비밀번호를 변경할 수 없음을 예외처리한다.")
-    public void editFail_PasswordNull() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .email("test@test.com")
-                .nickname("test")
-                .passwordCheck("test")
-                .password("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        //when
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .passwordCheck("new")
-                .build();
-        //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
-                .isInstanceOf(NeedToPutPasswordTwiceToEditException.class);
     }
 
     @Test
@@ -174,7 +105,7 @@ public class EditTest {
                 .nickname("test")
                 .build();
         //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+        Assertions.assertThatThrownBy(()->memberService.editMemberInfo(editMemberRequestDto, member))
                 .isInstanceOf(NicknameAlreadyInUseException.class);
     }
 
@@ -194,7 +125,7 @@ public class EditTest {
                 .email("test@test.com")
                 .build();
         //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+        Assertions.assertThatThrownBy(()->memberService.editMemberInfo(editMemberRequestDto, member))
                 .isInstanceOf(EmailAlreadyInUseException.class);
     }
 
@@ -214,49 +145,7 @@ public class EditTest {
                 .email("newtest.com")
                 .build();
         //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
+        Assertions.assertThatThrownBy(()->memberService.editMemberInfo(editMemberRequestDto, member))
                 .isInstanceOf(EmailNotFormatException.class);
-    }
-
-    @Test
-    @DisplayName("입력한 비밀번호가 서로 일치하지 않을 때 예외처리시킨다.")
-    public void editFail_PasswordNotMatching() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .email("test@test.com")
-                .nickname("test")
-                .passwordCheck("test")
-                .password("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        //when
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("new")
-                .passwordCheck("password")
-                .build();
-        //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
-                .isInstanceOf(PasswordNotMatchingException.class);
-    }
-
-    @Test
-    @DisplayName("변경하려는 비밀번호가 기존과 같을 떄, 예외처리시킨다.")
-    public void editFail_PasswordNotChanged() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .email("test@test.com")
-                .nickname("test")
-                .passwordCheck("test")
-                .password("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
-        //when
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("test")
-                .passwordCheck("test")
-                .build();
-        //then
-        Assertions.assertThatThrownBy(()->memberService.editMember(editMemberRequestDto, member))
-                .isInstanceOf(PasswordNotChangedException.class);
     }
 }

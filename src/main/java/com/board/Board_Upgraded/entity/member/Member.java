@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.entity.member;
 
+import com.board.Board_Upgraded.domain.member.MemberInfo;
 import com.board.Board_Upgraded.domain.member.MemberPosts;
 import com.board.Board_Upgraded.domain.member.Password;
 import com.board.Board_Upgraded.domain.member.Username;
@@ -23,20 +24,16 @@ public class Member extends BaseEntity {
     @Embedded private Username username;
     @Embedded private Password password;
     @Embedded private MemberPosts memberPosts;
-    @Column(name = "MEMBER_NICKNAME")
-    private String nickname;
-    @Column(name = "MEMBER_EMAIL")
-    private String email;
+    @Embedded private MemberInfo memberInfo;
     @Column(name = "MEMBER_ROLE")
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
     public Member(RegisterRequestDto registerRequestDto){
-        this.username = new Username(registerRequestDto.getUsername());
-        this.nickname = registerRequestDto.getNickname();
-        this.email = registerRequestDto.getEmail();
-        this.role = Role.USER;
-        this.password = new Password(registerRequestDto.getPassword());
+        username = new Username(registerRequestDto.getUsername());
+        memberInfo = new MemberInfo(registerRequestDto.getNickname(), registerRequestDto.getEmail());
+        role = Role.USER;
+        password = new Password(registerRequestDto.getPassword());
         this.setLastModifiedDate(LocalDateTime.now());
     }
 
@@ -48,12 +45,8 @@ public class Member extends BaseEntity {
         return this.password.isRightPassword(passwordEncoder, password);
     }
 
-    public void changeNickname(String nickname){
-        this.nickname = nickname;
-    }
-
-    public void changeEmail(String email){
-        this.email = email;
+    public void changeMemberInfo(MemberInfo memberInfo){
+        this.memberInfo = memberInfo;
     }
 
     public void changePassword(String password){
@@ -75,5 +68,13 @@ public class Member extends BaseEntity {
 
     public boolean isPasswordOutdated(){
         return isLastModifiedDateAfter(DueTime.PASSWORD_CHANGE_DUETIME.getDays());
+    }
+
+    public String getNickname(){
+        return memberInfo.getNickname();
+    }
+
+    public String getEmail(){
+        return memberInfo.getEmail();
     }
 }

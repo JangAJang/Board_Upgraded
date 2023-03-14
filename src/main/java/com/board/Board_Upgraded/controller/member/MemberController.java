@@ -36,7 +36,7 @@ public class MemberController {
 
     @PatchMapping("/edit")
     public Response edit(@RequestBody EditMemberRequestDto editMemberRequestDto){
-        memberService.editMember(editMemberRequestDto, getUsingMember());
+        memberService.editMemberInfo(editMemberRequestDto, getUsingMember());
         return Response.success("수정을 성공했습니다.");
     }
 

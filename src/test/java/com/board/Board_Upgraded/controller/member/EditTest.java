@@ -193,146 +193,14 @@ public class EditTest {
     }
 
     @Test
-    @DisplayName("비밀번호 변경을 요청할 떄, 성공하면 200코드와 수정에 성공했음을 반환해준다. ")
-    public void editPassword_Success() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("test")
-                .passwordCheck("test").build());
-        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
-                .username("test")
-                .password("test").build());
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("newPassword")
-                .passwordCheck("newPassword")
-                .build();
-        //expected
-        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
-                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
-                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(makeJson(editMemberRequestDto)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(true))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("수정을 성공했습니다."))
-                .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(passwordEncoder.matches("newPassword", memberRepository.findByUsername("test").get().getPassword()))
-                .isTrue();
-    }
-
-    @Test
-    @DisplayName("비밀번호를 두 번 입력하지 않으면 400에러와 예외를 반환하며 비밀번호는 바뀌지 않는다.")
-    public void editPassword_Fail_No_PasswordCheck() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("test")
-                .passwordCheck("test").build());
-        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
-                .username("test")
-                .password("test").build());
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("newPassword")
-                .build();
-        //expected
-        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
-                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
-                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(makeJson(editMemberRequestDto)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
-                        .value("비밀번호를 수정하기 위해서는, 비밀번호를 두 번 입력해야 합니다."))
-                .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(passwordEncoder.matches("test", memberRepository.findByUsername("test").get().getPassword()))
-                .isTrue();
-    }
-
-    @Test
-    @DisplayName("비밀번호가 서로 다를 경우 400에러와 예외를 반환하며 비밀번호는 바뀌지 않는다.")
-    public void editPassword_Fail_PasswordNotMatching() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("test")
-                .passwordCheck("test").build());
-        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
-                .username("test")
-                .password("test").build());
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("newPassword")
-                .passwordCheck("newPassword1")
-                .build();
-        //expected
-        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
-                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
-                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(makeJson(editMemberRequestDto)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
-                        .value("비밀번호가 일치하지 않습니다."))
-                .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(passwordEncoder.matches("test", memberRepository.findByUsername("test").get().getPassword()))
-                .isTrue();
-    }
-
-    @Test
-    @DisplayName("기존 비밀번호와 같은 비밀번호로 변경하는 경우, 400에러와 예외문구를 반환한다.")
-    public void editPassword_Fail_PasswordNotChanged() throws Exception{
-        //given
-        authService.registerNewMember(RegisterRequestDto.builder()
-                .username("test")
-                .nickname("test")
-                .email("test@test.com")
-                .password("test")
-                .passwordCheck("test").build());
-        TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
-                .username("test")
-                .password("test").build());
-        EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("test")
-                .passwordCheck("test")
-                .build();
-        //expected
-        mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
-                .header("Authorization", "Bearer ".concat(tokenResponseDto.getAccessToken()))
-                .header("RefreshToken", "Bearer ".concat(tokenResponseDto.getRefreshToken()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(makeJson(editMemberRequestDto)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.success").value(false))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage")
-                        .value("같은 비밀번호로 변경할 수 없습니다."))
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
     @DisplayName("토큰이 없을 경우, 401에러를 반환한다.")
     public void editFail_No_Token() throws Exception{
         //given
         authService.registerNewMember(RegisterRequestDto.builder()
                 .username("test")
                 .nickname("test")
-                .email("test@test.com")
-                .password("test")
-                .passwordCheck("test").build());
+                .email("test@test.com").build());
         EditMemberRequestDto editMemberRequestDto = EditMemberRequestDto.builder()
-                .password("test")
-                .passwordCheck("test")
                 .build();
         //expected
         mvc.perform(MockMvcRequestBuilders.patch("/api/members/edit")
