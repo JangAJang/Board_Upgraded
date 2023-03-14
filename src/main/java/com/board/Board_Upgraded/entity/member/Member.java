@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.entity.member;
 
+import com.board.Board_Upgraded.domain.member.MemberPosts;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.base.BaseEntity;
 import com.board.Board_Upgraded.entity.base.DueTime;
@@ -25,6 +26,13 @@ public class Member extends BaseEntity {
     @Column(name = "MEMBER_USERNAME")
     private String username;
 
+//    private Username username;
+//    private MemberInfo memberInfo;
+//    private Password password;
+
+    @Embedded
+    private MemberPosts memberPosts;
+
     @Column(name = "MEMBER_NICKNAME")
     private String nickname;
 
@@ -38,10 +46,6 @@ public class Member extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member")
-    @JsonIgnore
-    private List<Post> posts = new ArrayList<>();
-
     public Member(RegisterRequestDto registerRequestDto){
         this.username = registerRequestDto.getUsername();
         this.nickname = registerRequestDto.getNickname();
@@ -49,10 +53,6 @@ public class Member extends BaseEntity {
         this.role = Role.USER;
         this.password = registerRequestDto.getPassword();
         this.setLastModifiedDate(LocalDateTime.now());
-    }
-
-    public void addPost(Post post){
-        this.posts.add(post);
     }
 
     public void changeNickname(String nickname){
@@ -68,8 +68,16 @@ public class Member extends BaseEntity {
         setLastModifiedDate(LocalDateTime.now());
     }
 
+    public void addPost(Post post){
+        memberPosts.addPost(post);
+    }
+
     public void deletePost(Post post){
-        this.posts.remove(post);
+        memberPosts.removePost(post);
+    }
+
+    public List<Post> getMembersPost(){
+        return memberPosts.getMyPosts();
     }
 
     public boolean isPasswordOutdated(){
