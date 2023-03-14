@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostResponseDto {
-
+    private Long id;
     private String writer;
     private String title;
     private String content;
@@ -20,7 +20,8 @@ public class PostResponseDto {
 
     @Builder
     @QueryProjection
-    public PostResponseDto(String writer, String title, String content, LocalDateTime lastModifiedDate) {
+    public PostResponseDto(Long id, String writer, String title, String content, LocalDateTime lastModifiedDate) {
+        this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
@@ -29,6 +30,7 @@ public class PostResponseDto {
 
     public static PostResponseDto toDto(Post post){
         return PostResponseDto.builder()
+                .id(post.getId())
                 .writer(post.getWritersName())
                 .title(post.getTitle())
                 .content(post.getContent()).build();

@@ -13,8 +13,8 @@ public class QPostResponseDto extends ConstructorExpression<PostResponseDto> {
 
     private static final long serialVersionUID = -1392095817L;
 
-    public QPostResponseDto(com.querydsl.core.types.Expression<String> writer, com.querydsl.core.types.Expression<String> title, com.querydsl.core.types.Expression<String> content, com.querydsl.core.types.Expression<java.time.LocalDateTime> lastModifiedDate) {
-        super(PostResponseDto.class, new Class<?>[]{String.class, String.class, String.class, java.time.LocalDateTime.class}, writer, title, content, lastModifiedDate);
+    public QPostResponseDto(com.querydsl.core.types.Expression<Long> id, com.querydsl.core.types.Expression<String> writer, com.querydsl.core.types.Expression<String> title, com.querydsl.core.types.Expression<String> content, com.querydsl.core.types.Expression<java.time.LocalDateTime> lastModifiedDate) {
+        super(PostResponseDto.class, new Class<?>[]{long.class, String.class, String.class, String.class, java.time.LocalDateTime.class}, id, writer, title, content, lastModifiedDate);
     }
 
 }

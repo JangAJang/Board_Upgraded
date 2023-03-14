@@ -23,8 +23,8 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     @Override
     public Page<PostResponseDto> searchPost(SearchPostRequestDto searchPostRequestDto, SearchPostType searchPostType, Pageable pageable) {
         QueryResults<PostResponseDto> result = queryFactory
-                .select(new QPostResponseDto(member.nickname.as("writer"),
-                        post.title, post.content, post.lastModifiedDate))
+                .select(new QPostResponseDto(post.id, member.nickname.as("writer"),
+                        post.title.title, post.content.content, post.lastModifiedDate))
                 .from(post)
                 .leftJoin(post.member, member)
                 .where(makeConditionQuery(searchPostRequestDto.getText(), searchPostType))
@@ -38,8 +38,8 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     @Override
     public Page<PostResponseDto> getMembersPost(Long id, Pageable pageable) {
         QueryResults<PostResponseDto> result = queryFactory
-                .select(new QPostResponseDto(member.nickname.as("writer"),
-                        post.title, post.content, post.lastModifiedDate))
+                .select(new QPostResponseDto(post.id, member.nickname.as("writer"),
+                        post.title.title, post.content.content, post.lastModifiedDate))
                 .from(post)
                 .leftJoin(post.member, member)
                 .where(member.id.eq(id))
@@ -59,14 +59,14 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     private BooleanExpression makeConditionQueryWithMember(String text, SearchPostType searchPostType){
         if(searchPostType.equals(SearchPostType.WRITER))
             return member.nickname.contains(text);
-        return member.nickname.contains(text).or(post.title.contains(text));
+        return member.nickname.contains(text).or(post.title.title.contains(text));
     }
 
     private BooleanExpression makeConditionQueryWithoutMember(String text, SearchPostType searchPostType){
         if(searchPostType.equals(SearchPostType.TITLE))
-            return post.title.contains(text);
+            return post.title.title.contains(text);
         if(searchPostType.equals(SearchPostType.CONTENT))
-            return post.content.contains(text);
-        return post.title.contains(text).or(post.content.contains(text));
+            return post.content.content.contains(text);
+        return post.title.title.contains(text).or(post.content.content.contains(text));
     }
 }

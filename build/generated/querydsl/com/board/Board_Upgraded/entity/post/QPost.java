@@ -24,7 +24,7 @@ public class QPost extends EntityPathBase<Post> {
 
     public final com.board.Board_Upgraded.entity.base.QBaseEntity _super = new com.board.Board_Upgraded.entity.base.QBaseEntity(this);
 
-    public final StringPath content = createString("content");
+    public final com.board.Board_Upgraded.domain.post.QContent content;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
@@ -36,7 +36,7 @@ public class QPost extends EntityPathBase<Post> {
 
     public final com.board.Board_Upgraded.entity.member.QMember member;
 
-    public final StringPath title = createString("title");
+    public final com.board.Board_Upgraded.domain.post.QTitle title;
 
     public QPost(String variable) {
         this(Post.class, forVariable(variable), INITS);
@@ -56,7 +56,9 @@ public class QPost extends EntityPathBase<Post> {
 
     public QPost(Class<? extends Post> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.content = inits.isInitialized("content") ? new com.board.Board_Upgraded.domain.post.QContent(forProperty("content")) : null;
         this.member = inits.isInitialized("member") ? new com.board.Board_Upgraded.entity.member.QMember(forProperty("member")) : null;
+        this.title = inits.isInitialized("title") ? new com.board.Board_Upgraded.domain.post.QTitle(forProperty("title")) : null;
     }
 
 }
