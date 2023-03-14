@@ -26,7 +26,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
         if(searchMemberDto.getUsername() == null && searchMemberDto.getNickname() == null && searchMemberDto.getEmail() == null)
             throw new NeedToAddSearchConditionException();
         QueryResults<SearchMemberDto> result =  query
-                .select(new QSearchMemberDto(member.username, member.nickname, member.email))
+                .select(new QSearchMemberDto(member.username.username, member.memberInfo.nickname, member.memberInfo.email))
                 .from(member)
                 .where(searchCondition(searchMemberDto))
                 .offset(pageable.getOffset())
@@ -41,9 +41,9 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
     private BooleanBuilder containsSearch(SearchMemberDto searchMemberDto){
         BooleanBuilder builder = new BooleanBuilder();
-        if(hasText(searchMemberDto.getUsername())) builder.or(member.username.contains(searchMemberDto.getUsername()));
-        if(hasText(searchMemberDto.getNickname())) builder.or(member.nickname.contains(searchMemberDto.getNickname()));
-        if(hasText(searchMemberDto.getEmail())) builder.or(member.email.contains(searchMemberDto.getEmail()));
+        if(hasText(searchMemberDto.getUsername())) builder.or(member.username.username.contains(searchMemberDto.getUsername()));
+        if(hasText(searchMemberDto.getNickname())) builder.or(member.memberInfo.nickname.contains(searchMemberDto.getNickname()));
+        if(hasText(searchMemberDto.getEmail())) builder.or(member.memberInfo.email.contains(searchMemberDto.getEmail()));
         return builder;
     }
 }

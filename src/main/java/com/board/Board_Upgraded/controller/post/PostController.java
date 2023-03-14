@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.controller.post;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.post.EditPostRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
@@ -55,7 +56,7 @@ public class PostController {
     }
 
     private Member getCurrentMember(){
-        return memberRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
+        return memberRepository.findByUsername(new Username(SecurityContextHolder.getContext().getAuthentication().getName()))
                 .orElseThrow(MemberNotFoundException::new);
     }
 }

@@ -16,6 +16,4 @@ public class Username {
 
     @Column(name = "USERNAME")
     private String username;
-
-
 }

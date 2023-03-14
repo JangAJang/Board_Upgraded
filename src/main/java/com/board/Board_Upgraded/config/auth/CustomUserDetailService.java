@@ -1,6 +1,8 @@
 package com.board.Board_Upgraded.config.auth;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.entity.member.Member;
+import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,9 +23,9 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findByUsername(username)
+        return memberRepository.findByUsername(new Username(username))
                 .map(this::createUserDetails)
-                .orElseThrow(()-> new UsernameNotFoundException(username+" -> cannot find from DB"));
+                .orElseThrow(MemberNotFoundException::new);
     }
 
     private UserDetails createUserDetails(Member member){

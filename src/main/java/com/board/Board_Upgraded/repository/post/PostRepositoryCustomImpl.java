@@ -23,7 +23,7 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     @Override
     public Page<PostResponseDto> searchPost(SearchPostRequestDto searchPostRequestDto, SearchPostType searchPostType, Pageable pageable) {
         QueryResults<PostResponseDto> result = queryFactory
-                .select(new QPostResponseDto(post.id, member.nickname.as("writer"),
+                .select(new QPostResponseDto(post.id, member.memberInfo.nickname.as("writer"),
                         post.title.title, post.content.content, post.lastModifiedDate))
                 .from(post)
                 .leftJoin(post.member, member)
@@ -38,7 +38,7 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
     @Override
     public Page<PostResponseDto> getMembersPost(Long id, Pageable pageable) {
         QueryResults<PostResponseDto> result = queryFactory
-                .select(new QPostResponseDto(post.id, member.nickname.as("writer"),
+                .select(new QPostResponseDto(post.id, member.memberInfo.nickname.as("writer"),
                         post.title.title, post.content.content, post.lastModifiedDate))
                 .from(post)
                 .leftJoin(post.member, member)
@@ -58,8 +58,8 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
 
     private BooleanExpression makeConditionQueryWithMember(String text, SearchPostType searchPostType){
         if(searchPostType.equals(SearchPostType.WRITER))
-            return member.nickname.contains(text);
-        return member.nickname.contains(text).or(post.title.title.contains(text));
+            return member.memberInfo.nickname.contains(text);
+        return member.memberInfo.nickname.contains(text).or(post.title.title.contains(text));
     }
 
     private BooleanExpression makeConditionQueryWithoutMember(String text, SearchPostType searchPostType){

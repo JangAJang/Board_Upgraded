@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @Getter
 public class MemberInfo {
 
-    @Column(name = "USERNAME")
+    @Column(name = "NICKNAME")
     private String nickname;
     @Column(name = "EMAIL")
     private String email;

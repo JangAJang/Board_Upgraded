@@ -11,7 +11,7 @@ import java.util.List;
 @Embeddable
 public class MemberPosts {
 
-    @OneToMany
+    @OneToMany(mappedBy = "member")
     @JsonIgnore
     private final List<Post> posts = new ArrayList<>();
 

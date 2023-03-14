@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.service.member;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.*;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.exception.member.MemberNotFoundException;
@@ -35,6 +36,13 @@ public class MemberService {
         member.changeMemberInfo(editMemberRequestDto.toMemberInfo());
     }
 
+    @Transactional
+    public void editMemberPassword(String password, String passwordCheck, Member member){
+        memberInstanceValidator.validatePasswordCheck(password, passwordCheck);
+        memberInstanceValidator.isPasswordSameWithBefore(member, password);
+        member.changePassword(passwordEncoder.encode(password));
+    }
+
     @Transactional(readOnly = true)
     public Page<SearchMemberDto> search(SearchMemberDto searchMemberDto, Pageable pageable){
         return memberRepository.search(searchMemberDto, pageable);
@@ -51,18 +59,12 @@ public class MemberService {
 
     @Transactional
     public String deleteMember(Member member){
-        memberRepository.findByUsername(member.getUsername()).orElseThrow(MemberNotFoundException::new);
+        memberRepository.findByUsername(new Username(member.getUsername())).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(member);
         return "회원이 삭제되었습니다. 그동한 감사합니다.";
     }
 
-    private void changeMemberPassword(String password, String passwordCheck, Member member){
-        memberInstanceValidator.validatePasswordCheck(password, passwordCheck);
-        memberInstanceValidator.isPasswordSameWithBefore(member, password);
-        member.changePassword(passwordEncoder.encode(password));
-    }
-
     public Member findMemberByUsername(String username){
-        return memberRepository.findByUsername(username).orElseThrow(MemberNotFoundException::new);
+        return memberRepository.findByUsername(new Username(username)).orElseThrow(MemberNotFoundException::new);
     }
 }
