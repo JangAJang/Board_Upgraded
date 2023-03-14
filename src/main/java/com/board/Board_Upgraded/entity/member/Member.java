@@ -1,43 +1,32 @@
 package com.board.Board_Upgraded.entity.member;
 
 import com.board.Board_Upgraded.domain.member.MemberPosts;
+import com.board.Board_Upgraded.domain.member.Password;
 import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.base.BaseEntity;
 import com.board.Board_Upgraded.entity.base.DueTime;
 import com.board.Board_Upgraded.entity.post.Post;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Member extends BaseEntity {
-    @Embedded
-    private Username username;
-//    private MemberInfo memberInfo;
-//    private Password password;
-
-    @Embedded
-    private MemberPosts memberPosts;
-
+    @Embedded private Username username;
+    @Embedded private Password password;
+    @Embedded private MemberPosts memberPosts;
     @Column(name = "MEMBER_NICKNAME")
     private String nickname;
-
     @Column(name = "MEMBER_EMAIL")
     private String email;
-
-    @Column(name = "MEMBER_PASSWORD")
-    private String password;
-
     @Column(name = "MEMBER_ROLE")
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -47,12 +36,16 @@ public class Member extends BaseEntity {
         this.nickname = registerRequestDto.getNickname();
         this.email = registerRequestDto.getEmail();
         this.role = Role.USER;
-        this.password = registerRequestDto.getPassword();
+        this.password = new Password(registerRequestDto.getPassword());
         this.setLastModifiedDate(LocalDateTime.now());
     }
 
     public String getUsername(){
         return username.getUsername();
+    }
+
+    public boolean isPasswordSameWithBefore(String password, PasswordEncoder passwordEncoder){
+        return this.password.isRightPassword(passwordEncoder, password);
     }
 
     public void changeNickname(String nickname){
@@ -64,7 +57,7 @@ public class Member extends BaseEntity {
     }
 
     public void changePassword(String password){
-        this.password = password;
+        this.password = new Password(password);
         setLastModifiedDate(LocalDateTime.now());
     }
 

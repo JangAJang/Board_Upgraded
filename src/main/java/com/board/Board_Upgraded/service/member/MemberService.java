@@ -80,7 +80,7 @@ public class MemberService {
 
     private void changeMemberPassword(String password, String passwordCheck, Member member){
         memberInstanceValidator.validatePasswordCheck(password, passwordCheck);
-        memberInstanceValidator.validateWithCurrentPassword(password, member.getPassword());
+        memberInstanceValidator.isPasswordSameWithBefore(member, password);
         member.changePassword(passwordEncoder.encode(password));
     }
 

@@ -26,7 +26,7 @@ public class MemberInstanceValidator {
     public void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(signInRequestDto.getUsername())
                 .orElseThrow(MemberNotFoundException::new);
-        if(!passwordEncoder.matches(signInRequestDto.getPassword(), member.getPassword()))
+        if(isPasswordSameWithBefore(member, signInRequestDto.getPassword()))
             throw new PasswordNotMatchingException();
     }
 
@@ -57,8 +57,7 @@ public class MemberInstanceValidator {
         return !Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", email);
     }
 
-    public void validateWithCurrentPassword(String password, String currentPassword){
-        if(passwordEncoder.matches(password, currentPassword))
-            throw new PasswordNotChangedException();
+    public boolean isPasswordSameWithBefore(Member member, String password){
+        return member.isPasswordSameWithBefore(password, passwordEncoder);
     }
 }
