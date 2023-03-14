@@ -19,4 +19,8 @@ public class Password {
     public boolean isRightPassword(PasswordEncoder passwordEncoder, String password){
         return passwordEncoder.matches(password, this.password);
     }
+
+    public String getPassword() {
+        return password;
+    }
 }

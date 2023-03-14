@@ -32,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getRole().toString());
         return new org.springframework.security.core.userdetails.User(
                 member.getUsername(),
-                member.getPassword().toString(),
+                member.getPassword(),
                 Collections.singleton(grantedAuthority)
         );
     }

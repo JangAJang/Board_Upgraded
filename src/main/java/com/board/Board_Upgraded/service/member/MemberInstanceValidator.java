@@ -27,7 +27,7 @@ public class MemberInstanceValidator {
     public void validateSignInRequest(SignInRequestDto signInRequestDto){
         Member member = memberRepository.findByUsername(new Username(signInRequestDto.getUsername()))
                 .orElseThrow(MemberNotFoundException::new);
-        if(isPasswordSameWithBefore(member, signInRequestDto.getPassword()))
+        if(!isPasswordSameWithBefore(member, signInRequestDto.getPassword()))
             throw new PasswordNotMatchingException();
     }
 
