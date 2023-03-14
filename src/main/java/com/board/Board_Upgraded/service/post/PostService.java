@@ -33,11 +33,7 @@ public class PostService {
                 .content(new Content(writePostRequestDto.getContent()))
                 .member(member).build();
         postRepository.save(post);
-        return PostResponseDto.builder()
-                .writer(member.getNickname())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .lastModifiedDate(post.getLastModifiedDate()).build();
+        return PostResponseDto.toDto(post);
     }
 
     @Transactional(readOnly = true)
@@ -58,11 +54,7 @@ public class PostService {
         validateMember(member, post);
         if(StringUtils.hasText(editPostRequestDto.getTitle())) post.editTitle(new Title(editPostRequestDto.getTitle()));
         if(StringUtils.hasText(editPostRequestDto.getContent())) post.editContent(new Content(editPostRequestDto.getContent()));
-        return PostResponseDto.builder()
-                .title(post.getTitle())
-                .content(post.getContent())
-                .writer(member.getNickname())
-                .lastModifiedDate(post.getLastModifiedDate()).build();
+        return PostResponseDto.toDto(post);
     }
 
     @Transactional

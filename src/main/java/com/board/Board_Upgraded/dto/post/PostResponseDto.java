@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.dto.post;
 
+import com.board.Board_Upgraded.entity.post.Post;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,5 +25,12 @@ public class PostResponseDto {
         this.title = title;
         this.content = content;
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public static PostResponseDto toDto(Post post){
+        return PostResponseDto.builder()
+                .writer(post.getWritersName())
+                .title(post.getTitle())
+                .content(post.getContent()).build();
     }
 }

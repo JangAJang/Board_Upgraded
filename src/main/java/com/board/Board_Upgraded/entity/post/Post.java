@@ -59,4 +59,8 @@ public class Post extends BaseEntity {
     public boolean isWriter(Member member){
         return this.member.equals(member);
     }
+
+    public String getWritersName(){
+        return member.getNickname();
+    }
 }
