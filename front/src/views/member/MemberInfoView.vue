@@ -40,6 +40,12 @@ axios
     <div>
       <h2>해당 회원의 이메일은 {{email}}입니다.</h2>
     </div>
+    <div class="mt-5">
+      <router-link :to="{name: 'editInfo'}">정보 수정하기</router-link>
+    </div>
+    <div class="mt-1">
+      <router-link to="/members/posts">비밀번호 변경하기</router-link>
+    </div>
   </div>
 </template>
 
