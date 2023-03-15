@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.controller.member;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.EditMemberRequestDto;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.member.SignInRequestDto;
@@ -69,7 +70,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("수정을 성공했습니다."))
                 .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(memberRepository.findByUsername("test").get().getNickname()).isEqualTo("newNick");
+        Assertions.assertThat(memberRepository.findByUsername(new Username("test")).get().getNickname()).isEqualTo("newNick");
     }
 
     @Test
@@ -99,7 +100,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 닉네임입니다."))
                 .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(memberRepository.findByUsername("test").get().getNickname()).isEqualTo("test");
+        Assertions.assertThat(memberRepository.findByUsername(new Username("test")).get().getNickname()).isEqualTo("test");
     }
 
     @Test
@@ -129,7 +130,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.data").value("수정을 성공했습니다."))
                 .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(memberRepository.findByUsername("test").get().getEmail()).isEqualTo("newMail@test.com");
+        Assertions.assertThat(memberRepository.findByUsername(new Username("test")).get().getEmail()).isEqualTo("newMail@test.com");
     }
 
     @Test
@@ -159,7 +160,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("이미 사용중인 이메일입니다."))
                 .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(memberRepository.findByUsername("test").get().getEmail()).isEqualTo("test@test.com");
+        Assertions.assertThat(memberRepository.findByUsername(new Username("test")).get().getEmail()).isEqualTo("test@test.com");
     }
 
     @Test
@@ -189,7 +190,7 @@ public class EditTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result.failMessage").value("올바르지 않은 이메일 형식입니다."))
                 .andDo(MockMvcResultHandlers.print());
-        Assertions.assertThat(memberRepository.findByUsername("test").get().getEmail()).isEqualTo("test@test.com");
+        Assertions.assertThat(memberRepository.findByUsername(new Username("test")).get().getEmail()).isEqualTo("test@test.com");
     }
 
     @Test

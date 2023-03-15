@@ -1,5 +1,7 @@
 package com.board.Board_Upgraded.repository.member;
 
+import com.board.Board_Upgraded.domain.member.MemberInfo;
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.entity.member.Member;
 import com.board.Board_Upgraded.repository.member.MemberRepository;
@@ -46,7 +48,7 @@ public class MemberRepositoryTest {
 
         //when
         //then
-        assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("test");
+        assertThat(memberRepository.findByUsername(new Username("testUser")).get().getNickname()).isEqualTo("test");
     }
 
     @Test
@@ -54,9 +56,9 @@ public class MemberRepositoryTest {
     public void updateTest() throws Exception{
         //given
         //when
-        memberRepository.findByUsername("testUser").get().changeNickname("이건줄 몰랐지");
+        memberRepository.findByUsername(new Username("testUser")).get().changeMemberInfo(new MemberInfo("이건줄 몰랐지", "t@t.com"));
         //then
-        assertThat(memberRepository.findByUsername("testUser").get().getNickname()).isEqualTo("이건줄 몰랐지");
+        assertThat(memberRepository.findByUsername(new Username("testUser")).get().getNickname()).isEqualTo("이건줄 몰랐지");
     }
 
     @Test
@@ -65,7 +67,7 @@ public class MemberRepositoryTest {
         //given
 
         //when
-        Member member = memberRepository.findByUsername("testUser").get();
+        Member member = memberRepository.findByUsername(new Username("testUser")).get();
         //then
         memberRepository.delete(member);
         assertThat(memberRepository.findAll().size()).isEqualTo(0);

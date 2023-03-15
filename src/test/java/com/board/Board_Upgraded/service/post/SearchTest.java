@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.service.post;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
 import com.board.Board_Upgraded.dto.post.PostResponseDto;
 import com.board.Board_Upgraded.dto.post.SearchPostRequestDto;
@@ -44,7 +45,7 @@ public class SearchTest {
                 postService.write(WritePostRequestDto.builder()
                         .title("title" + i)
                         .content("content" + i)
-                        .build(), memberRepository.findByUsername("test" + i/10).orElseThrow(MemberNotFoundException::new)));
+                        .build(), memberRepository.findByUsername(new Username("test" + i/10)).orElseThrow(MemberNotFoundException::new)));
     }
 
     @Test

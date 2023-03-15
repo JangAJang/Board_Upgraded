@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.domainTest;
 
+import com.board.Board_Upgraded.domain.member.Username;
 import com.board.Board_Upgraded.domain.post.Content;
 import com.board.Board_Upgraded.domain.post.Title;
 import com.board.Board_Upgraded.dto.member.RegisterRequestDto;
@@ -35,7 +36,7 @@ public class PostTest {
                 .email("test@test.com")
                 .password("test")
                 .passwordCheck("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByUsername(new Username("test")).orElseThrow(MemberNotFoundException::new);
         //when
         Title title = new Title("제목");
         Content content = new Content("내용");
@@ -55,7 +56,7 @@ public class PostTest {
                 .email("test@test.com")
                 .password("test")
                 .passwordCheck("test").build());
-        Member member = memberRepository.findByUsername("test").orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByUsername(new Username("test")).orElseThrow(MemberNotFoundException::new);
         Title title = new Title("제목");
         Content content = new Content("내용");
         Post post = new Post(title, content, member);

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import axios from "axios";
 
 const nickname = ref('')
 const email = ref('')
 
-const editMember = function (){
-
-}
 </script>
 
 <template>

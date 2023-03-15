@@ -20,7 +20,6 @@ public class BaseEntity {
     @Column(name = "CREATED_TIME", nullable = false, updatable = false)
     private LocalDateTime createdDate;
 
-
     @Column(name = "LAST_MODIFIED_TIME", nullable = false)
     private LocalDateTime lastModifiedDate;
 
