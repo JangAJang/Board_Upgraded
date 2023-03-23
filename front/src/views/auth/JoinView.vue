@@ -22,6 +22,10 @@ const join = function () {
       router.replace({ name: 'signIn' })
     })
 }
+
+const validateEmail = function () {
+  alert('인증번호를 메일로 발송했습니다. 인증번호를 확인해주세요.')
+}
 </script>
 
 <template>
@@ -34,6 +38,10 @@ const join = function () {
     </div>
     <div class="mt-1">
       <el-input v-model="email" type="email" placeholder="이메일을 입력해주세요." />
+      <div>
+        <el-button type="primary" @click="validateEmail()">인증번호 전송</el-button>
+        <el-input type="text" placeholder="인증 번호를 입력해주세요." />
+      </div>
     </div>
     <div class="mt-1">
       <el-input v-model="password" type="password" placeholder="비밀번호를 입력해주세요." />

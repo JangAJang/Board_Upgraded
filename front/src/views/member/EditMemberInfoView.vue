@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import axios from "axios";
+import { ref } from 'vue'
+import axios from 'axios'
 
 const nickname = ref('')
 const email = ref('')
-
 </script>
 
 <template>
