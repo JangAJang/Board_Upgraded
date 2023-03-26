@@ -5,7 +5,13 @@ const username = ref('')
 const nickname = ref('')
 const email = ref('')
 const search = function (){
-  axios.get('/jangs-board/members/search')
+  axios.get('/jangs-board/members/search?page=1', {
+    username: username.value,
+    nickname: nickname.value,
+    email: email.value
+  }).then(res => {
+
+  })
 }
 </script>
 
