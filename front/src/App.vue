@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+const containsCookie = function () {
+  let cookie = this.$cookies.class
+  alert(cookie)
+  return cookie.toString().includes("Authorization")
+}
 </script>
 
 <template>
   <header>
-    <div class="wrapper" v-if="$cookies" >
+    <div class="wrapper" v-if="containsCookie" >
       <RouterLink to="/members/search">회원 검색</RouterLink>
       <RouterLink to="/posts" class="m-2">게시물 보기</RouterLink>
       <RouterLink to="/message" >쪽지 보기</RouterLink>

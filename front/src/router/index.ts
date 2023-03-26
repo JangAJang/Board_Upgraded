@@ -43,6 +43,11 @@ const router = createRouter({
       path: '/members/edit',
       name: 'editInfo',
       component: () => import('../views/member/EditMemberInfoView.vue')
+    },
+    {
+      path: '/members/search',
+      name: 'searchMember',
+      component: () => import('../views/member/MemberSearchRequestView.vue')
     }
   ]
 })
