@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.controller;
 
+import com.board.Board_Upgraded.exception.member.UsernameAlreadyInUseException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,8 @@ public class TestController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/api/test/getTest")
     public String getController(){
-        return "get";
+        throw new UsernameAlreadyInUseException();
+//        return "get";
     }
 
     @ApiOperation(value = "post메서드 테스트", notes = "post이 스웨거에 등록되는지 테스트 합니다")

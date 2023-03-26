@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
 
-    Optional<Post> findByTitle(String title);
+    Optional<Post> findByTitle_Title(String title);
 }

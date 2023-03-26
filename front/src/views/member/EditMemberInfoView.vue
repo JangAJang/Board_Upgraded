@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
+import router from '@/router'
 
 const nickname = ref('')
 const email = ref('')
+const editMember = function () {
+  axios
+      .patch('/jangs-board/members/edit', {
+        nickname: nickname.value,
+        email: email.value
+      })
+      .then(() => {
+        router.replace({ name: 'welcome' })
+      })
+}
 </script>
 
 <template>

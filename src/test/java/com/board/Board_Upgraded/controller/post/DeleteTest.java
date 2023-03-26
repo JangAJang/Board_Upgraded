@@ -54,7 +54,7 @@ public class DeleteTest {
     @DisplayName("게시물을 삭제할 때, 토큰이 있는 상태로 내가 만든 게시물을 삭제요청 하면 정상적으로 삭제된다.")
     public void deletePostTest() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -74,7 +74,7 @@ public class DeleteTest {
     @DisplayName("토큰이 없을 때, 삭제를 요청하면 401에러를 반환한다")
     public void deletePost_NoToken() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -89,7 +89,7 @@ public class DeleteTest {
     @DisplayName("없는 게시물의 삭제를 요청하면 404(NotFound)에러를 반환한다")
     public void deletePost_NoPost() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -115,7 +115,7 @@ public class DeleteTest {
                 .email("test1@test.com")
                 .password("test")
                 .passwordCheck("test").build());
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test1")
                 .password("test").build());

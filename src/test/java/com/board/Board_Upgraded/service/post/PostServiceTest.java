@@ -78,7 +78,7 @@ public class PostServiceTest {
                 .title("진짜 취업")
                 .content("하고싶다.")
                 .build();
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
         PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
@@ -100,7 +100,7 @@ public class PostServiceTest {
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .content("하고싶다.")
                 .build();
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
         PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
@@ -122,7 +122,7 @@ public class PostServiceTest {
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("인턴")
                 .build();
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
         PostResponseDto postResponseDto = postService.edit(editPostRequestDto, member, post.getId());
         //then
@@ -152,7 +152,7 @@ public class PostServiceTest {
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("인턴")
                 .build();
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
 
         //then
@@ -169,7 +169,7 @@ public class PostServiceTest {
                 .title("취업")
                 .content("가즈아").build();
         PostResponseDto createResult = postService.write(writePostRequestDto, member);
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
         postService.delete(member, post.getId());
         //then
@@ -185,7 +185,7 @@ public class PostServiceTest {
                 .title("취업")
                 .content("가즈아").build();
         PostResponseDto createResult = postService.write(writePostRequestDto, member);
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         //when
 
         //then
@@ -202,7 +202,7 @@ public class PostServiceTest {
                 .title("취업")
                 .content("가즈아").build();
         PostResponseDto createResult = postService.write(writePostRequestDto, member);
-        Post post = postRepository.findByTitle("취업").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("취업").orElseThrow(PostNotFoundException::new);
         authService.registerNewMember(
                 RegisterRequestDto.builder()
                         .username("user")

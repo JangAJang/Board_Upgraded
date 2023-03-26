@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class AuthenticationExceptionAdvice {
 
     @ExceptionHandler(NeedToLoginException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public Response needToLoginException(){
         return Response.failure(403, "인증이 되어있지 않습니다. 로그인하세요.");
     }

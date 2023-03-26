@@ -73,7 +73,7 @@ public class EditTest {
     @DisplayName("게시물을 수정할 때, 회원권한이 있으면 정상적으로 게시물을 수정한다. ")
     public void editPostTest() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -97,7 +97,7 @@ public class EditTest {
     @DisplayName("토큰이 없이 게시물을 수정할 때, 401에러를 반환한다.")
     public void editPost_Unauthorized() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("바뀐 제목입니다.")
                 .content("바뀐 내용입니다.")
@@ -123,7 +123,7 @@ public class EditTest {
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("newT")
                 .password("new").build());
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         EditPostRequestDto editPostRequestDto = EditPostRequestDto.builder()
                 .title("바뀐 제목입니다.")
                 .content("바뀐 내용입니다.")
@@ -145,7 +145,7 @@ public class EditTest {
     @DisplayName("제목만 존재하고, 내용이 null이면 제목만 변경된다.")
     public void editPost_OnlyTitle() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -170,7 +170,7 @@ public class EditTest {
     @DisplayName("내용만 존재하고, 제목이 null이면 제목만 변경된다.")
     public void editPost_OnlyContent() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
@@ -195,7 +195,7 @@ public class EditTest {
     @DisplayName("입력이 없을 경우 게시물이 그대로 나온다.")
     public void editPost_AllNull() throws Exception{
         //given
-        Post post = postRepository.findByTitle("제목입니다.").orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByTitle_Title("제목입니다.").orElseThrow(PostNotFoundException::new);
         TokenResponseDto tokenResponseDto = authService.signIn(SignInRequestDto.builder()
                 .username("test")
                 .password("test").build());
