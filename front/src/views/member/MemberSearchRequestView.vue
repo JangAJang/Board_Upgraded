@@ -4,13 +4,15 @@ import axios from "axios";
 const username = ref('')
 const nickname = ref('')
 const email = ref('')
+const memberInfos = []
 const search = function (){
-  axios.get('/jangs-board/members/search?page=1', {
-    username: username.value,
+  axios.get('/jangs-board/members/search', {
+    email: email.value,
     nickname: nickname.value,
-    email: email.value
+    username: username.value,
   }).then(res => {
-
+    console.log(res.data.result.data)
+    memberInfos.push(res.data.result.data)
   })
 }
 </script>
@@ -27,6 +29,21 @@ const search = function (){
       <div>
         <el-button @click="search">검색하기</el-button>
       </div>
+    </div>
+    <div>
+      <ul>
+        <li v-for="memberInfo in memberInfos" class="mt-1">
+          <div>
+            {{memberInfo.username}}
+          </div>
+          <div>
+            {{memberInfo.nickname}}
+          </div>
+          <div>
+            {{memberInfo.email}}
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
