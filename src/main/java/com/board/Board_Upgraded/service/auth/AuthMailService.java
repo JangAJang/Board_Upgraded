@@ -30,6 +30,12 @@ public class AuthMailService {
         return message;
     }
 
+    public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage emailForm = createEmailForm(toEmail);
+        mailSender.send(emailForm);
+        return authNum; //인증 코드 반환
+    }
+
     private void createCode(){
         Random random = new Random();
         StringBuilder key = new StringBuilder();
