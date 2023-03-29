@@ -20,6 +20,16 @@ public class AuthMailService {
     private static final String TITLE = "L.A.N 회원가입 인증 번호";
     private String authNum;
 
+    public MimeMessage createEmailForm(String email) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        message.addRecipients(MimeMessage.RecipientType.TO, email);
+        message.setSubject(TITLE);
+        message.setFrom(SENDER);
+        createCode();
+        message.setText("인증 번호는 " + authNum + "입니다.");
+        return message;
+    }
+
     private void createCode(){
         Random random = new Random();
         StringBuilder key = new StringBuilder();
