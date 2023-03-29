@@ -4,8 +4,9 @@ import axios from "axios";
 const username = ref('')
 const nickname = ref('')
 const email = ref('')
-const memberInfos = []
+let memberInfos = []
 const search = function (){
+  memberInfos = []
   axios.get('/jangs-board/members/search', {
     email: email.value,
     nickname: nickname.value,
@@ -27,7 +28,7 @@ const search = function (){
         <el-input v-model= "email" type="text" placeholder="검색할 이메일을 입력해주세요"/>
       </div>
       <div>
-        <el-button @click="search">검색하기</el-button>
+        <el-button @click="search" class="mt-3">검색하기</el-button>
       </div>
     </div>
     <div>

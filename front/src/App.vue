@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import VueCookies from "vue-cookies";
 const containsCookie = function () {
-  let cookie = this.$cookies.class
-  alert(cookie)
-  return cookie.toString().includes("Authorization")
+  return !(VueCookies.get('Authorization') == null || VueCookies.get('RefreshToken') == null)
 }
 </script>
 
