@@ -1,5 +1,6 @@
 package com.board.Board_Upgraded.service.auth;
 
+import com.board.Board_Upgraded.dto.auth.EmailAuthRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class AuthMailService {
         return message;
     }
 
-    public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
-        MimeMessage emailForm = createEmailForm(toEmail);
+    public String sendEmail(EmailAuthRequestDto toEmail) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage emailForm = createEmailForm(toEmail.getEmail());
         mailSender.send(emailForm);
         return authNum; //인증 코드 반환
     }
