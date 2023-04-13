@@ -30,6 +30,10 @@ public class ChatService {
         return chatRoom;
     }
 
+    public List<ChatRoom> findAllRoom(){
+        return chatRoomRepository.findAllRoom();
+    }
+
     public <T> void sendMessage(WebSocketSession session, T message) {
         try{
             session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
