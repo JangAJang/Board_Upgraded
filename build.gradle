@@ -57,6 +57,8 @@ dependencies {
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 	//spring email
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
+	//chat server
+	implementation project(':chat')
 }
 
 tasks.named('test') {
