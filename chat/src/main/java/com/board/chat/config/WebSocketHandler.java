@@ -2,6 +2,7 @@ package com.board.chat.config;
 
 import com.board.chat.dto.ChatMessage;
 import com.board.chat.dto.ChatRoom;
+import com.board.chat.repository.ChatRoomRepository;
 import com.board.chat.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
     private final ObjectMapper objectMapper;
+    private final ChatRoomRepository chatRoomRepository;
     private final ChatService chatService;
 
     @Override
@@ -23,7 +25,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("{}", payload);
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
-        ChatRoom chatRoom = chatService.findRoomById(chatMessage.getRoomId());
+        ChatRoom chatRoom = chatRoomRepository.findRoomById(chatMessage.getRoomId());
         chatRoom.handlerActions(session, chatMessage, chatService);
     }
 }
