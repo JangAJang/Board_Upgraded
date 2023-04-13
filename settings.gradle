@@ -1,1 +1,4 @@
 rootProject.name = 'Board_Upgraded'
+
+include 'Board_Upgraded'
+include 'chat'

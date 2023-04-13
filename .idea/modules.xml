@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Board_Upgraded.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Board_Upgraded.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.board.Board_Upgraded.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.board.Board_Upgraded.main.iml" />
     </modules>
   </component>
 </project>
